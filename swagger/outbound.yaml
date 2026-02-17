@@ -1,0 +1,4137 @@
+openapi: 3.1.0
+info:
+  title: SOFTSOL_OUTBOUND
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/sales_order/getNewSalesOrder:
+    post:
+      summary: http://localhost:3000/api/sales_order/getNewSalesOrder
+      description: http://localhost:3000/api/sales_order/getNewSalesOrder
+      operationId: httpLocalhost3000ApiSalesOrderGetnewsalesorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '625'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 11:54:36 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"271-sZi+eNHb4eLcUF8OCpqYwEKv4p8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        nullable: true
+                        example: null
+                      BranchName:
+                        nullable: true
+                        example: null
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T17:24:38.063Z'
+                      CustomerID:
+                        nullable: true
+                        example: null
+                      CustomerName:
+                        nullable: true
+                        example: null
+                      DeliveryDate:
+                        nullable: true
+                        example: null
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      IsShipment:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        nullable: true
+                        example: null
+                      Remarks:
+                        nullable: true
+                        example: null
+                      SalesOrderDate:
+                        type: string
+                        example: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderStatus:
+                        type: string
+                        example: Draft
+                      TransporterName:
+                        nullable: true
+                        example: null
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-22T17:24:38.063Z'
+                      VehicleNumber:
+                        nullable: true
+                        example: null
+                      WarehouseID:
+                        nullable: true
+                        example: null
+                      WarehouseName:
+                        nullable: true
+                        example: null
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: New Sales Order fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: null
+                      BranchName: null
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T17:24:38.063Z'
+                      CustomerID: null
+                      CustomerName: null
+                      DeliveryDate: null
+                      IsDeleted: false
+                      IsShipment: false
+                      LRNumber: null
+                      Remarks: null
+                      SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderStatus: Draft
+                      TransporterName: null
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-22T17:24:38.063Z'
+                      VehicleNumber: null
+                      WarehouseID: null
+                      WarehouseName: null
+                      total_MRP: 0
+                      total_quantity: 0
+                    message: New Sales Order fetched Successfully
+  /api/sales_order/getSalesOrder:
+    post:
+      summary: http://localhost:3000/api/sales_order/getSalesOrder
+      description: http://localhost:3000/api/sales_order/getSalesOrder
+      operationId: httpLocalhost3000ApiSalesOrderGetsalesorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '612'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 13:16:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"264-7/VhkkDeRvMK4HmJkhFJahanCL0"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T17:24:38.063Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      DeliveryDate:
+                        type: string
+                        example: '2025-06-25T00:00:00.000Z'
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      IsShipment:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LL
+                      Remarks:
+                        type: string
+                        example: Remarks
+                      SalesOrderDate:
+                        type: string
+                        example: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderStatus:
+                        type: string
+                        example: Draft
+                      TransporterName:
+                        type: string
+                        example: TT
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-22T18:07:47.930Z'
+                      VehicleNumber:
+                        type: string
+                        example: VV
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T17:24:38.063Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      DeliveryDate: '2025-06-25T00:00:00.000Z'
+                      IsDeleted: false
+                      IsShipment: false
+                      LRNumber: LL
+                      Remarks: Remarks
+                      SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderStatus: Draft
+                      TransporterName: TT
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-22T18:07:47.930Z'
+                      VehicleNumber: VV
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                      total_MRP: 0
+                      total_quantity: 0
+  /api/sales_order/getAllSalesOrders:
+    post:
+      summary: http://localhost:3000/api/sales_order/getAllSalesOrders
+      description: http://localhost:3000/api/sales_order/getAllSalesOrders
+      operationId: httpLocalhost3000ApiSalesOrderGetallsalesorders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderStatus:
+                  type: string
+                  example: Draft
+            example:
+              SalesOrderStatus: Draft
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '614'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 13:17:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"266-2Ukp/i19nbyeSPOQFl5579AJrbg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-06-22T17:24:38.063Z'
+                        CustomerID:
+                          type: number
+                          example: 6
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        DeliveryDate:
+                          type: string
+                          example: '2025-06-25T00:00:00.000Z'
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        IsShipment:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LL
+                        Remarks:
+                          type: string
+                          example: Remarks
+                        SalesOrderDate:
+                          type: string
+                          example: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID:
+                          type: number
+                          example: 1
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderStatus:
+                          type: string
+                          example: Draft
+                        TransporterName:
+                          type: string
+                          example: TT
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-22T18:07:47.930Z'
+                        VehicleNumber:
+                          type: string
+                          example: VV
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                        total_MRP:
+                          type: number
+                          example: 0
+                        total_quantity:
+                          type: number
+                          example: 0
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T17:24:38.063Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        DeliveryDate: '2025-06-25T00:00:00.000Z'
+                        IsDeleted: false
+                        IsShipment: false
+                        LRNumber: LL
+                        Remarks: Remarks
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderStatus: Draft
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-22T18:07:47.930Z'
+                        VehicleNumber: VV
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 0
+                        total_quantity: 0
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T17:24:38.063Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        DeliveryDate: '2025-06-25T00:00:00.000Z'
+                        IsDeleted: false
+                        IsShipment: false
+                        LRNumber: LL
+                        Remarks: Remarks
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderStatus: Draft
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-22T18:07:47.930Z'
+                        VehicleNumber: VV
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 0
+                        total_quantity: 0
+  /api/sales_order/updateSalesOrder:
+    post:
+      summary: http://localhost:3000/api/sales_order/updateSalesOrder
+      description: http://localhost:3000/api/sales_order/updateSalesOrder
+      operationId: httpLocalhost3000ApiSalesOrderUpdatesalesorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: string
+                  example: '13'
+                CustomerID:
+                  type: string
+                  example: '6'
+                DeliveryDate:
+                  type: string
+                  example: '2025-06-25'
+                LRNumber:
+                  type: string
+                  example: LL
+                Remarks:
+                  type: string
+                  example: Remarks
+                SalesOrderID:
+                  type: string
+                  example: '1'
+                SalesOrderStatus:
+                  type: string
+                  example: Draft
+                TransporterName:
+                  type: string
+                  example: TT
+                VehicleNumber:
+                  type: string
+                  example: VV
+                WarehouseID:
+                  type: string
+                  example: '8'
+            example:
+              BranchID: '13'
+              CustomerID: '6'
+              DeliveryDate: '2025-06-25'
+              LRNumber: LL
+              Remarks: Remarks
+              SalesOrderID: '1'
+              SalesOrderStatus: Draft
+              TransporterName: TT
+              VehicleNumber: VV
+              WarehouseID: '8'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '657'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 12:37:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"291-fQgAc/wbfVKVyC8edrDd5WCZBVc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T17:24:38.063Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      DeliveryDate:
+                        type: string
+                        example: '2025-06-25T00:00:00.000Z'
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      IsShipment:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LL
+                      Remarks:
+                        type: string
+                        example: Remarks
+                      SalesOrderDate:
+                        type: string
+                        example: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderStatus:
+                        type: string
+                        example: Draft
+                      TransporterName:
+                        type: string
+                        example: TT
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-22T18:07:15.917Z'
+                      VehicleNumber:
+                        type: string
+                        example: VV
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: Sales order updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T17:24:38.063Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      DeliveryDate: '2025-06-25T00:00:00.000Z'
+                      IsDeleted: false
+                      IsShipment: false
+                      LRNumber: LL
+                      Remarks: Remarks
+                      SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderStatus: Draft
+                      TransporterName: TT
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-22T18:07:15.917Z'
+                      VehicleNumber: VV
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                      total_MRP: 0
+                      total_quantity: 0
+                    message: Sales order updated successfully
+  /api/sales_order/deleteSalesOrder:
+    post:
+      summary: http://localhost:3000/api/sales_order/deleteSalesOrder
+      description: http://localhost:3000/api/sales_order/deleteSalesOrder
+      operationId: httpLocalhost3000ApiSalesOrderDeletesalesorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '46'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 12:37:45 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2e-99ssM0/CuCGdD2yaGJbCicqXz6E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Sales order deleted successfully
+              examples:
+                Success:
+                  value:
+                    message: Sales order deleted successfully
+  /api/sales_order/getAllAvailableBinProducts:
+    post:
+      summary: http://localhost:3000/api/sales_order/getAllAvailableBinProducts
+      description: http://localhost:3000/api/sales_order/getAllAvailableBinProducts
+      operationId: httpLocalhost3000ApiSalesOrderGetallavailablebinproducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID:
+                  type: string
+                  example: '8'
+            example:
+              WarehouseID: '8'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '811'
+            Date:
+              schema:
+                type: string
+                example: Sat, 28 Jun 2025 13:22:28 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"32b-I28jhfYqS4HaZwmonf0FWHhzCDg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        LineName:
+                          type: string
+                          example: AATA
+                        PackagingTypeName:
+                          type: string
+                          example: open-edit
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        UOMCode:
+                          type: array
+                          items:
+                            type: string
+                            example: pcs
+                          example:
+                            - pcs
+                            - pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                    example:
+                      - BrandName: 'Aashirvaad '
+                        LineName: AATA
+                        PackagingTypeName: open-edit
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        UOMCode:
+                          - pcs
+                          - pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                      - BrandName: Milton
+                        LineName: Bottles
+                        PackagingTypeName: open-edit
+                        ProductCode: '3'
+                        ProductConsumeName: Storage
+                        ProductID: 3
+                        ProductName: Bottles
+                        ProductTypeName: BOTTLES
+                        UOMCode:
+                          - pcs
+                          - pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                      - BrandName: Amazon Fresh
+                        LineName: Fruits
+                        PackagingTypeName: open-edit
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        UOMCode:
+                          - bags
+                          - bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BrandName: 'Aashirvaad '
+                        LineName: AATA
+                        PackagingTypeName: open-edit
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        UOMCode:
+                          - pcs
+                          - pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                      - BrandName: Milton
+                        LineName: Bottles
+                        PackagingTypeName: open-edit
+                        ProductCode: '3'
+                        ProductConsumeName: Storage
+                        ProductID: 3
+                        ProductName: Bottles
+                        ProductTypeName: BOTTLES
+                        UOMCode:
+                          - pcs
+                          - pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                      - BrandName: Amazon Fresh
+                        LineName: Fruits
+                        PackagingTypeName: open-edit
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        UOMCode:
+                          - bags
+                          - bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+  /api/sales_order/getAllBinProductsBatchNumbers:
+    post:
+      summary: http://localhost:3000/api/sales_order/getAllBinProductsBatchNumbers
+      description: http://localhost:3000/api/sales_order/getAllBinProductsBatchNumbers
+      operationId: httpLocalhost3000ApiSalesOrderGetallbinproductsbatchnumbers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductID:
+                  type: string
+                  example: '1'
+                WarehouseID:
+                  type: string
+                  example: '8'
+            example:
+              ProductID: '1'
+              WarehouseID: '8'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '20'
+            Date:
+              schema:
+                type: string
+                example: Sat, 28 Jun 2025 07:27:42 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"14-eGq30AAHtvHu06M03PlHZvgMk9A"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      example: '8'
+                    example:
+                      - '8'
+                      - '847'
+              examples:
+                Success:
+                  value:
+                    data:
+                      - '8'
+                      - '847'
+  /api/sales_order/addNewProductForSalesOrder:
+    post:
+      summary: http://localhost:3000/api/sales_order/addNewProductForSalesOrder
+      description: http://localhost:3000/api/sales_order/addNewProductForSalesOrder
+      operationId: httpLocalhost3000ApiSalesOrderAddnewproductforsalesorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: B01
+                BranchID:
+                  type: string
+                  example: '13'
+                CustomerID:
+                  type: string
+                  example: '6'
+                Discount:
+                  type: string
+                  example: '10'
+                MRP:
+                  type: string
+                  example: '300'
+                ProductID:
+                  type: string
+                  example: '1'
+                Quantity:
+                  type: string
+                  example: '35'
+                SLOCID:
+                  type: string
+                  example: '1'
+                SalesOrderID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+                WarehouseID:
+                  type: string
+                  example: '8'
+            example:
+              BatchNumber: B01
+              BranchID: '13'
+              CustomerID: '6'
+              Discount: '10'
+              MRP: '300'
+              ProductID: '1'
+              Quantity: '35'
+              SLOCID: '1'
+              SalesOrderID: '1'
+              UOMID: '7'
+              WarehouseID: '8'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '912'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 16:49:40 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"390-krU8SOrp6nf3dzsCDcqeJ8FkOOY"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: 'Aashirvaad '
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T21:40:20.670Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      Discount:
+                        type: number
+                        example: 10
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: AATA
+                      MRP:
+                        type: number
+                        example: 300
+                      PackagingTypeName:
+                        type: string
+                        example: open-edit
+                      Pending_Quantity:
+                        type: number
+                        example: 135
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: '1'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: AATA
+                      ProductTypeName:
+                        type: string
+                        example: AATA
+                      Quantity:
+                        type: number
+                        example: 135
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 39150
+                      Total_Product_Discount:
+                        type: number
+                        example: 1350
+                      Total_Product_MRP:
+                        type: number
+                        example: 40500
+                      UOMCode:
+                        type: string
+                        example: pcs
+                      UOMDescription:
+                        type: string
+                        example: pcs
+                      UOMID:
+                        type: number
+                        example: 7
+                      UOMName:
+                        type: string
+                        example: pcs
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-22T22:19:42.780Z'
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Product added to sales order successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: 'Aashirvaad '
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T21:40:20.670Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      Discount: 10
+                      IsDeleted: false
+                      LineName: AATA
+                      MRP: 300
+                      PackagingTypeName: open-edit
+                      Pending_Quantity: 135
+                      Picked_Quantity: 0
+                      ProductCode: '1'
+                      ProductConsumeName: Consumed
+                      ProductID: 1
+                      ProductName: AATA
+                      ProductTypeName: AATA
+                      Quantity: 135
+                      SLOCID: 1
+                      SLOCName: Good
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderProductID: 1
+                      Total_Product_Amount: 39150
+                      Total_Product_Discount: 1350
+                      Total_Product_MRP: 40500
+                      UOMCode: pcs
+                      UOMDescription: pcs
+                      UOMID: 7
+                      UOMName: pcs
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-22T22:19:42.780Z'
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Product added to sales order successfully
+  /api/sales_order/getSalesOrderProduct:
+    post:
+      summary: http://localhost:3000/api/sales_order/getSalesOrderProduct
+      description: http://localhost:3000/api/sales_order/getSalesOrderProduct
+      operationId: httpLocalhost3000ApiSalesOrderGetsalesorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '858'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 17:37:52 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"35a-N44zO2sLGM1dTCm0aO4dfI8JeSs"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: 'Aashirvaad '
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T21:40:20.670Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      Discount:
+                        type: number
+                        example: 10
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: AATA
+                      MRP:
+                        type: number
+                        example: 300
+                      PackagingTypeName:
+                        type: string
+                        example: open-edit
+                      Pending_Quantity:
+                        type: number
+                        example: 135
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: '1'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: AATA
+                      ProductTypeName:
+                        type: string
+                        example: AATA
+                      Quantity:
+                        type: number
+                        example: 135
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 39150
+                      Total_Product_Discount:
+                        type: number
+                        example: 1350
+                      Total_Product_MRP:
+                        type: number
+                        example: 40500
+                      UOMCode:
+                        type: string
+                        example: pcs
+                      UOMDescription:
+                        type: string
+                        example: pcs
+                      UOMID:
+                        type: number
+                        example: 7
+                      UOMName:
+                        type: string
+                        example: pcs
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-22T23:03:12.920Z'
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: 'Aashirvaad '
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T21:40:20.670Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      Discount: 10
+                      IsDeleted: false
+                      LineName: AATA
+                      MRP: 300
+                      PackagingTypeName: open-edit
+                      Pending_Quantity: 135
+                      Picked_Quantity: 0
+                      ProductCode: '1'
+                      ProductConsumeName: Consumed
+                      ProductID: 1
+                      ProductName: AATA
+                      ProductTypeName: AATA
+                      Quantity: 135
+                      SLOCID: 1
+                      SLOCName: Good
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderProductID: 1
+                      Total_Product_Amount: 39150
+                      Total_Product_Discount: 1350
+                      Total_Product_MRP: 40500
+                      UOMCode: pcs
+                      UOMDescription: pcs
+                      UOMID: 7
+                      UOMName: pcs
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-22T23:03:12.920Z'
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+  /api/sales_order/getSalesOrderAllProducts:
+    post:
+      summary: http://localhost:3000/api/sales_order/getSalesOrderAllProducts
+      description: http://localhost:3000/api/sales_order/getSalesOrderAllProducts
+      operationId: httpLocalhost3000ApiSalesOrderGetsalesorderallproducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '860'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 17:37:56 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"35c-yMY6gdqVzSjENQGlk40vSwNucGU"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-06-22T21:40:20.670Z'
+                        CustomerID:
+                          type: number
+                          example: 6
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        Discount:
+                          type: number
+                          example: 10
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        PackagingTypeName:
+                          type: string
+                          example: open-edit
+                        Pending_Quantity:
+                          type: number
+                          example: 135
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        Quantity:
+                          type: number
+                          example: 135
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        SalesOrderID:
+                          type: number
+                          example: 1
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderProductID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 39150
+                        Total_Product_Discount:
+                          type: number
+                          example: 1350
+                        Total_Product_MRP:
+                          type: number
+                          example: 40500
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-22T23:03:12.920Z'
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T21:40:20.670Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        Discount: 10
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: open-edit
+                        Pending_Quantity: 135
+                        Picked_Quantity: 0
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        Quantity: 135
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        Total_Product_Amount: 39150
+                        Total_Product_Discount: 1350
+                        Total_Product_MRP: 40500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-22T23:03:12.920Z'
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T21:40:20.670Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        Discount: 10
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: open-edit
+                        Pending_Quantity: 135
+                        Picked_Quantity: 0
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        Quantity: 135
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        Total_Product_Amount: 39150
+                        Total_Product_Discount: 1350
+                        Total_Product_MRP: 40500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-22T23:03:12.920Z'
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/sales_order/updateSalesOrderProduct:
+    post:
+      summary: http://localhost:3000/api/sales_order/updateSalesOrderProduct
+      description: http://localhost:3000/api/sales_order/updateSalesOrderProduct
+      operationId: httpLocalhost3000ApiSalesOrderUpdatesalesorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: B01
+                Discount:
+                  type: string
+                  example: '10'
+                MRP:
+                  type: string
+                  example: '300'
+                ProductID:
+                  type: string
+                  example: '1'
+                Quantity:
+                  type: string
+                  example: '135'
+                SLOCID:
+                  type: string
+                  example: '1'
+                SalesOrderID:
+                  type: string
+                  example: '1'
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+            example:
+              BatchNumber: B01
+              Discount: '10'
+              MRP: '300'
+              ProductID: '1'
+              Quantity: '135'
+              SLOCID: '1'
+              SalesOrderID: '1'
+              SalesOrderProductID: '1'
+              UOMID: '7'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '911'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:39:41 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"38f-7X1bINwHYMUiGZvNJlNGtc4kK54"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: 'Aashirvaad '
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-22T21:40:20.670Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      Discount:
+                        type: number
+                        example: 10
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: AATA
+                      MRP:
+                        type: number
+                        example: 300
+                      PackagingTypeName:
+                        type: string
+                        example: open-edit
+                      Pending_Quantity:
+                        type: number
+                        example: 135
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: '1'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: AATA
+                      ProductTypeName:
+                        type: string
+                        example: AATA
+                      Quantity:
+                        type: number
+                        example: 135
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 39150
+                      Total_Product_Discount:
+                        type: number
+                        example: 1350
+                      Total_Product_MRP:
+                        type: number
+                        example: 40500
+                      UOMCode:
+                        type: string
+                        example: pcs
+                      UOMDescription:
+                        type: string
+                        example: pcs
+                      UOMID:
+                        type: number
+                        example: 7
+                      UOMName:
+                        type: string
+                        example: pcs
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-23T01:09:43.707Z'
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Sales order product updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: 'Aashirvaad '
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-22T21:40:20.670Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      Discount: 10
+                      IsDeleted: false
+                      LineName: AATA
+                      MRP: 300
+                      PackagingTypeName: open-edit
+                      Pending_Quantity: 135
+                      Picked_Quantity: 0
+                      ProductCode: '1'
+                      ProductConsumeName: Consumed
+                      ProductID: 1
+                      ProductName: AATA
+                      ProductTypeName: AATA
+                      Quantity: 135
+                      SLOCID: 1
+                      SLOCName: Good
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderProductID: 1
+                      Total_Product_Amount: 39150
+                      Total_Product_Discount: 1350
+                      Total_Product_MRP: 40500
+                      UOMCode: pcs
+                      UOMDescription: pcs
+                      UOMID: 7
+                      UOMName: pcs
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-23T01:09:43.707Z'
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Sales order product updated successfully
+  /api/sales_order/deleteSalesOrderProduct:
+    post:
+      summary: http://localhost:3000/api/sales_order/deleteSalesOrderProduct
+      description: http://localhost:3000/api/sales_order/deleteSalesOrderProduct
+      operationId: httpLocalhost3000ApiSalesOrderDeletesalesorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderID:
+                  type: string
+                  example: '1'
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderID: '1'
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '68'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:42:34 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"44-2Lq079/sZUOTCUpi5n7ngLtIL0o"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: done
+                  message:
+                    type: string
+                    example: Sales order product deleted successfully
+              examples:
+                Success:
+                  value:
+                    data: done
+                    message: Sales order product deleted successfully
+  /api/picklist/getAllPickListOrders:
+    post:
+      summary: http://localhost:3000/api/picklist/getAllPickListOrders
+      description: http://localhost:3000/api/picklist/getAllPickListOrders
+      operationId: httpLocalhost3000ApiPicklistGetallpicklistorders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderStatus:
+                  type: string
+                  example: Picklist Completed
+            example:
+              SalesOrderStatus: Picklist Completed
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '631'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:47:57 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"277-1aX/OUIqy5Qt++efQ1eqS1l9GHY"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-06-22T17:24:38.063Z'
+                        CustomerID:
+                          type: number
+                          example: 6
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        DeliveryDate:
+                          type: string
+                          example: '2025-06-25T00:00:00.000Z'
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        IsShipment:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LL
+                        Remarks:
+                          type: string
+                          example: Remarks
+                        SalesOrderDate:
+                          type: string
+                          example: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID:
+                          type: number
+                          example: 1
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderStatus:
+                          type: string
+                          example: Picklist Completed
+                        TransporterName:
+                          type: string
+                          example: TT
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-23T01:17:39.757Z'
+                        VehicleNumber:
+                          type: string
+                          example: VV
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                        total_MRP:
+                          type: number
+                          example: 300
+                        total_quantity:
+                          type: number
+                          example: 135
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T17:24:38.063Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        DeliveryDate: '2025-06-25T00:00:00.000Z'
+                        IsDeleted: false
+                        IsShipment: false
+                        LRNumber: LL
+                        Remarks: Remarks
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderStatus: Picklist Completed
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:17:39.757Z'
+                        VehicleNumber: VV
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 300
+                        total_quantity: 135
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T17:24:38.063Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        DeliveryDate: '2025-06-25T00:00:00.000Z'
+                        IsDeleted: false
+                        IsShipment: false
+                        LRNumber: LL
+                        Remarks: Remarks
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderStatus: Picklist Completed
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:17:39.757Z'
+                        VehicleNumber: VV
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 300
+                        total_quantity: 135
+  /api/picklist/getSalesOrderAllPendingProductsForPicklist:
+    post:
+      summary: >-
+        http://localhost:3000/api/picklist/getSalesOrderAllPendingProductsForPicklist
+      description: >-
+        http://localhost:3000/api/picklist/getSalesOrderAllPendingProductsForPicklist
+      operationId: httpLocalhost3000ApiPicklistGetsalesorderallpendingproductsforpicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductID:
+                  type: string
+                  example: '1'
+                SalesOrderID:
+                  type: string
+                  example: '1'
+            example:
+              ProductID: '1'
+              SalesOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '860'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:45:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"35c-Zmga7kak+e+gWnSWES/VVyYOreY"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-06-22T21:40:20.670Z'
+                        CustomerID:
+                          type: number
+                          example: 6
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        Discount:
+                          type: number
+                          example: 10
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        PackagingTypeName:
+                          type: string
+                          example: open-edit
+                        Pending_Quantity:
+                          type: number
+                          example: 135
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        Quantity:
+                          type: number
+                          example: 135
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        SalesOrderID:
+                          type: number
+                          example: 1
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderProductID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 39150
+                        Total_Product_Discount:
+                          type: number
+                          example: 1350
+                        Total_Product_MRP:
+                          type: number
+                          example: 40500
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-23T01:12:36.330Z'
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T21:40:20.670Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        Discount: 10
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: open-edit
+                        Pending_Quantity: 135
+                        Picked_Quantity: 0
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        Quantity: 135
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        Total_Product_Amount: 39150
+                        Total_Product_Discount: 1350
+                        Total_Product_MRP: 40500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:12:36.330Z'
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-22T21:40:20.670Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        Discount: 10
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: open-edit
+                        Pending_Quantity: 135
+                        Picked_Quantity: 0
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        Quantity: 135
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        Total_Product_Amount: 39150
+                        Total_Product_Discount: 1350
+                        Total_Product_MRP: 40500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:12:36.330Z'
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/picklist/getAllPicklistOrderPickedProducts:
+    post:
+      summary: http://localhost:3000/api/picklist/getAllPicklistOrderPickedProducts
+      description: http://localhost:3000/api/picklist/getAllPicklistOrderPickedProducts
+      operationId: httpLocalhost3000ApiPicklistGetallpicklistorderpickedproducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1979'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:48:22 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"7bb-xlImQa5llYQ4r52Rkl4ak+wCIlg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ActionType:
+                          type: number
+                          example: 2
+                        AvailableQuantity:
+                          type: number
+                          example: 150
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: '10001'
+                        BinProductID:
+                          type: number
+                          example: 1
+                        BinProductLogID:
+                          type: number
+                          example: 17
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-28T19:28:42.647Z'
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        FilledQuantity:
+                          type: number
+                          example: 0
+                        IsActive:
+                          type: boolean
+                          example: false
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        ManufactureDate:
+                          type: string
+                          example: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity:
+                          type: number
+                          example: 150
+                        PackagingTypeName:
+                          type: string
+                          example: open-edit
+                        PalletTypeID:
+                          type: number
+                          example: 7
+                        Palletname:
+                          type: string
+                          example: Nilkamal
+                        PickedDate:
+                          type: string
+                          example: '2025-06-23T01:17:31.933Z'
+                        PickedQuantity:
+                          type: number
+                          example: 100
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderProductID:
+                          type: number
+                          example: 1
+                        StackID:
+                          type: number
+                          example: 8
+                        StackName:
+                          type: string
+                          example: S01
+                        StackNumber:
+                          type: string
+                          example: '1'
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-23T01:17:39.750Z'
+                        VendorID:
+                          type: number
+                          example: 1
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - ActionType: 2
+                        AvailableQuantity: 150
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 17
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        CustomerName: Softsol
+                        FilledQuantity: 0
+                        IsActive: false
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: open-edit
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        PickedDate: '2025-06-23T01:17:31.933Z'
+                        PickedQuantity: 100
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-06-23T01:17:39.750Z'
+                        VendorID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - ActionType: 2
+                        AvailableQuantity: 150
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 18
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        CustomerName: Softsol
+                        FilledQuantity: 0
+                        IsActive: false
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: open-edit
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        PickedDate: '2025-06-23T01:17:39.753Z'
+                        PickedQuantity: 35
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-06-23T01:17:39.750Z'
+                        VendorID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - ActionType: 2
+                        AvailableQuantity: 150
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 17
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        CustomerName: Softsol
+                        FilledQuantity: 0
+                        IsActive: false
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: open-edit
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        PickedDate: '2025-06-23T01:17:31.933Z'
+                        PickedQuantity: 100
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-06-23T01:17:39.750Z'
+                        VendorID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - ActionType: 2
+                        AvailableQuantity: 150
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 18
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        CustomerName: Softsol
+                        FilledQuantity: 0
+                        IsActive: false
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: open-edit
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        PickedDate: '2025-06-23T01:17:39.753Z'
+                        PickedQuantity: 35
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        SLOCID: 1
+                        SLOCName: Good
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderProductID: 1
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-06-23T01:17:39.750Z'
+                        VendorID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/picklist/suggestBinForPicklist:
+    post:
+      summary: http://localhost:3000/api/picklist/suggestBinForPicklist
+      description: http://localhost:3000/api/picklist/suggestBinForPicklist
+      operationId: httpLocalhost3000ApiPicklistSuggestbinforpicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Quantity:
+                  type: number
+                  example: 135
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              Quantity: 135
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '242'
+            Date:
+              schema:
+                type: string
+                example: Tue, 01 Jul 2025 03:27:19 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"f2-2o8KSWyICu8Fn583Kaupf7PCMPk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 150
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      ManufactureDate:
+                        type: string
+                        example: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+                  message:
+                    type: string
+                    example: Fetched Bin Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 150
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinStatus: New
+                      FilledQuantity: 0
+                      ManufactureDate: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+                    message: Fetched Bin Successfully
+  /api/picklist/fetchAllAvailableBinsForPicklist:
+    post:
+      summary: http://localhost:3000/api/picklist/fetchAllAvailableBinsForPicklist
+      description: http://localhost:3000/api/picklist/fetchAllAvailableBinsForPicklist
+      operationId: httpLocalhost3000ApiPicklistFetchallavailablebinsforpicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Quantity:
+                  type: number
+                  example: 135
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              Quantity: 135
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '207'
+            Date:
+              schema:
+                type: string
+                example: Tue, 01 Jul 2025 03:29:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"cf-mEjFIYS+FiFQPOFoA3mLQFUFc+g"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AvailableQuantity:
+                          type: number
+                          example: 150
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: '10001'
+                        BinStatus:
+                          type: string
+                          example: New
+                        FilledQuantity:
+                          type: number
+                          example: 0
+                        ManufactureDate:
+                          type: string
+                          example: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity:
+                          type: number
+                          example: 150
+                        PalletTypeID:
+                          type: number
+                          example: 7
+                        Palletname:
+                          type: string
+                          example: Nilkamal
+                    example:
+                      - AvailableQuantity: 150
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinStatus: New
+                        FilledQuantity: 0
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+              examples:
+                Success:
+                  value:
+                    data:
+                      - AvailableQuantity: 150
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinStatus: New
+                        FilledQuantity: 0
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+  /api/picklist/validateBinNumberForPicklist:
+    post:
+      summary: http://localhost:3000/api/picklist/validateBinNumberForPicklist
+      description: http://localhost:3000/api/picklist/validateBinNumberForPicklist
+      operationId: httpLocalhost3000ApiPicklistValidatebinnumberforpicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinNumber:
+                  type: string
+                  example: '10001'
+                Quantity:
+                  type: number
+                  example: 135
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              BinNumber: '10001'
+              Quantity: 135
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '205'
+            Date:
+              schema:
+                type: string
+                example: Tue, 01 Jul 2025 03:32:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"cd-3TM95KDZ2E/WKQN2XfXBAZwCF6U"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 150
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      ManufactureDate:
+                        type: string
+                        example: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 150
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinStatus: New
+                      FilledQuantity: 0
+                      ManufactureDate: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+  /api/picklist/pickProductFromBinForPicklist:
+    post:
+      summary: http://localhost:3000/api/picklist/pickProductFromBinForPicklist
+      description: http://localhost:3000/api/picklist/pickProductFromBinForPicklist
+      operationId: httpLocalhost3000ApiPicklistPickproductfrombinforpicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinID:
+                  type: string
+                  example: '1'
+                Quantity:
+                  type: number
+                  example: 35
+                SalesOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              BinID: '1'
+              Quantity: 35
+              SalesOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '509'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:47:37 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1fd-CMhThR9OEFPcDnN0tPCWGNGmI2s"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 150
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinProductID:
+                        type: number
+                        example: 1
+                      BinStatus:
+                        type: string
+                        example: New
+                      BranchID:
+                        type: number
+                        example: 13
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-28T19:28:42.647Z'
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      IsActive:
+                        type: boolean
+                        example: false
+                      MRP:
+                        type: number
+                        example: 300
+                      ManufactureDate:
+                        type: string
+                        example: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+                      ProductID:
+                        type: number
+                        example: 1
+                      SLOCID:
+                        type: number
+                        example: 1
+                      StackID:
+                        type: number
+                        example: 8
+                      UOMID:
+                        type: number
+                        example: 7
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-23T01:17:39.750Z'
+                      VendorID:
+                        type: number
+                        example: 1
+                      WarehouseID:
+                        type: number
+                        example: 8
+                  message:
+                    type: string
+                    example: Product picked successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 150
+                      BatchNumber: B01
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinProductID: 1
+                      BinStatus: New
+                      BranchID: 13
+                      CreatedBy: 1
+                      CreatedDate: '2025-05-28T19:28:42.647Z'
+                      FilledQuantity: 0
+                      IsActive: false
+                      MRP: 300
+                      ManufactureDate: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+                      ProductID: 1
+                      SLOCID: 1
+                      StackID: 8
+                      UOMID: 7
+                      UpdatedBy: 1
+                      UpdatedDate: '2025-06-23T01:17:39.750Z'
+                      VendorID: 1
+                      WarehouseID: 8
+                    message: Product picked successfully
+  /api/shipment/getNewSalesOrderShipment:
+    post:
+      summary: http://localhost:3000/api/shipment/getNewSalesOrderShipment
+      description: http://localhost:3000/api/shipment/getNewSalesOrderShipment
+      operationId: httpLocalhost3000ApiShipmentGetnewsalesordershipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '720'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:24:30 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2d0-JwF8uxrs1p05TKqQHCPQLx/F1uc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        nullable: true
+                        example: null
+                      BranchName:
+                        nullable: true
+                        example: null
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-23T00:54:32.833Z'
+                      CustomerID:
+                        nullable: true
+                        example: null
+                      CustomerName:
+                        nullable: true
+                        example: null
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        nullable: true
+                        example: null
+                      SalesOrderDate:
+                        nullable: true
+                        example: null
+                      SalesOrderID:
+                        nullable: true
+                        example: null
+                      SalesOrderNumber:
+                        nullable: true
+                        example: null
+                      SalesOrderShipmentDate:
+                        type: string
+                        example: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID:
+                        type: number
+                        example: 1
+                      SalesOrderShipmentNumber:
+                        type: string
+                        example: 6023202500001SP
+                      TransporterName:
+                        nullable: true
+                        example: null
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-23T00:54:32.833Z'
+                      VehicleNumber:
+                        nullable: true
+                        example: null
+                      VehicleTypeCapacityTonnes:
+                        nullable: true
+                        example: null
+                      VehicleTypeID:
+                        nullable: true
+                        example: null
+                      WarehouseID:
+                        nullable: true
+                        example: null
+                      WarehouseName:
+                        nullable: true
+                        example: null
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+                      vehicleTypeName:
+                        nullable: true
+                        example: null
+                  message:
+                    type: string
+                    example: New Sales Order Shipment fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: null
+                      BranchName: null
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-23T00:54:32.833Z'
+                      CustomerID: null
+                      CustomerName: null
+                      IsDeleted: false
+                      LRNumber: null
+                      SalesOrderDate: null
+                      SalesOrderID: null
+                      SalesOrderNumber: null
+                      SalesOrderShipmentDate: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID: 1
+                      SalesOrderShipmentNumber: 6023202500001SP
+                      TransporterName: null
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-23T00:54:32.833Z'
+                      VehicleNumber: null
+                      VehicleTypeCapacityTonnes: null
+                      VehicleTypeID: null
+                      WarehouseID: null
+                      WarehouseName: null
+                      total_MRP: 0
+                      total_quantity: 0
+                      vehicleTypeName: null
+                    message: New Sales Order Shipment fetched Successfully
+  /api/shipment/getSalesOrderShipment:
+    post:
+      summary: http://localhost:3000/api/shipment/getSalesOrderShipment
+      description: http://localhost:3000/api/shipment/getSalesOrderShipment
+      operationId: httpLocalhost3000ApiShipmentGetsalesordershipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderShipmentID:
+                  type: string
+                  example: '1'
+            example:
+              SalesOrderShipmentID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '707'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:54:46 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2c3-IBft+/SKUi5voJ6rNOIQ3JcUBYY"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-23T00:54:32.833Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LL
+                      SalesOrderDate:
+                        type: string
+                        example: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderShipmentDate:
+                        type: string
+                        example: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID:
+                        type: number
+                        example: 1
+                      SalesOrderShipmentNumber:
+                        type: string
+                        example: 6023202500001SP
+                      TransporterName:
+                        type: string
+                        example: TT
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-23T01:24:29.557Z'
+                      VehicleNumber:
+                        type: string
+                        example: VV
+                      VehicleTypeCapacityTonnes:
+                        type: number
+                        example: 100
+                      VehicleTypeID:
+                        type: number
+                        example: 1
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                      total_MRP:
+                        type: number
+                        example: 300
+                      total_quantity:
+                        type: number
+                        example: 135
+                      vehicleTypeName:
+                        type: string
+                        example: trucks
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-23T00:54:32.833Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      IsDeleted: false
+                      LRNumber: LL
+                      SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderShipmentDate: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID: 1
+                      SalesOrderShipmentNumber: 6023202500001SP
+                      TransporterName: TT
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-23T01:24:29.557Z'
+                      VehicleNumber: VV
+                      VehicleTypeCapacityTonnes: 100
+                      VehicleTypeID: 1
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                      total_MRP: 300
+                      total_quantity: 135
+                      vehicleTypeName: trucks
+  /api/shipment/getAllSalesOrderShipments:
+    post:
+      summary: http://localhost:3000/api/shipment/getAllSalesOrderShipments
+      description: http://localhost:3000/api/shipment/getAllSalesOrderShipments
+      operationId: httpLocalhost3000ApiShipmentGetallsalesordershipments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '709'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:54:51 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2c5-IH534/QrnfY9wNFXCZe3iEiTVfg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-06-23T00:54:32.833Z'
+                        CustomerID:
+                          type: number
+                          example: 6
+                        CustomerName:
+                          type: string
+                          example: Softsol
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LL
+                        SalesOrderDate:
+                          type: string
+                          example: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID:
+                          type: number
+                          example: 1
+                        SalesOrderNumber:
+                          type: string
+                          example: 6022202500001SO
+                        SalesOrderShipmentDate:
+                          type: string
+                          example: '2025-06-23T00:00:00.000Z'
+                        SalesOrderShipmentID:
+                          type: number
+                          example: 1
+                        SalesOrderShipmentNumber:
+                          type: string
+                          example: 6023202500001SP
+                        TransporterName:
+                          type: string
+                          example: TT
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-06-23T01:24:29.557Z'
+                        VehicleNumber:
+                          type: string
+                          example: VV
+                        VehicleTypeCapacityTonnes:
+                          type: number
+                          example: 100
+                        VehicleTypeID:
+                          type: number
+                          example: 1
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                        total_MRP:
+                          type: number
+                          example: 300
+                        total_quantity:
+                          type: number
+                          example: 135
+                        vehicleTypeName:
+                          type: string
+                          example: trucks
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-23T00:54:32.833Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        IsDeleted: false
+                        LRNumber: LL
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderShipmentDate: '2025-06-23T00:00:00.000Z'
+                        SalesOrderShipmentID: 1
+                        SalesOrderShipmentNumber: 6023202500001SP
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:24:29.557Z'
+                        VehicleNumber: VV
+                        VehicleTypeCapacityTonnes: 100
+                        VehicleTypeID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 300
+                        total_quantity: 135
+                        vehicleTypeName: trucks
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-06-23T00:54:32.833Z'
+                        CustomerID: 6
+                        CustomerName: Softsol
+                        IsDeleted: false
+                        LRNumber: LL
+                        SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                        SalesOrderID: 1
+                        SalesOrderNumber: 6022202500001SO
+                        SalesOrderShipmentDate: '2025-06-23T00:00:00.000Z'
+                        SalesOrderShipmentID: 1
+                        SalesOrderShipmentNumber: 6023202500001SP
+                        TransporterName: TT
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-06-23T01:24:29.557Z'
+                        VehicleNumber: VV
+                        VehicleTypeCapacityTonnes: 100
+                        VehicleTypeID: 1
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_MRP: 300
+                        total_quantity: 135
+                        vehicleTypeName: trucks
+  /api/shipment/updateSalesOrderShipment:
+    post:
+      summary: http://localhost:3000/api/shipment/updateSalesOrderShipment
+      description: http://localhost:3000/api/shipment/updateSalesOrderShipment
+      operationId: httpLocalhost3000ApiShipmentUpdatesalesordershipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: string
+                  example: '13'
+                CustomerID:
+                  type: string
+                  example: '6'
+                SalesOrderID:
+                  type: string
+                  example: '1'
+                SalesOrderShipmentID:
+                  type: string
+                  example: '1'
+                VehicleTypeID:
+                  type: string
+                  example: '1'
+                WarehouseID:
+                  type: string
+                  example: '8'
+            example:
+              BranchID: '13'
+              CustomerID: '6'
+              SalesOrderID: '1'
+              SalesOrderShipmentID: '1'
+              VehicleTypeID: '1'
+              WarehouseID: '8'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '761'
+            Date:
+              schema:
+                type: string
+                example: Sun, 22 Jun 2025 19:54:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2f9-RR4lDmjY0JTDBv3rslZEjRHjYYE"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-06-23T00:54:32.833Z'
+                      CustomerID:
+                        type: number
+                        example: 6
+                      CustomerName:
+                        type: string
+                        example: Softsol
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LL
+                      SalesOrderDate:
+                        type: string
+                        example: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID:
+                        type: number
+                        example: 1
+                      SalesOrderNumber:
+                        type: string
+                        example: 6022202500001SO
+                      SalesOrderShipmentDate:
+                        type: string
+                        example: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID:
+                        type: number
+                        example: 1
+                      SalesOrderShipmentNumber:
+                        type: string
+                        example: 6023202500001SP
+                      TransporterName:
+                        type: string
+                        example: TT
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-06-23T01:24:29.557Z'
+                      VehicleNumber:
+                        type: string
+                        example: VV
+                      VehicleTypeCapacityTonnes:
+                        type: number
+                        example: 100
+                      VehicleTypeID:
+                        type: number
+                        example: 1
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                      total_MRP:
+                        type: number
+                        example: 300
+                      total_quantity:
+                        type: number
+                        example: 135
+                      vehicleTypeName:
+                        type: string
+                        example: trucks
+                  message:
+                    type: string
+                    example: Sales Order Shipment updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-06-23T00:54:32.833Z'
+                      CustomerID: 6
+                      CustomerName: Softsol
+                      IsDeleted: false
+                      LRNumber: LL
+                      SalesOrderDate: '2025-06-22T00:00:00.000Z'
+                      SalesOrderID: 1
+                      SalesOrderNumber: 6022202500001SO
+                      SalesOrderShipmentDate: '2025-06-23T00:00:00.000Z'
+                      SalesOrderShipmentID: 1
+                      SalesOrderShipmentNumber: 6023202500001SP
+                      TransporterName: TT
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-06-23T01:24:29.557Z'
+                      VehicleNumber: VV
+                      VehicleTypeCapacityTonnes: 100
+                      VehicleTypeID: 1
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                      total_MRP: 300
+                      total_quantity: 135
+                      vehicleTypeName: trucks
+                    message: Sales Order Shipment updated Successfully
+tags: []

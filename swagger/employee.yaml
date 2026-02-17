@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: Master Data API - Employee
+  description: API endpoints for managing employees and users.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+paths:
+  /master/employee/addEmployee:
+    post:
+      tags: [Employee]
+      summary: Add a new employee and optionally create a system user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [EmployeeCode, EmployeeName, IsActive, user_id]
+              properties:
+                EmployeeCode: { type: string, example: "EMP001" }
+                EmployeeName: { type: string, example: "John Doe" }
+                WarehouseID:
+                  {
+                    type: integer,
+                    example: 1,
+                    description: "Required if creating a user. Can be null otherwise.",
+                  }
+                Designation:
+                  {
+                    type: string,
+                    example: "Warehouse Operator",
+                    description: "Optional Job Title",
+                  }
+                PhoneNumber:
+                  {
+                    type: string,
+                    example: "+1-555-1234",
+                    description: "Optional Contact Number",
+                  }
+                IsActive: { type: boolean, example: true }
+                createUser:
+                  {
+                    type: boolean,
+                    example: true,
+                    description: "Set to true to create a user account",
+                  }
+                UserName:
+                  {
+                    type: string,
+                    example: "johndoe",
+                    description: "Required if createUser is true",
+                  }
+                Password:
+                  {
+                    type: string,
+                    format: password,
+                    example: "Password123!",
+                    description: "Required if createUser is true",
+                  }
+                ConfirmPassword:
+                  {
+                    type: string,
+                    format: password,
+                    example: "Password123!",
+                    description: "Required if createUser is true",
+                  }
+                RoleID:
+                  {
+                    type: integer,
+                    example: 3,
+                    description: "Required if createUser is true",
+                  }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "201": { description: Employee and User (if any) created successfully }
+        "400": { description: Bad request or validation error }
+# ... (Full definitions for get, getAll, update, delete)

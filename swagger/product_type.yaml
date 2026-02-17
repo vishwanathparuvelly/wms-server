@@ -1,0 +1,87 @@
+# swagger/product_type.yaml
+
+openapi: 3.0.0
+info:
+  title: WMS API - Master (Product Type)
+  description: API endpoints for managing product types.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api/master
+    description: Development server
+
+components:
+  schemas:
+    ProductType:
+      type: object
+      properties:
+        ProductTypeID: { type: integer }
+        ProductTypeName: { type: string }
+        ProductTypeDescription: { type: string }
+        ProductColor: { type: string }
+        ColorCode: { type: string, nullable: true, example: "#FF5733" }
+        ParentProduct: { type: string, nullable: true }
+        IsActive: { type: boolean }
+      required:
+        - ProductTypeName
+        - ProductTypeDescription
+        - ProductColor
+        - IsActive
+
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+
+security:
+  - bearerAuth: []
+
+paths:
+  /product-type/addProductType:
+    post:
+      summary: Add a new product type
+      tags: [Product Type]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductTypeName: { type: string }
+                ProductTypeDescription: { type: string }
+                ProductColor: { type: string }
+                ColorCode: { type: string, nullable: true }
+                ParentProduct: { type: string, nullable: true }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "201": { description: "Product Type created" }
+
+  /product-type/updateProductType:
+    post:
+      summary: Update an existing product type
+      tags: [Product Type]
+      # ... (similar properties as add, but with ProductTypeID)
+
+  /product-type/getProductType:
+    post:
+      summary: Get a single product type by ID
+      tags: [Product Type]
+      # ... (standard definition)
+
+  /product-type/getAllProductTypes:
+    post:
+      summary: Get a list of all product types (paginated)
+      tags: [Product Type]
+      # ... (standard definition)
+
+  /product-type/getParentProductTypes:
+    get:
+      summary: Get the static list of parent product types
+      tags: [Product Type]
+      responses:
+        "200": { description: "OK" }
+
+  /product-type/deleteProductType:
+    post:
+      summary: Delete a product type
+      tags: [Product Type]
+      # ... (standard definition)

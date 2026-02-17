@@ -1,0 +1,48 @@
+# swagger/customer_type.yml
+openapi: 3.0.0
+info:
+  title: Customer Type Master API
+  version: 1.0.0
+  description: API for managing Customer Type Master Data (e.g., Corporate, Retail).
+tags:
+  - name: Customer Type Master
+
+paths:
+  /master/customer-type/addCustomerType:
+    post:
+      tags: [Customer Type Master]
+      summary: Add a new Customer Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CustomerTypeName: { type: string, example: "Corporate" }
+                CustomerTypeDescription:
+                  { type: string, example: "Large enterprise clients" }
+                IsActive: { type: boolean, example: true }
+              required: [CustomerTypeName, IsActive]
+      responses:
+        "201": { description: Customer Type added successfully }
+        "400": { description: Invalid input or duplicate name }
+
+  /master/customer-type/getAllCustomerTypes:
+    post:
+      tags: [Customer Type Master]
+      summary: Get list of all Customer Types with pagination, search, and sorting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer, example: 1 }
+                pageSize: { type: integer, example: 10 }
+                search: { type: string }
+                sortBy: { type: string, example: "CustomerTypeName" }
+      responses:
+        "200": { description: Success }
+
+  # ... (You would typically add updateCustomerType and deleteCustomerType here as well)

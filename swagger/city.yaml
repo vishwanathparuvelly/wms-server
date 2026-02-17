@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Master Data API - City
+  description: API endpoints for managing cities.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        CityID:
+          type: integer
+          example: 1
+        CityName:
+          type: string
+          example: "Hyderabad"
+        CityCode:
+          type: string
+          example: "HYD"
+        StateID:
+          type: integer
+          example: 1000
+        StateName:
+          type: string
+          example: "Telangana"
+        CountryID:
+          type: integer
+          example: 101
+        CountryName:
+          type: string
+          example: "India"
+        IsActive:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A message describing the error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
+paths:
+  /master/city/addCity:
+    post:
+      tags:
+        - City
+      summary: Add a new city
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CityName
+                - CityCode
+                - StateID
+                - IsActive
+                - user_id
+              properties:
+                CityName:
+                  type: string
+                  example: "Hyderabad"
+                CityCode:
+                  type: string
+                  example: "HYD"
+                StateID:
+                  type: integer
+                  description: The ID of a valid, existing parent state.
+                  example: 1000
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: City added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/City"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/city/getAllCities:
+    post:
+      tags:
+        - City
+      summary: Get a list of cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StateID:
+                  type: integer
+                  description: "Optional: filter by parent StateID."
+                IsActive:
+                  type: boolean
+                  description: "Optional: filter by active status."
+                includeDeleted:
+                  type: boolean
+                  description: "Optional: set to true to include soft-deleted records."
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: A list of cities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/City"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/city/getCity:
+    post:
+      tags:
+        - City
+      summary: Get a single city by its ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CityID
+                - user_id
+              properties:
+                CityID:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/City"
+        "400":
+          description: City not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/city/updateCity:
+    post:
+      tags:
+        - City
+      summary: Update an existing city
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CityID
+                - CityName
+                - CityCode
+                - StateID
+                - IsActive
+                - user_id
+              properties:
+                CityID:
+                  type: integer
+                  example: 1
+                CityName:
+                  type: string
+                  example: "Cyberabad"
+                CityCode:
+                  type: string
+                  example: "CYB"
+                StateID:
+                  type: integer
+                  description: The ID of a valid, existing parent state.
+                  example: 1000
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: City updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/City"
+        "400":
+          description: City not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/city/deleteCity:
+    post:
+      tags:
+        - City
+      summary: Delete a city (soft delete)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CityID
+                - user_id
+              properties:
+                CityID:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: City deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "City deleted successfully."
+        "400":
+          description: City not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"

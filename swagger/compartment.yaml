@@ -1,0 +1,208 @@
+# swagger/compartment.yaml
+
+openapi: 3.0.0
+info:
+  title: WMS API - Master (Compartment)
+  description: API endpoints for managing Compartments within warehouses.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api/master
+    description: Development server
+
+components:
+  schemas:
+    Compartment:
+      type: object
+      properties:
+        CompartmentID:
+          type: integer
+          description: Unique identifier for the compartment.
+        CompartmentCode:
+          type: string
+          description: A unique code for the compartment.
+        CompartmentName:
+          type: string
+          description: The name of the compartment.
+        WarehouseID:
+          type: integer
+          description: The ID of the warehouse this compartment belongs to.
+        WarehouseName:
+          type: string
+          description: The name of the parent warehouse.
+        MaxStockCount:
+          type: integer
+          description: The maximum number of stock units this compartment can hold.
+        Length:
+          type: number
+          format: decimal
+        Breadth:
+          type: number
+          format: decimal
+        Height:
+          type: number
+          format: decimal
+        Volume:
+          type: number
+          format: decimal
+          description: Calculated volume (L*B*H).
+        IsActive:
+          type: boolean
+          description: Status of the compartment.
+        CreatedDate:
+          type: string
+          format: date-time
+      required:
+        - CompartmentCode
+        - CompartmentName
+        - WarehouseID
+        - MaxStockCount
+        - Length
+        - Breadth
+        - Height
+        - IsActive
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /compartment/addCompartment:
+    post:
+      summary: Add a new compartment
+      tags:
+        - Compartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CompartmentCode: { type: string }
+                CompartmentName: { type: string }
+                WarehouseID: { type: integer }
+                MaxStockCount: { type: integer }
+                Length: { type: number }
+                Breadth: { type: number }
+                Height: { type: number }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "201":
+          description: Compartment created successfully
+        "400":
+          description: Bad request (e.g., validation error)
+
+  /compartment/updateCompartment:
+    post:
+      summary: Update an existing compartment
+      tags:
+        - Compartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CompartmentID: { type: integer }
+                CompartmentCode: { type: string }
+                CompartmentName: { type: string }
+                WarehouseID: { type: integer }
+                MaxStockCount: { type: integer }
+                Length: { type: number }
+                Breadth: { type: number }
+                Height: { type: number }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "200":
+          description: Compartment updated successfully
+        "400":
+          description: Bad request
+
+  /compartment/getCompartment:
+    post:
+      summary: Get a single compartment by ID
+      tags:
+        - Compartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CompartmentID: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Compartment"
+
+  /compartment/getAllCompartments:
+    post:
+      summary: Get a list of all compartments (paginated)
+      tags:
+        - Compartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer }
+                pageSize: { type: integer }
+                search: { type: string, nullable: true }
+                sortBy: { type: string, nullable: true }
+                sortOrder: { type: string, enum: [asc, desc], nullable: true }
+                WarehouseID: { type: integer, nullable: true }
+                IsActive: { type: boolean, nullable: true }
+      responses:
+        "200":
+          description: A list of compartments.
+
+  /compartment/deleteCompartment:
+    post:
+      summary: Delete a compartment
+      tags:
+        - Compartment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CompartmentID: { type: integer }
+                user_id: { type: integer }
+      responses:
+        "200":
+          description: Compartment deleted successfully
+
+  /compartment/getCompartmentsLite:
+    post:
+      summary: Get a simplified list of active compartments for dropdowns
+      tags:
+        - Compartment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID:
+                  type: integer
+                  description: Optional. Filter compartments by a specific warehouse.
+                  nullable: true
+      responses:
+        "200":
+          description: OK

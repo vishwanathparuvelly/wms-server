@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Bin Master API
+  description: API endpoints for managing warehouse bins.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+
+paths:
+  /bin/addBin:
+    post:
+      summary: Add a new bin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StackID
+                - BinNumber
+                - XCoordinate
+                - YCoordinate
+                - ZCoordinate
+                - IsActive
+                - user_id
+              properties:
+                StackID: { type: integer, example: 1 }
+                BinNumber: { type: string, example: "A-01-01-B1" }
+                XCoordinate: { type: string, example: "A01" }
+                YCoordinate: { type: string, example: "R05" }
+                ZCoordinate: { type: string, example: "L03" }
+                CheckDigit: { type: string, example: "7", nullable: true }
+                MaxPallets: { type: integer, example: 2, nullable: true }
+                MaxWeightKG:
+                  {
+                    type: number,
+                    format: "decimal",
+                    example: 1200.50,
+                    nullable: true,
+                  }
+                MaxVolumeCBM:
+                  {
+                    type: number,
+                    format: "decimal",
+                    example: 1.5,
+                    nullable: true,
+                  }
+                PalletTypeID: { type: integer, example: 1, nullable: true }
+                StorageTypeID: { type: integer, example: 2, nullable: true }
+                IsActive: { type: boolean, example: true }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "201": { description: Bin created successfully }
+        "400": { description: Bad request or validation error }
+
+  /bin/getBin:
+    post:
+      summary: Get a single bin by ID
+      # ... (This endpoint remains the same)
+
+  /bin/getAllBins:
+    post:
+      summary: Get a list of all bins with pagination, search, and sort
+      # ... (This endpoint remains the same, but the response will contain the new fields)
+
+  /bin/updateBin:
+    post:
+      summary: Update an existing bin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - BinID
+                - StackID
+                - BinNumber
+                - XCoordinate
+                - YCoordinate
+                - ZCoordinate
+                - IsActive
+                - user_id
+              properties:
+                BinID: { type: integer, example: 1 }
+                StackID: { type: integer, example: 1 }
+                BinNumber: { type: string, example: "A-01-01-B1-MOD" }
+                XCoordinate: { type: string, example: "A02" }
+                YCoordinate: { type: string, example: "R06" }
+                ZCoordinate: { type: string, example: "L04" }
+                CheckDigit: { type: string, example: "8", nullable: true }
+                MaxPallets: { type: integer, example: 3, nullable: true }
+                MaxWeightKG:
+                  {
+                    type: number,
+                    format: "decimal",
+                    example: 1500.00,
+                    nullable: true,
+                  }
+                MaxVolumeCBM:
+                  {
+                    type: number,
+                    format: "decimal",
+                    example: 2.0,
+                    nullable: true,
+                  }
+                PalletTypeID: { type: integer, example: 2, nullable: true }
+                StorageTypeID: { type: integer, example: 3, nullable: true }
+                IsActive: { type: boolean, example: false }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200": { description: Bin updated successfully }
+        "400": { description: Bad request or validation error }
+
+  /bin/deleteBin:
+    post:
+      summary: Soft delete a bin
+      # ... (This endpoint remains the same)
+
+  /bin/getBinsLite:
+    post:
+      summary: Get a simplified list of bins for dropdowns
+      # ... (This endpoint remains the same)

@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: Gate Type Master API
+  description: API endpoints for managing Gate Type master data.
+  version: 1.0.0
+servers:
+  - url: /api/master
+    description: Development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /gate-type/getGateTypesLite:
+    post:
+      summary: Get a lightweight list of active Gate Types
+      responses:
+        "200":
+          description: A lite list of gate types for dropdowns.

@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: Warehouse Master API
+  description: API endpoints for managing warehouses.
+  version: 1.0.0
+
+paths:
+  /api/warehouse/add:
+    post:
+      summary: Add a new warehouse
+      tags: [Warehouse]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseName:
+                  { type: string, example: "Main Distribution Center" }
+                WarehouseCode: { type: string, example: "MDC-01" }
+                WarehouseTypeID:
+                  {
+                    type: integer,
+                    example: 1,
+                    description: "ID for the type of warehouse (e.g., Owned, Rented)",
+                  }
+                ParentWarehouseID:
+                  { type: integer, nullable: true, example: null }
+                StreetAddress1: { type: string, example: "123 Industrial Way" }
+                StreetAddress2: { type: string, example: "Logistics Park" }
+                Latitude: { type: number, format: float, example: 17.4474 }
+                Longitude: { type: number, format: float, example: 78.3762 }
+                MaxCapacitySQFT:
+                  { type: number, format: float, example: 50000.00 }
+                MaxCapacityMT: { type: number, format: float, example: 1000.00 }
+                CarpetArea: { type: number, format: float, example: 45000.00 }
+                CountryID: { type: integer, example: 1 }
+                StateID: { type: integer, example: 1001 }
+                CityID: { type: integer, example: 1 }
+                ZoneID: { type: integer, example: 1 }
+                BranchID: { type: integer, example: 1 }
+                IsActive: { type: boolean, example: true }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "201": { description: "Warehouse added successfully" }
+        "400": { description: "Bad Request / Validation Error" }
+
+  /api/warehouse/get:
+    post:
+      summary: Get a single warehouse by ID
+      tags: [Warehouse]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID: { type: integer, example: 1 }
+      responses:
+        "200": { description: "Successful retrieval" }
+        "400": { description: "Bad Request" }
+
+  /api/warehouse/getall:
+    post:
+      summary: Get all warehouses with pagination and filtering
+      tags: [Warehouse]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer, example: 1 }
+                pageSize: { type: integer, example: 10 }
+                IsActive: { type: boolean, example: true }
+                BranchID: { type: integer, example: 1 }
+      responses:
+        "200": { description: "Successful retrieval" }
+        "400": { description: "Bad Request" }
+
+  /api/warehouse/update:
+    post:
+      summary: Update an existing warehouse
+      tags: [Warehouse]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID: { type: integer, example: 1 }
+                WarehouseName:
+                  {
+                    type: string,
+                    example: "Main Distribution Center (Updated)",
+                  }
+                WarehouseCode: { type: string, example: "MDC-01-U" }
+                WarehouseTypeID: { type: integer, example: 2 }
+                ParentWarehouseID:
+                  { type: integer, nullable: true, example: null }
+                StreetAddress1: { type: string, example: "123 Industrial Way" }
+                StreetAddress2: { type: string, example: "Logistics Park" }
+                Latitude: { type: number, format: float, example: 17.4475 }
+                Longitude: { type: number, format: float, example: 78.3763 }
+                MaxCapacitySQFT:
+                  { type: number, format: float, example: 55000.00 }
+                MaxCapacityMT: { type: number, format: float, example: 1200.00 }
+                CarpetArea: { type: number, format: float, example: 48000.00 }
+                CountryID: { type: integer, example: 1 }
+                StateID: { type: integer, example: 1001 }
+                CityID: { type: integer, example: 1 }
+                ZoneID: { type: integer, example: 1 }
+                BranchID: { type: integer, example: 1 }
+                IsActive: { type: boolean, example: true }
+                user_id: { type: integer, example: 2 }
+      responses:
+        "200": { description: "Warehouse updated successfully" }
+        "400": { description: "Bad Request / Validation Error" }
+
+  /api/warehouse/delete:
+    post:
+      summary: Delete a warehouse (soft delete)
+      tags: [Warehouse]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID: { type: integer, example: 1 }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200": { description: "Warehouse deleted successfully" }
+        "400": { description: "Bad Request" }

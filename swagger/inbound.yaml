@@ -1,0 +1,4846 @@
+openapi: 3.1.0
+info:
+  title: SOFTSOL_INBOUND
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth/login:
+    post:
+      summary: localhost:3000/auth/login
+      description: localhost:3000/auth/login
+      operationId: localhost3000AuthLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Password:
+                  type: string
+                  example: test@123
+                UserName:
+                  type: string
+                  example: test
+            example:
+              Password: test@123
+              UserName: test
+      responses:
+        '200':
+          description: Success
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '231'
+            Date:
+              schema:
+                type: string
+                example: Sun, 18 May 2025 10:49:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"e7-W3127shW7y2zuXZ0r3udpcjjftY"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Token:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImlhdCI6MTc0NzU2NTM1NSwiZXhwIjoxNzQ3NTY4OTU1LCJhdWQiOiJ5b3VyZG9tYWluLmNvbSIsImlzcyI6InlvdXJkb21haW4uY29tIn0._Q6qPVB3A5jd9saNCbnfplrJhk6FpFaquiInfWRTgQM
+                  UserID:
+                    type: number
+                    example: 1
+              examples:
+                Success:
+                  value:
+                    Token: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImlhdCI6MTc0NzU2NTM1NSwiZXhwIjoxNzQ3NTY4OTU1LCJhdWQiOiJ5b3VyZG9tYWluLmNvbSIsImlzcyI6InlvdXJkb21haW4uY29tIn0._Q6qPVB3A5jd9saNCbnfplrJhk6FpFaquiInfWRTgQM
+                    UserID: 1
+        '401':
+          description: Error
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '40'
+            Date:
+              schema:
+                type: string
+                example: Sun, 18 May 2025 10:50:04 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"28-iHGTIv7noT3UMayYgBivAszwTgE"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid username or password
+              examples:
+                Error:
+                  value:
+                    error: Invalid username or password
+  /api/purchase_order/newPurchaseOrder:
+    post:
+      summary: http://localhost:3000/api/purchase_order/newPurchaseOrder
+      description: http://localhost:3000/api/purchase_order/newPurchaseOrder
+      operationId: httpLocalhost3000ApiPurchaseOrderNewpurchaseorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '685'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:21:17 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2ad-XhVjAA5rybKeTkQWGabPVp8/IYU"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        nullable: true
+                        example: null
+                      BranchName:
+                        nullable: true
+                        example: null
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T22:51:18.967Z'
+                      DeliveryAddress:
+                        nullable: true
+                        example: null
+                      DeliveryDate:
+                        nullable: true
+                        example: null
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        nullable: true
+                        example: null
+                      PersonInChargeInternal:
+                        nullable: true
+                        example: null
+                      PersonInChargeVendor:
+                        nullable: true
+                        example: null
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 2
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500002PO
+                      PurchaseOrderStatus:
+                        type: string
+                        example: Draft
+                      Remarks:
+                        nullable: true
+                        example: null
+                      TransporterName:
+                        nullable: true
+                        example: null
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T22:51:18.967Z'
+                      VehicleNumber:
+                        nullable: true
+                        example: null
+                      VendorID:
+                        nullable: true
+                        example: null
+                      VendorName:
+                        nullable: true
+                        example: null
+                      WarehouseID:
+                        nullable: true
+                        example: null
+                      WarehouseName:
+                        nullable: true
+                        example: null
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: New Purchase Order fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: null
+                      BranchName: null
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T22:51:18.967Z'
+                      DeliveryAddress: null
+                      DeliveryDate: null
+                      IsDeleted: false
+                      LRNumber: null
+                      PersonInChargeInternal: null
+                      PersonInChargeVendor: null
+                      PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID: 2
+                      PurchaseOrderNumber: 50027202500002PO
+                      PurchaseOrderStatus: Draft
+                      Remarks: null
+                      TransporterName: null
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T22:51:18.967Z'
+                      VehicleNumber: null
+                      VendorID: null
+                      VendorName: null
+                      WarehouseID: null
+                      WarehouseName: null
+                      total_quantity: 0
+                    message: New Purchase Order fetched Successfully
+        '400':
+          description: Failure
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '47'
+            Date:
+              schema:
+                type: string
+                example: Sat, 17 May 2025 10:48:29 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2f-819pvXpwxaoufb0deWAKQpaAeV4"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: user_id is required in request body
+              examples:
+                Failure:
+                  value:
+                    error: user_id is required in request body
+  /api/purchase_order/getAllPurchaseOrders:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getAllPurchaseOrders
+      description: http://localhost:3000/api/purchase_order/getAllPurchaseOrders
+      operationId: httpLocalhost3000ApiPurchaseOrderGetallpurchaseorders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderStatus:
+                  type: string
+                  example: Draft
+            example:
+              PurchaseOrderStatus: Draft
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1433'
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 May 2025 07:00:37 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"599-JjUPbpI8ICgElbiB/Cv9vlx5t+E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-17T15:45:58.817Z'
+                        DeliveryAddress:
+                          type: string
+                          example: Attapur
+                        DeliveryDate:
+                          type: string
+                          example: '2025-05-18T00:00:00.000Z'
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LR123
+                        PersonInChargeInternal:
+                          type: string
+                          example: Vishwa
+                        PersonInChargeVendor:
+                          type: string
+                          example: Sreenu
+                        PurchaseOrderDate:
+                          type: string
+                          example: '2025-05-17T00:00:00.000Z'
+                        PurchaseOrderID:
+                          type: number
+                          example: 2
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50017202500002PO
+                        PurchaseOrderStatus:
+                          type: string
+                          example: Completed
+                        Remarks:
+                          type: string
+                          example: Warehouse Kirana Pruchase Order
+                        TransporterName:
+                          type: string
+                          example: ORL Transports
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-18T19:44:40.727Z'
+                        VehicleNumber:
+                          type: string
+                          example: TG00123
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 9
+                        WarehouseName:
+                          type: string
+                          example: HYDCHANDANAGAR
+                        total_quantity:
+                          type: number
+                          example: 14.5
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-17T15:45:58.817Z'
+                        DeliveryAddress: Attapur
+                        DeliveryDate: '2025-05-18T00:00:00.000Z'
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PersonInChargeInternal: Vishwa
+                        PersonInChargeVendor: Sreenu
+                        PurchaseOrderDate: '2025-05-17T00:00:00.000Z'
+                        PurchaseOrderID: 2
+                        PurchaseOrderNumber: 50017202500002PO
+                        PurchaseOrderStatus: Completed
+                        Remarks: Warehouse Kirana Pruchase Order
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-18T19:44:40.727Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 9
+                        WarehouseName: HYDCHANDANAGAR
+                        total_quantity: 14.5
+                      - BranchID: 10
+                        BranchName: Pak-branch
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-20T12:52:40.350Z'
+                        DeliveryAddress: adsfsdaf
+                        DeliveryDate: '2025-05-24T00:00:00.000Z'
+                        IsDeleted: false
+                        LRNumber: asf
+                        PersonInChargeInternal: asdf
+                        PersonInChargeVendor: asdf
+                        PurchaseOrderDate: '2025-05-20T00:00:00.000Z'
+                        PurchaseOrderID: 17
+                        PurchaseOrderNumber: 50020202500017PO
+                        PurchaseOrderStatus: Completed
+                        Remarks: asfasdf
+                        TransporterName: asf
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-23T14:47:32.243Z'
+                        VehicleNumber: asf
+                        VendorID: 3
+                        VendorName: '12'
+                        WarehouseID: 7
+                        WarehouseName: bangladesh-warehouse
+                        total_quantity: 9
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-17T15:45:58.817Z'
+                        DeliveryAddress: Attapur
+                        DeliveryDate: '2025-05-18T00:00:00.000Z'
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PersonInChargeInternal: Vishwa
+                        PersonInChargeVendor: Sreenu
+                        PurchaseOrderDate: '2025-05-17T00:00:00.000Z'
+                        PurchaseOrderID: 2
+                        PurchaseOrderNumber: 50017202500002PO
+                        PurchaseOrderStatus: Completed
+                        Remarks: Warehouse Kirana Pruchase Order
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-18T19:44:40.727Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 9
+                        WarehouseName: HYDCHANDANAGAR
+                        total_quantity: 14.5
+                      - BranchID: 10
+                        BranchName: Pak-branch
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-20T12:52:40.350Z'
+                        DeliveryAddress: adsfsdaf
+                        DeliveryDate: '2025-05-24T00:00:00.000Z'
+                        IsDeleted: false
+                        LRNumber: asf
+                        PersonInChargeInternal: asdf
+                        PersonInChargeVendor: asdf
+                        PurchaseOrderDate: '2025-05-20T00:00:00.000Z'
+                        PurchaseOrderID: 17
+                        PurchaseOrderNumber: 50020202500017PO
+                        PurchaseOrderStatus: Completed
+                        Remarks: asfasdf
+                        TransporterName: asf
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-23T14:47:32.243Z'
+                        VehicleNumber: asf
+                        VendorID: 3
+                        VendorName: '12'
+                        WarehouseID: 7
+                        WarehouseName: bangladesh-warehouse
+                        total_quantity: 9
+  /api/purchase_order/updatePurchaseOrder:
+    post:
+      summary: http://localhost:3000/api/purchase_order/updatePurchaseOrder
+      description: http://localhost:3000/api/purchase_order/updatePurchaseOrder
+      operationId: httpLocalhost3000ApiPurchaseOrderUpdatepurchaseorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 13
+                DeliveryAddress:
+                  type: string
+                  example: Attapur
+                DeliveryDate:
+                  type: string
+                  example: '2025-05-29'
+                LRNumber:
+                  type: string
+                  example: LR123
+                PersonInChargeInternal:
+                  type: string
+                  example: Vishwa
+                PersonInChargeVendor:
+                  type: string
+                  example: Sreenu
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+                PurchaseOrderStatus:
+                  type: string
+                  example: Open
+                Remarks:
+                  type: string
+                  example: Warehouse Kirana Pruchase Order
+                TransporterName:
+                  type: string
+                  example: ORL Transports
+                VehicleNumber:
+                  type: string
+                  example: TG00123
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 8
+            example:
+              BranchID: 13
+              DeliveryAddress: Attapur
+              DeliveryDate: '2025-05-29'
+              LRNumber: LR123
+              PersonInChargeInternal: Vishwa
+              PersonInChargeVendor: Sreenu
+              PurchaseOrderID: 1
+              PurchaseOrderStatus: Open
+              Remarks: Warehouse Kirana Pruchase Order
+              TransporterName: ORL Transports
+              VehicleNumber: TG00123
+              VendorID: 1
+              WarehouseID: 8
+      responses:
+        '200':
+          description: Success
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '765'
+            Date:
+              schema:
+                type: string
+                example: Sat, 17 May 2025 10:51:21 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2fd-czxkmyRIqxlzomeMF7S3j0On16U"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-17T15:45:58.817Z'
+                      DeliveryAddress:
+                        type: string
+                        example: Attapur
+                      DeliveryDate:
+                        type: string
+                        example: '2025-05-18T00:00:00.000Z'
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LR123
+                      PersonInChargeInternal:
+                        type: string
+                        example: Vishwa
+                      PersonInChargeVendor:
+                        type: string
+                        example: Sreenu
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-17T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 2
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50017202500002PO
+                      PurchaseOrderStatus:
+                        type: string
+                        example: Draft
+                      Remarks:
+                        type: string
+                        example: Warehouse Kirana Pruchase Order
+                      TransporterName:
+                        type: string
+                        example: ORL Transports
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-17T16:21:22.683Z'
+                      VehicleNumber:
+                        type: string
+                        example: TG00123
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 9
+                      WarehouseName:
+                        type: string
+                        example: HYDCHANDANAGAR
+                  message:
+                    type: string
+                    example: Purchase order updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-17T15:45:58.817Z'
+                      DeliveryAddress: Attapur
+                      DeliveryDate: '2025-05-18T00:00:00.000Z'
+                      IsDeleted: false
+                      LRNumber: LR123
+                      PersonInChargeInternal: Vishwa
+                      PersonInChargeVendor: Sreenu
+                      PurchaseOrderDate: '2025-05-17T00:00:00.000Z'
+                      PurchaseOrderID: 2
+                      PurchaseOrderNumber: 50017202500002PO
+                      PurchaseOrderStatus: Draft
+                      Remarks: Warehouse Kirana Pruchase Order
+                      TransporterName: ORL Transports
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-17T16:21:22.683Z'
+                      VehicleNumber: TG00123
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 9
+                      WarehouseName: HYDCHANDANAGAR
+                    message: Purchase order updated successfully
+  /api/purchase_order/deletePurchaseOrder:
+    post:
+      summary: http://localhost:3000/api/purchase_order/deletePurchaseOrder
+      description: http://localhost:3000/api/purchase_order/deletePurchaseOrder
+      operationId: httpLocalhost3000ApiPurchaseOrderDeletepurchaseorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+                user_id:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderID: 1
+              user_id: 1
+      responses:
+        '200':
+          description: Success
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '49'
+            Date:
+              schema:
+                type: string
+                example: Sat, 17 May 2025 10:25:21 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"31-uqBivGub/sL94oY4cTpooCkZasc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Purchase order deleted successfully
+              examples:
+                Success:
+                  value:
+                    message: Purchase order deleted successfully
+  /api/purchase_order/addNewProductForPurchaseOrder:
+    post:
+      summary: http://localhost:3000/api/purchase_order/addNewProductForPurchaseOrder
+      description: http://localhost:3000/api/purchase_order/addNewProductForPurchaseOrder
+      operationId: httpLocalhost3000ApiPurchaseOrderAddnewproductforpurchaseorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: B01
+                BranchID:
+                  type: number
+                  example: 13
+                Discount:
+                  type: number
+                  example: 20
+                MRP:
+                  type: number
+                  example: 60
+                ProductID:
+                  type: number
+                  example: 2
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 125
+                SLOCID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 8
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 8
+            example:
+              BatchNumber: B01
+              BranchID: 13
+              Discount: 20
+              MRP: 60
+              ProductID: 2
+              PurchaseOrderID: 1
+              Quantity: 125
+              SLOCID: 1
+              UOMID: 8
+              VendorID: 1
+              WarehouseID: 8
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '926'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:49:48 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"39e-CeCDl/wkr24YLpaM7VQvjnpXbz8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: 'Aashirvaad '
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:19:20.287Z'
+                      Discount:
+                        type: number
+                        example: 50
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: AATA
+                      MRP:
+                        type: number
+                        example: 300
+                      PackagingTypeName:
+                        type: string
+                        example: Packed
+                      Pending_Quantity:
+                        type: number
+                        example: 120
+                      ProductCode:
+                        type: string
+                        example: '1'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: AATA
+                      ProductTypeName:
+                        type: string
+                        example: AATA
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderProductID:
+                        type: number
+                        example: 1
+                      Quantity:
+                        type: number
+                        example: 120
+                      Received_Quantity:
+                        type: number
+                        example: 0
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      Total_Product_Amount:
+                        type: number
+                        example: 30000
+                      Total_Product_Discount:
+                        type: number
+                        example: 6000
+                      Total_Product_MRP:
+                        type: number
+                        example: 36000
+                      UOMCode:
+                        type: string
+                        example: pcs
+                      UOMDescription:
+                        type: string
+                        example: pcs
+                      UOMID:
+                        type: number
+                        example: 7
+                      UOMName:
+                        type: string
+                        example: pcs
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:19:50.710Z'
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Product added to purchase order successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: 'Aashirvaad '
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:19:20.287Z'
+                      Discount: 50
+                      IsDeleted: false
+                      LineName: AATA
+                      MRP: 300
+                      PackagingTypeName: Packed
+                      Pending_Quantity: 120
+                      ProductCode: '1'
+                      ProductConsumeName: Consumed
+                      ProductID: 1
+                      ProductName: AATA
+                      ProductTypeName: AATA
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderProductID: 1
+                      Quantity: 120
+                      Received_Quantity: 0
+                      SLOCID: 1
+                      SLOCName: Good
+                      Total_Product_Amount: 30000
+                      Total_Product_Discount: 6000
+                      Total_Product_MRP: 36000
+                      UOMCode: pcs
+                      UOMDescription: pcs
+                      UOMID: 7
+                      UOMName: pcs
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:19:50.710Z'
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Product added to purchase order successfully
+  /api/purchase_order/getPurchaseOrderProduct:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getPurchaseOrderProduct
+      description: http://localhost:3000/api/purchase_order/getPurchaseOrderProduct
+      operationId: httpLocalhost3000ApiPurchaseOrderGetpurchaseorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderProductID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderProductID: 1
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '869'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:57:40 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"365-wGz0zPgsNY0mBnccDhF3y/KPbEU"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: 'Aashirvaad '
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:19:20.287Z'
+                      Discount:
+                        type: number
+                        example: 50
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: AATA
+                      MRP:
+                        type: number
+                        example: 300
+                      PackagingTypeName:
+                        type: string
+                        example: Packed
+                      Pending_Quantity:
+                        type: number
+                        example: 120
+                      ProductCode:
+                        type: string
+                        example: '1'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: AATA
+                      ProductTypeName:
+                        type: string
+                        example: AATA
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderProductID:
+                        type: number
+                        example: 1
+                      Quantity:
+                        type: number
+                        example: 120
+                      Received_Quantity:
+                        type: number
+                        example: 0
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      Total_Product_Amount:
+                        type: number
+                        example: 30000
+                      Total_Product_Discount:
+                        type: number
+                        example: 6000
+                      Total_Product_MRP:
+                        type: number
+                        example: 36000
+                      UOMCode:
+                        type: string
+                        example: pcs
+                      UOMDescription:
+                        type: string
+                        example: pcs
+                      UOMID:
+                        type: number
+                        example: 7
+                      UOMName:
+                        type: string
+                        example: pcs
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:19:50.710Z'
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: 'Aashirvaad '
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:19:20.287Z'
+                      Discount: 50
+                      IsDeleted: false
+                      LineName: AATA
+                      MRP: 300
+                      PackagingTypeName: Packed
+                      Pending_Quantity: 120
+                      ProductCode: '1'
+                      ProductConsumeName: Consumed
+                      ProductID: 1
+                      ProductName: AATA
+                      ProductTypeName: AATA
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderProductID: 1
+                      Quantity: 120
+                      Received_Quantity: 0
+                      SLOCID: 1
+                      SLOCName: Good
+                      Total_Product_Amount: 30000
+                      Total_Product_Discount: 6000
+                      Total_Product_MRP: 36000
+                      UOMCode: pcs
+                      UOMDescription: pcs
+                      UOMID: 7
+                      UOMName: pcs
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:19:50.710Z'
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+  /api/purchase_order/getPurchaseOrderAllProducts:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getPurchaseOrderAllProducts
+      description: http://localhost:3000/api/purchase_order/getPurchaseOrderAllProducts
+      operationId: httpLocalhost3000ApiPurchaseOrderGetpurchaseorderallproducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderID: 1
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '2597'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:58:23 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"a25-GohouA0kbsfcjjFJ/MC+R3ilI7g"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-27T23:19:20.287Z'
+                        Discount:
+                          type: number
+                          example: 50
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        PackagingTypeName:
+                          type: string
+                          example: Packed
+                        Pending_Quantity:
+                          type: number
+                          example: 120
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        PurchaseOrderID:
+                          type: number
+                          example: 1
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50027202500001PO
+                        PurchaseOrderProductID:
+                          type: number
+                          example: 1
+                        Quantity:
+                          type: number
+                          example: 120
+                        Received_Quantity:
+                          type: number
+                          example: 0
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        Total_Product_Amount:
+                          type: number
+                          example: 30000
+                        Total_Product_Discount:
+                          type: number
+                          example: 6000
+                        Total_Product_MRP:
+                          type: number
+                          example: 36000
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-27T23:19:50.710Z'
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:19:20.287Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 120
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        Quantity: 120
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 30000
+                        Total_Product_Discount: 6000
+                        Total_Product_MRP: 36000
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:19:50.710Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B02
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:21:58.520Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 15
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 2
+                        Quantity: 15
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 3750
+                        Total_Product_Discount: 750
+                        Total_Product_MRP: 4500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:21:58.520Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: Amazon Fresh
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:23:19.630Z'
+                        Discount: 20
+                        IsDeleted: false
+                        LineName: Fruits
+                        MRP: 60
+                        PackagingTypeName: Open
+                        Pending_Quantity: 135
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 3
+                        Quantity: 135
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 5400
+                        Total_Product_Discount: 2700
+                        Total_Product_MRP: 8100
+                        UOMCode: bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:25:06.833Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:19:20.287Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 120
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        Quantity: 120
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 30000
+                        Total_Product_Discount: 6000
+                        Total_Product_MRP: 36000
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:19:50.710Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B02
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:21:58.520Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 15
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 2
+                        Quantity: 15
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 3750
+                        Total_Product_Discount: 750
+                        Total_Product_MRP: 4500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:21:58.520Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: Amazon Fresh
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:23:19.630Z'
+                        Discount: 20
+                        IsDeleted: false
+                        LineName: Fruits
+                        MRP: 60
+                        PackagingTypeName: Open
+                        Pending_Quantity: 135
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 3
+                        Quantity: 135
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 5400
+                        Total_Product_Discount: 2700
+                        Total_Product_MRP: 8100
+                        UOMCode: bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:25:06.833Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/purchase_order/updatePurchaseOrderProduct:
+    post:
+      summary: http://localhost:3000/api/purchase_order/updatePurchaseOrderProduct
+      description: http://localhost:3000/api/purchase_order/updatePurchaseOrderProduct
+      operationId: httpLocalhost3000ApiPurchaseOrderUpdatepurchaseorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: B01
+                BranchID:
+                  type: number
+                  example: 13
+                Discount:
+                  type: number
+                  example: 20
+                MRP:
+                  type: number
+                  example: 60
+                ProductID:
+                  type: number
+                  example: 2
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+                PurchaseOrderProductID:
+                  type: number
+                  example: 3
+                Quantity:
+                  type: number
+                  example: 135
+                SLOCID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 8
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 8
+            example:
+              BatchNumber: B01
+              BranchID: 13
+              Discount: 20
+              MRP: 60
+              ProductID: 2
+              PurchaseOrderID: 1
+              PurchaseOrderProductID: 3
+              Quantity: 135
+              SLOCID: 1
+              UOMID: 8
+              VendorID: 1
+              WarehouseID: 8
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '919'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:55:04 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"397-P/lrDQ8ViHieRZTDLtdLDli1ACk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      BrandName:
+                        type: string
+                        example: Amazon Fresh
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:23:19.630Z'
+                      Discount:
+                        type: number
+                        example: 20
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LineName:
+                        type: string
+                        example: Fruits
+                      MRP:
+                        type: number
+                        example: 60
+                      PackagingTypeName:
+                        type: string
+                        example: Open
+                      Pending_Quantity:
+                        type: number
+                        example: 135
+                      ProductCode:
+                        type: string
+                        example: '2'
+                      ProductConsumeName:
+                        type: string
+                        example: Consumed
+                      ProductID:
+                        type: number
+                        example: 2
+                      ProductName:
+                        type: string
+                        example: Pomegranet
+                      ProductTypeName:
+                        type: string
+                        example: FRUITS
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderProductID:
+                        type: number
+                        example: 3
+                      Quantity:
+                        type: number
+                        example: 135
+                      Received_Quantity:
+                        type: number
+                        example: 0
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SLOCName:
+                        type: string
+                        example: Good
+                      Total_Product_Amount:
+                        type: number
+                        example: 5400
+                      Total_Product_Discount:
+                        type: number
+                        example: 2700
+                      Total_Product_MRP:
+                        type: number
+                        example: 8100
+                      UOMCode:
+                        type: string
+                        example: bags
+                      UOMDescription:
+                        type: string
+                        example: bags
+                      UOMID:
+                        type: number
+                        example: 8
+                      UOMName:
+                        type: string
+                        example: bags
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:25:06.833Z'
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Product updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: B01
+                      BranchID: 13
+                      BranchName: VISHWA
+                      BrandName: Amazon Fresh
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:23:19.630Z'
+                      Discount: 20
+                      IsDeleted: false
+                      LineName: Fruits
+                      MRP: 60
+                      PackagingTypeName: Open
+                      Pending_Quantity: 135
+                      ProductCode: '2'
+                      ProductConsumeName: Consumed
+                      ProductID: 2
+                      ProductName: Pomegranet
+                      ProductTypeName: FRUITS
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderProductID: 3
+                      Quantity: 135
+                      Received_Quantity: 0
+                      SLOCID: 1
+                      SLOCName: Good
+                      Total_Product_Amount: 5400
+                      Total_Product_Discount: 2700
+                      Total_Product_MRP: 8100
+                      UOMCode: bags
+                      UOMDescription: bags
+                      UOMID: 8
+                      UOMName: bags
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:25:06.833Z'
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Product updated Successfully
+  /api/purchase_order/deletePurchaseOrderProduct:
+    post:
+      summary: http://localhost:3000/api/purchase_order/deletePurchaseOrderProduct
+      description: http://localhost:3000/api/purchase_order/deletePurchaseOrderProduct
+      operationId: httpLocalhost3000ApiPurchaseOrderDeletepurchaseorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderID:
+                  type: number
+                  example: 2
+                PurchaseOrderProductID:
+                  type: number
+                  example: 3
+                user_id:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderID: 2
+              PurchaseOrderProductID: 3
+              user_id: 1
+      responses:
+        '200':
+          description: Success
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '62'
+            Date:
+              schema:
+                type: string
+                example: Sat, 17 May 2025 11:30:08 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"3e-GtrAY10kATl/7K+KROvi+0CECvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Product deleted from purchase order successfully
+              examples:
+                Success:
+                  value:
+                    message: Product deleted from purchase order successfully
+  /api/purchase_order/getNewPurchaseOrderReceiving:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getNewPurchaseOrderReceiving
+      description: http://localhost:3000/api/purchase_order/getNewPurchaseOrderReceiving
+      operationId: httpLocalhost3000ApiPurchaseOrderGetnewpurchaseorderreceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '621'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 17:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"26d-PYapYX7nMEIfHy9us+bdJ42PVxA"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        nullable: true
+                        example: null
+                      BranchName:
+                        nullable: true
+                        example: null
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:29:49.683Z'
+                      GSRN:
+                        type: string
+                        example: 50027202500001RC
+                      InvoiceNumber:
+                        nullable: true
+                        example: null
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        nullable: true
+                        example: null
+                      PurchaseOrderDate:
+                        nullable: true
+                        example: null
+                      PurchaseOrderID:
+                        nullable: true
+                        example: null
+                      PurchaseOrderNumber:
+                        nullable: true
+                        example: null
+                      PurchaseOrderReceivingID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReceivingStatus:
+                        type: string
+                        example: Draft
+                      ReceivingDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:29:49.683Z'
+                      VehicleNumber:
+                        nullable: true
+                        example: null
+                      VendorID:
+                        nullable: true
+                        example: null
+                      VendorName:
+                        nullable: true
+                        example: null
+                      WarehouseID:
+                        nullable: true
+                        example: null
+                      WarehouseName:
+                        nullable: true
+                        example: null
+                  message:
+                    type: string
+                    example: Inbound Receiving fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: null
+                      BranchName: null
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:29:49.683Z'
+                      GSRN: 50027202500001RC
+                      InvoiceNumber: null
+                      IsDeleted: false
+                      LRNumber: null
+                      PurchaseOrderDate: null
+                      PurchaseOrderID: null
+                      PurchaseOrderNumber: null
+                      PurchaseOrderReceivingID: 1
+                      PurchaseOrderReceivingStatus: Draft
+                      ReceivingDate: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:29:49.683Z'
+                      VehicleNumber: null
+                      VendorID: null
+                      VendorName: null
+                      WarehouseID: null
+                      WarehouseName: null
+                    message: Inbound Receiving fetched Successfully
+  /api/purchase_order/getPurchaseOrderReceiving:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getPurchaseOrderReceiving
+      description: http://localhost:3000/api/purchase_order/getPurchaseOrderReceiving
+      operationId: httpLocalhost3000ApiPurchaseOrderGetpurchaseorderreceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReceivingID:
+                  type: string
+                  example: '1'
+            example:
+              PurchaseOrderReceivingID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '696'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 18:53:44 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2b8-y+ndbJq4Ub6n49+1rM1gcMrsaOs"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:29:49.683Z'
+                      GSRN:
+                        type: string
+                        example: 50027202500001RC
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LR123
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderReceivingID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReceivingStatus:
+                        type: string
+                        example: PutAway Started
+                      ReceivingDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      TransporterName:
+                        type: string
+                        example: ORL Transports
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-28T00:00:00.370Z'
+                      VehicleNumber:
+                        type: string
+                        example: TG00123
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                      total_quantity:
+                        type: number
+                        example: 270
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:29:49.683Z'
+                      GSRN: 50027202500001RC
+                      InvoiceNumber: INV001
+                      IsDeleted: false
+                      LRNumber: LR123
+                      PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderReceivingID: 1
+                      PurchaseOrderReceivingStatus: PutAway Started
+                      ReceivingDate: '2025-05-27T00:00:00.000Z'
+                      TransporterName: ORL Transports
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-28T00:00:00.370Z'
+                      VehicleNumber: TG00123
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                      total_quantity: 270
+  /api/purchase_order/getAllPurchaseOrderReceivings:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getAllPurchaseOrderReceivings
+      description: http://localhost:3000/api/purchase_order/getAllPurchaseOrderReceivings
+      operationId: httpLocalhost3000ApiPurchaseOrderGetallpurchaseorderreceivings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReceivingStatus:
+                  type: string
+                  example: PutAway Started
+            example:
+              PurchaseOrderReceivingStatus: PutAway Started
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '698'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 18:54:48 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2ba-tVWIv0zYeJ0D1QxSsZvWRyfVOso"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-27T23:29:49.683Z'
+                        GSRN:
+                          type: string
+                          example: 50027202500001RC
+                        InvoiceNumber:
+                          type: string
+                          example: INV001
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LR123
+                        PurchaseOrderDate:
+                          type: string
+                          example: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID:
+                          type: number
+                          example: 1
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50027202500001PO
+                        PurchaseOrderReceivingID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReceivingStatus:
+                          type: string
+                          example: PutAway Started
+                        ReceivingDate:
+                          type: string
+                          example: '2025-05-27T00:00:00.000Z'
+                        TransporterName:
+                          type: string
+                          example: ORL Transports
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber:
+                          type: string
+                          example: TG00123
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                        total_quantity:
+                          type: number
+                          example: 270
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:29:49.683Z'
+                        GSRN: 50027202500001RC
+                        InvoiceNumber: INV001
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderReceivingID: 1
+                        PurchaseOrderReceivingStatus: PutAway Started
+                        ReceivingDate: '2025-05-27T00:00:00.000Z'
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_quantity: 270
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:29:49.683Z'
+                        GSRN: 50027202500001RC
+                        InvoiceNumber: INV001
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderReceivingID: 1
+                        PurchaseOrderReceivingStatus: PutAway Started
+                        ReceivingDate: '2025-05-27T00:00:00.000Z'
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_quantity: 270
+  /api/purchase_order/getPurchaseOrder:
+    post:
+      summary: http://localhost:3000/api/purchase_order/getPurchaseOrder
+      description: http://localhost:3000/api/purchase_order/getPurchaseOrder
+      operationId: httpLocalhost3000ApiPurchaseOrderGetpurchaseorder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderID:
+                  type: string
+                  example: '1'
+            example:
+              PurchaseOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '743'
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 May 2025 06:54:44 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2e7-rM06e4hekTwJ+amtDUZ8S+6PF7s"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-17T15:45:58.817Z'
+                      DeliveryAddress:
+                        type: string
+                        example: Attapur
+                      DeliveryDate:
+                        type: string
+                        example: '2025-05-18T00:00:00.000Z'
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LR123
+                      PersonInChargeInternal:
+                        type: string
+                        example: Vishwa
+                      PersonInChargeVendor:
+                        type: string
+                        example: Sreenu
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-17T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 2
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50017202500002PO
+                      PurchaseOrderStatus:
+                        type: string
+                        example: Completed
+                      Remarks:
+                        type: string
+                        example: Warehouse Kirana Pruchase Order
+                      TransporterName:
+                        type: string
+                        example: ORL Transports
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-18T19:44:40.727Z'
+                      VehicleNumber:
+                        type: string
+                        example: TG00123
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 9
+                      WarehouseName:
+                        type: string
+                        example: HYDCHANDANAGAR
+                      total_quantity:
+                        type: number
+                        example: 14.5
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-17T15:45:58.817Z'
+                      DeliveryAddress: Attapur
+                      DeliveryDate: '2025-05-18T00:00:00.000Z'
+                      IsDeleted: false
+                      LRNumber: LR123
+                      PersonInChargeInternal: Vishwa
+                      PersonInChargeVendor: Sreenu
+                      PurchaseOrderDate: '2025-05-17T00:00:00.000Z'
+                      PurchaseOrderID: 2
+                      PurchaseOrderNumber: 50017202500002PO
+                      PurchaseOrderStatus: Completed
+                      Remarks: Warehouse Kirana Pruchase Order
+                      TransporterName: ORL Transports
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-18T19:44:40.727Z'
+                      VehicleNumber: TG00123
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 9
+                      WarehouseName: HYDCHANDANAGAR
+                      total_quantity: 14.5
+        '400':
+          description: Failure
+          headers:
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '53'
+            Date:
+              schema:
+                type: string
+                example: Sat, 17 May 2025 10:49:54 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"35-MqulPvwMhfdn0UToZR3ycsg9gyg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: No purchase order found with the given ID
+              examples:
+                Failure:
+                  value:
+                    error: No purchase order found with the given ID
+  /api/purchase_order/updatePurchaseOrderReceiving:
+    post:
+      summary: http://localhost:3000/api/purchase_order/updatePurchaseOrderReceiving
+      description: http://localhost:3000/api/purchase_order/updatePurchaseOrderReceiving
+      operationId: httpLocalhost3000ApiPurchaseOrderUpdatepurchaseorderreceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 13
+                InvoiceNumber:
+                  type: string
+                  example: INV001
+                PurchaseOrderID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 8
+            example:
+              BranchID: 13
+              InvoiceNumber: INV001
+              PurchaseOrderID: 1
+              PurchaseOrderReceivingID: 1
+              VendorID: 1
+              WarehouseID: 8
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '670'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 18:13:01 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"29e-KNjqRK/I++BWN+4IUmuBc7urcXI"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:29:49.683Z'
+                      GSRN:
+                        type: string
+                        example: 50027202500001RC
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LR123
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderReceivingID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReceivingStatus:
+                        type: string
+                        example: Open
+                      ReceivingDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:43:03.000Z'
+                      VehicleNumber:
+                        type: string
+                        example: TG00123
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Updated details Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:29:49.683Z'
+                      GSRN: 50027202500001RC
+                      InvoiceNumber: INV001
+                      IsDeleted: false
+                      LRNumber: LR123
+                      PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderReceivingID: 1
+                      PurchaseOrderReceivingStatus: Open
+                      ReceivingDate: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:43:03.000Z'
+                      VehicleNumber: TG00123
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Updated details Successfully
+  /api/purchase_order/updatePurchaseOrderReceivingStatus:
+    post:
+      summary: >-
+        http://localhost:3000/api/purchase_order/updatePurchaseOrderReceivingStatus
+      description: >-
+        http://localhost:3000/api/purchase_order/updatePurchaseOrderReceivingStatus
+      operationId: httpLocalhost3000ApiPurchaseOrderUpdatepurchaseorderreceivingstatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingStatus:
+                  type: string
+                  example: Received
+            example:
+              PurchaseOrderReceivingID: 1
+              PurchaseOrderReceivingStatus: Received
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '673'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 18:21:55 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a1-h2KFD3qrXUp6ceKCRSZa6kwpG7A"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 13
+                      BranchName:
+                        type: string
+                        example: VISHWA
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: test
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-27T23:29:49.683Z'
+                      GSRN:
+                        type: string
+                        example: 50027202500001RC
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      IsDeleted:
+                        type: boolean
+                        example: false
+                      LRNumber:
+                        type: string
+                        example: LR123
+                      PurchaseOrderDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID:
+                        type: number
+                        example: 1
+                      PurchaseOrderNumber:
+                        type: string
+                        example: 50027202500001PO
+                      PurchaseOrderReceivingID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReceivingStatus:
+                        type: string
+                        example: Received
+                      ReceivingDate:
+                        type: string
+                        example: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: test
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-27T23:51:57.260Z'
+                      VehicleNumber:
+                        type: string
+                        example: TG00123
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Ramana Kirana
+                      WarehouseID:
+                        type: number
+                        example: 8
+                      WarehouseName:
+                        type: string
+                        example: SHIVSHAKTI
+                  message:
+                    type: string
+                    example: Updated status Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 13
+                      BranchName: VISHWA
+                      CreatedBy: 1
+                      CreatedByUserName: test
+                      CreatedDate: '2025-05-27T23:29:49.683Z'
+                      GSRN: 50027202500001RC
+                      InvoiceNumber: INV001
+                      IsDeleted: false
+                      LRNumber: LR123
+                      PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                      PurchaseOrderID: 1
+                      PurchaseOrderNumber: 50027202500001PO
+                      PurchaseOrderReceivingID: 1
+                      PurchaseOrderReceivingStatus: Received
+                      ReceivingDate: '2025-05-27T00:00:00.000Z'
+                      UpdatedBy: 1
+                      UpdatedByUserName: test
+                      UpdatedDate: '2025-05-27T23:51:57.260Z'
+                      VehicleNumber: TG00123
+                      VendorID: 1
+                      VendorName: Ramana Kirana
+                      WarehouseID: 8
+                      WarehouseName: SHIVSHAKTI
+                    message: Updated status Successfully
+  /api/purchase_order/deletePurchaseOrderReceiving:
+    post:
+      summary: http://localhost:3000/api/purchase_order/deletePurchaseOrderReceiving
+      description: http://localhost:3000/api/purchase_order/deletePurchaseOrderReceiving
+      operationId: httpLocalhost3000ApiPurchaseOrderDeletepurchaseorderreceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '63'
+            Date:
+              schema:
+                type: string
+                example: Sun, 18 May 2025 14:14:09 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"3f-Q3nrIVOyARXPiDE4Z4Fwk/xCnww"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Receiving deleted for purchase order successfully
+              examples:
+                Success:
+                  value:
+                    message: Receiving deleted for purchase order successfully
+  /api/putaway/getAllPutawayOrders:
+    post:
+      summary: http://localhost:3000/api/putaway/getAllPutawayOrders
+      description: http://localhost:3000/api/putaway/getAllPutawayOrders
+      operationId: httpLocalhost3000ApiPutawayGetallputawayorders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '698'
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 May 2025 18:54:58 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2ba-tVWIv0zYeJ0D1QxSsZvWRyfVOso"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-27T23:29:49.683Z'
+                        GSRN:
+                          type: string
+                          example: 50027202500001RC
+                        InvoiceNumber:
+                          type: string
+                          example: INV001
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LRNumber:
+                          type: string
+                          example: LR123
+                        PurchaseOrderDate:
+                          type: string
+                          example: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID:
+                          type: number
+                          example: 1
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50027202500001PO
+                        PurchaseOrderReceivingID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReceivingStatus:
+                          type: string
+                          example: PutAway Started
+                        ReceivingDate:
+                          type: string
+                          example: '2025-05-27T00:00:00.000Z'
+                        TransporterName:
+                          type: string
+                          example: ORL Transports
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber:
+                          type: string
+                          example: TG00123
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                        total_quantity:
+                          type: number
+                          example: 270
+                    example:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:29:49.683Z'
+                        GSRN: 50027202500001RC
+                        InvoiceNumber: INV001
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderReceivingID: 1
+                        PurchaseOrderReceivingStatus: PutAway Started
+                        ReceivingDate: '2025-05-27T00:00:00.000Z'
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_quantity: 270
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 13
+                        BranchName: VISHWA
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:29:49.683Z'
+                        GSRN: 50027202500001RC
+                        InvoiceNumber: INV001
+                        IsDeleted: false
+                        LRNumber: LR123
+                        PurchaseOrderDate: '2025-05-27T00:00:00.000Z'
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderReceivingID: 1
+                        PurchaseOrderReceivingStatus: PutAway Started
+                        ReceivingDate: '2025-05-27T00:00:00.000Z'
+                        TransporterName: ORL Transports
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T00:00:00.370Z'
+                        VehicleNumber: TG00123
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                        total_quantity: 270
+  /api/putaway/getPurchaseOrderAllPendingProductsForPutaway:
+    post:
+      summary: >-
+        http://localhost:3000/api/putaway/getPurchaseOrderAllPendingProductsForPutaway
+      description: >-
+        http://localhost:3000/api/putaway/getPurchaseOrderAllPendingProductsForPutaway
+      operationId: httpLocalhost3000ApiPutawayGetpurchaseorderallpendingproductsforputaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderID:
+                  type: string
+                  example: '1'
+            example:
+              PurchaseOrderID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '2597'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 16:11:08 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"a25-G545FAUJzaxI0/YagvHBeOahOXw"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-27T23:19:20.287Z'
+                        Discount:
+                          type: number
+                          example: 50
+                        IsDeleted:
+                          type: boolean
+                          example: false
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        PackagingTypeName:
+                          type: string
+                          example: Packed
+                        Pending_Quantity:
+                          type: number
+                          example: 70
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        PurchaseOrderID:
+                          type: number
+                          example: 1
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50027202500001PO
+                        PurchaseOrderProductID:
+                          type: number
+                          example: 1
+                        Quantity:
+                          type: number
+                          example: 120
+                        Received_Quantity:
+                          type: number
+                          example: 50
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        Total_Product_Amount:
+                          type: number
+                          example: 30000
+                        Total_Product_Discount:
+                          type: number
+                          example: 6000
+                        Total_Product_MRP:
+                          type: number
+                          example: 36000
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: test
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-28T19:28:42.663Z'
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:19:20.287Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 70
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        Quantity: 120
+                        Received_Quantity: 50
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 30000
+                        Total_Product_Discount: 6000
+                        Total_Product_MRP: 36000
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T19:28:42.663Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B02
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:21:58.520Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 15
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 2
+                        Quantity: 15
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 3750
+                        Total_Product_Discount: 750
+                        Total_Product_MRP: 4500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:21:58.520Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: Amazon Fresh
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:23:19.630Z'
+                        Discount: 20
+                        IsDeleted: false
+                        LineName: Fruits
+                        MRP: 60
+                        PackagingTypeName: Open
+                        Pending_Quantity: 135
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 3
+                        Quantity: 135
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 5400
+                        Total_Product_Discount: 2700
+                        Total_Product_MRP: 8100
+                        UOMCode: bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:25:06.833Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:19:20.287Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 70
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        Quantity: 120
+                        Received_Quantity: 50
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 30000
+                        Total_Product_Discount: 6000
+                        Total_Product_MRP: 36000
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-28T19:28:42.663Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B02
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:21:58.520Z'
+                        Discount: 50
+                        IsDeleted: false
+                        LineName: AATA
+                        MRP: 300
+                        PackagingTypeName: Packed
+                        Pending_Quantity: 15
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 2
+                        Quantity: 15
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 3750
+                        Total_Product_Discount: 750
+                        Total_Product_MRP: 4500
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:21:58.520Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+                      - BatchNumber: B01
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: Amazon Fresh
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-27T23:23:19.630Z'
+                        Discount: 20
+                        IsDeleted: false
+                        LineName: Fruits
+                        MRP: 60
+                        PackagingTypeName: Open
+                        Pending_Quantity: 135
+                        ProductCode: '2'
+                        ProductConsumeName: Consumed
+                        ProductID: 2
+                        ProductName: Pomegranet
+                        ProductTypeName: FRUITS
+                        PurchaseOrderID: 1
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 3
+                        Quantity: 135
+                        Received_Quantity: 0
+                        SLOCID: 1
+                        SLOCName: Good
+                        Total_Product_Amount: 5400
+                        Total_Product_Discount: 2700
+                        Total_Product_MRP: 8100
+                        UOMCode: bags
+                        UOMDescription: bags
+                        UOMID: 8
+                        UOMName: bags
+                        UpdatedBy: 1
+                        UpdatedByUserName: test
+                        UpdatedDate: '2025-05-27T23:25:06.833Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/putaway/getAllAvailablePalletTypesForPurchaseOrderProduct:
+    post:
+      summary: >-
+        http://localhost:3000/api/putaway/getAllAvailablePalletTypesForPurchaseOrderProduct
+      description: >-
+        http://localhost:3000/api/putaway/getAllAvailablePalletTypesForPurchaseOrderProduct
+      operationId: >-
+        httpLocalhost3000ApiPutawayGetallavailablepallettypesforpurchaseorderproduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderProductID:
+                  type: string
+                  example: '1'
+            example:
+              PurchaseOrderProductID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '685'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 16:11:19 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2ad-uEDIbVG3OL7d0O2vsWfdw9Lx2Xk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Breadth:
+                          type: number
+                          example: 200
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-24T15:23:39.350Z'
+                        Height:
+                          type: number
+                          example: 200
+                        IsActive:
+                          type: boolean
+                          example: true
+                        Length:
+                          type: number
+                          example: 200
+                        PalletTypeID:
+                          type: number
+                          example: 9
+                        PalletTypeMaxCapacity:
+                          type: number
+                          example: 100
+                        Palletname:
+                          type: string
+                          example: Chetan
+                        UOMID:
+                          type: number
+                          example: 7
+                        UpdatedBy:
+                          nullable: true
+                          example: null
+                        UpdatedDate:
+                          nullable: true
+                          example: null
+                    example:
+                      - Breadth: 200
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:23:39.350Z'
+                        Height: 200
+                        IsActive: true
+                        Length: 200
+                        PalletTypeID: 9
+                        PalletTypeMaxCapacity: 100
+                        Palletname: Chetan
+                        UOMID: 7
+                        UpdatedBy: null
+                        UpdatedDate: null
+                      - Breadth: 100
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:22:35.990Z'
+                        Height: 100
+                        IsActive: true
+                        Length: 100
+                        PalletTypeID: 7
+                        PalletTypeMaxCapacity: 150
+                        Palletname: Nilkamal
+                        UOMID: 6
+                        UpdatedBy: null
+                        UpdatedDate: null
+                      - Breadth: 50
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:23:08.960Z'
+                        Height: 50
+                        IsActive: true
+                        Length: 50
+                        PalletTypeID: 8
+                        PalletTypeMaxCapacity: 50
+                        Palletname: SURYA
+                        UOMID: 8
+                        UpdatedBy: null
+                        UpdatedDate: null
+              examples:
+                Success:
+                  value:
+                    data:
+                      - Breadth: 200
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:23:39.350Z'
+                        Height: 200
+                        IsActive: true
+                        Length: 200
+                        PalletTypeID: 9
+                        PalletTypeMaxCapacity: 100
+                        Palletname: Chetan
+                        UOMID: 7
+                        UpdatedBy: null
+                        UpdatedDate: null
+                      - Breadth: 100
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:22:35.990Z'
+                        Height: 100
+                        IsActive: true
+                        Length: 100
+                        PalletTypeID: 7
+                        PalletTypeMaxCapacity: 150
+                        Palletname: Nilkamal
+                        UOMID: 6
+                        UpdatedBy: null
+                        UpdatedDate: null
+                      - Breadth: 50
+                        CreatedBy: 1
+                        CreatedDate: '2025-05-24T15:23:08.960Z'
+                        Height: 50
+                        IsActive: true
+                        Length: 50
+                        PalletTypeID: 8
+                        PalletTypeMaxCapacity: 50
+                        Palletname: SURYA
+                        UOMID: 8
+                        UpdatedBy: null
+                        UpdatedDate: null
+  /api/putaway/getAllPutawayOrderAllocatedProducts:
+    post:
+      summary: http://localhost:3000/api/putaway/getAllPutawayOrderAllocatedProducts
+      description: http://localhost:3000/api/putaway/getAllPutawayOrderAllocatedProducts
+      operationId: httpLocalhost3000ApiPutawayGetallputawayorderallocatedproducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReceivingID:
+                  type: string
+                  example: '1'
+            example:
+              PurchaseOrderReceivingID: '1'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1085'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 16:24:52 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"43d-6JQwtWjhc4jj5WViCVUo7tjU3tQ"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ActionType:
+                          type: number
+                          example: 1
+                        AllocatedDate:
+                          type: string
+                          example: '2025-05-28T19:28:42.663Z'
+                        AllocatedQuantity:
+                          type: number
+                          example: 50
+                        AvailableQuantity:
+                          type: number
+                          example: 100
+                        BatchChangeReason:
+                          type: string
+                          example: ''
+                        BatchNumber:
+                          type: string
+                          example: B01
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: '10001'
+                        BinProductID:
+                          type: number
+                          example: 1
+                        BinProductLogID:
+                          type: number
+                          example: 1
+                        BranchID:
+                          type: number
+                          example: 13
+                        BranchName:
+                          type: string
+                          example: VISHWA
+                        BrandName:
+                          type: string
+                          example: 'Aashirvaad '
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: test
+                        CreatedDate:
+                          type: string
+                          example: '2025-05-28T19:28:42.647Z'
+                        FilledQuantity:
+                          type: number
+                          example: 50
+                        GSRN:
+                          type: string
+                          example: 50027202500001RC
+                        IsActive:
+                          type: boolean
+                          example: true
+                        LineName:
+                          type: string
+                          example: AATA
+                        MRP:
+                          type: number
+                          example: 300
+                        ManufactureDate:
+                          type: string
+                          example: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity:
+                          type: number
+                          example: 150
+                        PackagingTypeName:
+                          type: string
+                          example: Packed
+                        PalletTypeID:
+                          type: number
+                          example: 7
+                        Palletname:
+                          type: string
+                          example: Nilkamal
+                        ProductCode:
+                          type: string
+                          example: '1'
+                        ProductConsumeName:
+                          type: string
+                          example: Consumed
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: AATA
+                        ProductTypeName:
+                          type: string
+                          example: AATA
+                        PurchaseOrderNumber:
+                          type: string
+                          example: 50027202500001PO
+                        PurchaseOrderProductID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReceivingID:
+                          type: number
+                          example: 1
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SLOCName:
+                          type: string
+                          example: Good
+                        StackID:
+                          type: number
+                          example: 8
+                        StackName:
+                          type: string
+                          example: S01
+                        StackNumber:
+                          type: string
+                          example: '1'
+                        UOMCode:
+                          type: string
+                          example: pcs
+                        UOMDescription:
+                          type: string
+                          example: pcs
+                        UOMID:
+                          type: number
+                          example: 7
+                        UOMName:
+                          type: string
+                          example: pcs
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedDate:
+                          type: string
+                          example: '2025-05-28T19:28:42.647Z'
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Ramana Kirana
+                        WarehouseID:
+                          type: number
+                          example: 8
+                        WarehouseName:
+                          type: string
+                          example: SHIVSHAKTI
+                    example:
+                      - ActionType: 1
+                        AllocatedDate: '2025-05-28T19:28:42.663Z'
+                        AllocatedQuantity: 50
+                        AvailableQuantity: 100
+                        BatchChangeReason: ''
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 1
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        FilledQuantity: 50
+                        GSRN: 50027202500001RC
+                        IsActive: true
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: Packed
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        PurchaseOrderReceivingID: 1
+                        SLOCID: 1
+                        SLOCName: Good
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-05-28T19:28:42.647Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+              examples:
+                Success:
+                  value:
+                    data:
+                      - ActionType: 1
+                        AllocatedDate: '2025-05-28T19:28:42.663Z'
+                        AllocatedQuantity: 50
+                        AvailableQuantity: 100
+                        BatchChangeReason: ''
+                        BatchNumber: B01
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinProductID: 1
+                        BinProductLogID: 1
+                        BranchID: 13
+                        BranchName: VISHWA
+                        BrandName: 'Aashirvaad '
+                        CreatedBy: 1
+                        CreatedByUserName: test
+                        CreatedDate: '2025-05-28T19:28:42.647Z'
+                        FilledQuantity: 50
+                        GSRN: 50027202500001RC
+                        IsActive: true
+                        LineName: AATA
+                        MRP: 300
+                        ManufactureDate: '2025-05-20T00:00:00.000Z'
+                        MaxQuantity: 150
+                        PackagingTypeName: Packed
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                        ProductCode: '1'
+                        ProductConsumeName: Consumed
+                        ProductID: 1
+                        ProductName: AATA
+                        ProductTypeName: AATA
+                        PurchaseOrderNumber: 50027202500001PO
+                        PurchaseOrderProductID: 1
+                        PurchaseOrderReceivingID: 1
+                        SLOCID: 1
+                        SLOCName: Good
+                        StackID: 8
+                        StackName: S01
+                        StackNumber: '1'
+                        UOMCode: pcs
+                        UOMDescription: pcs
+                        UOMID: 7
+                        UOMName: pcs
+                        UpdatedBy: 1
+                        UpdatedDate: '2025-05-28T19:28:42.647Z'
+                        VendorID: 1
+                        VendorName: Ramana Kirana
+                        WarehouseID: 8
+                        WarehouseName: SHIVSHAKTI
+  /api/putaway/suggestBinForPutaway:
+    post:
+      summary: http://localhost:3000/api/putaway/suggestBinForPutaway
+      description: http://localhost:3000/api/putaway/suggestBinForPutaway
+      operationId: httpLocalhost3000ApiPutawaySuggestbinforputaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchChangeReason:
+                  type: string
+                  example: Their was mistake from vendor
+                BatchNumber:
+                  type: string
+                  example: B01
+                MRP:
+                  type: string
+                  example: '300'
+                ManufactureDate:
+                  type: string
+                  example: '2025-05-20'
+                PalletTypeID:
+                  type: string
+                  example: '7'
+                PurchaseOrderProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 70
+                SLOCID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+            example:
+              BatchChangeReason: Their was mistake from vendor
+              BatchNumber: B01
+              MRP: '300'
+              ManufactureDate: '2025-05-20'
+              PalletTypeID: '7'
+              PurchaseOrderProductID: 1
+              PurchaseOrderReceivingID: 1
+              Quantity: 70
+              SLOCID: '1'
+              UOMID: '7'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '202'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 16:11:31 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"ca-DaH8FlQo/K+62oHAQD6DJj/fsmI"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 100
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinStatus:
+                        type: string
+                        example: Partial
+                      FilledQuantity:
+                        type: number
+                        example: 50
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+                  message:
+                    type: string
+                    example: Fetched Bin Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 100
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinStatus: Partial
+                      FilledQuantity: 50
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+                    message: Fetched Bin Successfully
+  /api/putaway/fetchAllAvailableBinsForPutaway:
+    post:
+      summary: http://localhost:3000/api/putaway/fetchAllAvailableBinsForPutaway
+      description: http://localhost:3000/api/putaway/fetchAllAvailableBinsForPutaway
+      operationId: httpLocalhost3000ApiPutawayFetchallavailablebinsforputaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchChangeReason:
+                  type: string
+                  example: Their was mistake from vendor
+                BatchNumber:
+                  type: string
+                  example: B01
+                MRP:
+                  type: string
+                  example: '300'
+                ManufactureDate:
+                  type: string
+                  example: '2025-05-20'
+                PalletTypeID:
+                  type: string
+                  example: '7'
+                PurchaseOrderProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 70
+                SLOCID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+            example:
+              BatchChangeReason: Their was mistake from vendor
+              BatchNumber: B01
+              MRP: '300'
+              ManufactureDate: '2025-05-20'
+              PalletTypeID: '7'
+              PurchaseOrderProductID: 1
+              PurchaseOrderReceivingID: 1
+              Quantity: 70
+              SLOCID: '1'
+              UOMID: '7'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '319'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 16:13:54 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"13f-3ZDMr4hnQkw4PKFjA/uYF+VdtXc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AvailableQuantity:
+                          type: number
+                          example: 100
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: '10001'
+                        BinStatus:
+                          type: string
+                          example: Partial
+                        FilledQuantity:
+                          type: number
+                          example: 50
+                        MaxQuantity:
+                          type: number
+                          example: 150
+                        PalletTypeID:
+                          type: number
+                          example: 7
+                        Palletname:
+                          type: string
+                          example: Nilkamal
+                    example:
+                      - AvailableQuantity: 100
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinStatus: Partial
+                        FilledQuantity: 50
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                      - AvailableQuantity: 150
+                        BinID: 2
+                        BinNumber: '10002'
+                        BinStatus: New
+                        FilledQuantity: 0
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+              examples:
+                Success:
+                  value:
+                    data:
+                      - AvailableQuantity: 100
+                        BinID: 1
+                        BinNumber: '10001'
+                        BinStatus: Partial
+                        FilledQuantity: 50
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+                      - AvailableQuantity: 150
+                        BinID: 2
+                        BinNumber: '10002'
+                        BinStatus: New
+                        FilledQuantity: 0
+                        MaxQuantity: 150
+                        PalletTypeID: 7
+                        Palletname: Nilkamal
+  /api/putaway/validateBinNumberForPutaway:
+    post:
+      summary: http://localhost:3000/api/putaway/validateBinNumberForPutaway
+      description: http://localhost:3000/api/putaway/validateBinNumberForPutaway
+      operationId: httpLocalhost3000ApiPutawayValidatebinnumberforputaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchChangeReason:
+                  type: string
+                  example: Their was mistake from vendor
+                BatchNumber:
+                  type: string
+                  example: B01
+                BinNumber:
+                  type: string
+                  example: '10001'
+                MRP:
+                  type: string
+                  example: '300'
+                ManufactureDate:
+                  type: string
+                  example: '2025-05-20'
+                PalletTypeID:
+                  type: string
+                  example: '7'
+                PurchaseOrderProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 120
+                SLOCID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+            example:
+              BatchChangeReason: Their was mistake from vendor
+              BatchNumber: B01
+              BinNumber: '10001'
+              MRP: '300'
+              ManufactureDate: '2025-05-20'
+              PalletTypeID: '7'
+              PurchaseOrderProductID: 1
+              PurchaseOrderReceivingID: 1
+              Quantity: 120
+              SLOCID: '1'
+              UOMID: '7'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '160'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 13:47:44 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"a0-/3btlFFnx46Bl2ab6sLOXsDoPgo"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 150
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 150
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinStatus: New
+                      FilledQuantity: 0
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+  /api/putaway/putProductIntoBinForPutaway:
+    post:
+      summary: http://localhost:3000/api/putaway/putProductIntoBinForPutaway
+      description: http://localhost:3000/api/putaway/putProductIntoBinForPutaway
+      operationId: httpLocalhost3000ApiPutawayPutproductintobinforputaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchChangeReason:
+                  type: string
+                  example: Their was mistake from vendor
+                BatchNumber:
+                  type: string
+                  example: B01
+                BinID:
+                  type: number
+                  example: 1
+                MRP:
+                  type: string
+                  example: '300'
+                ManufactureDate:
+                  type: string
+                  example: '2025-05-20'
+                PalletTypeID:
+                  type: string
+                  example: '7'
+                PurchaseOrderProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReceivingID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+                SLOCID:
+                  type: string
+                  example: '1'
+                UOMID:
+                  type: string
+                  example: '7'
+            example:
+              BatchChangeReason: Their was mistake from vendor
+              BatchNumber: B01
+              BinID: 1
+              MRP: '300'
+              ManufactureDate: '2025-05-20'
+              PalletTypeID: '7'
+              PurchaseOrderProductID: 1
+              PurchaseOrderReceivingID: 1
+              Quantity: 50
+              SLOCID: '1'
+              UOMID: '7'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '501'
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 May 2025 13:58:38 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1f5-Jmoli1HwgFkLNwXlU2TEuwwpXCQ"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 100
+                      BatchNumber:
+                        type: string
+                        example: B01
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: '10001'
+                      BinProductID:
+                        type: number
+                        example: 1
+                      BranchID:
+                        type: number
+                        example: 13
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedDate:
+                        type: string
+                        example: '2025-05-28T19:28:42.647Z'
+                      FilledQuantity:
+                        type: number
+                        example: 50
+                      IsActive:
+                        type: boolean
+                        example: true
+                      MRP:
+                        type: number
+                        example: 300
+                      ManufactureDate:
+                        type: string
+                        example: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity:
+                        type: number
+                        example: 150
+                      PalletTypeID:
+                        type: number
+                        example: 7
+                      Palletname:
+                        type: string
+                        example: Nilkamal
+                      ProductID:
+                        type: number
+                        example: 1
+                      SLOCID:
+                        type: number
+                        example: 1
+                      StackID:
+                        type: number
+                        example: 8
+                      UOMID:
+                        type: number
+                        example: 7
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedDate:
+                        type: string
+                        example: '2025-05-28T19:28:42.647Z'
+                      VendorID:
+                        type: number
+                        example: 1
+                      WarehouseID:
+                        type: number
+                        example: 8
+                  message:
+                    type: string
+                    example: Product allocated to bin successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 100
+                      BatchNumber: B01
+                      BinID: 1
+                      BinNumber: '10001'
+                      BinProductID: 1
+                      BranchID: 13
+                      CreatedBy: 1
+                      CreatedDate: '2025-05-28T19:28:42.647Z'
+                      FilledQuantity: 50
+                      IsActive: true
+                      MRP: 300
+                      ManufactureDate: '2025-05-20T00:00:00.000Z'
+                      MaxQuantity: 150
+                      PalletTypeID: 7
+                      Palletname: Nilkamal
+                      ProductID: 1
+                      SLOCID: 1
+                      StackID: 8
+                      UOMID: 7
+                      UpdatedBy: 1
+                      UpdatedDate: '2025-05-28T19:28:42.647Z'
+                      VendorID: 1
+                      WarehouseID: 8
+                    message: Product allocated to bin successfully
+tags: []

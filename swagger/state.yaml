@@ -1,0 +1,286 @@
+openapi: 3.0.0
+info:
+  title: Master Data API - State
+  description: API endpoints for managing states.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+
+components:
+  schemas:
+    State:
+      type: object
+      properties:
+        StateID:
+          type: integer
+          description: The unique 4-digit auto-incrementing ID of the state.
+          example: 1001
+        StateName:
+          type: string
+          example: "Telangana"
+        StateCode:
+          type: string
+          example: "TS"
+        TinNumber:
+          type: string
+          example: "36"
+        CountryID:
+          type: integer
+          example: 101
+        CountryName:
+          type: string
+          description: The name of the parent country (from a JOIN).
+          example: "India"
+        IsActive:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A message describing the error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
+paths:
+  /master/state/addState:
+    post:
+      tags:
+        - State
+      summary: Add a new state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StateName
+                - StateCode
+                - CountryID
+                - IsActive
+                - user_id
+              properties:
+                StateName:
+                  type: string
+                  example: "Telangana"
+                StateCode:
+                  type: string
+                  example: "TS"
+                TinNumber:
+                  type: string
+                  example: "36"
+                CountryID:
+                  type: integer
+                  description: The ID of the parent country.
+                  example: 101
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: State added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/State"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/state/getAllStates:
+    post:
+      tags:
+        - State
+      summary: Get a list of states
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CountryID:
+                  type: integer
+                  description: "Optional: filter by parent CountryID."
+                IsActive:
+                  type: boolean
+                  description: "Optional: filter by active status."
+                includeDeleted:
+                  type: boolean
+                  description: "Optional: set to true to include soft-deleted records."
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: A list of states
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/State"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/state/getState:
+    post:
+      tags:
+        - State
+      summary: Get a single state by its ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StateID
+                - user_id
+              properties:
+                StateID:
+                  type: integer
+                  example: 1001
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/State"
+        "400":
+          description: State not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/state/updateState:
+    post:
+      tags:
+        - State
+      summary: Update an existing state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StateID
+                - StateName
+                - StateCode
+                - CountryID
+                - IsActive
+                - user_id
+              properties:
+                StateID:
+                  type: integer
+                  example: 1001
+                StateName:
+                  type: string
+                  example: "Telangana State"
+                StateCode:
+                  type: string
+                  example: "TG"
+                TinNumber:
+                  type: string
+                  example: "36A"
+                CountryID:
+                  type: integer
+                  example: 101
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: State updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/State"
+        "400":
+          description: State not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /master/state/deleteState:
+    post:
+      tags:
+        - State
+      summary: Delete a state (soft delete)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StateID
+                - user_id
+              properties:
+                StateID:
+                  type: integer
+                  example: 1001
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: State deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "State deleted successfully."
+        "400":
+          description: State not found or bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"

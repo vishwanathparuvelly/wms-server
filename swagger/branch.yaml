@@ -1,0 +1,265 @@
+openapi: 3.0.0
+info:
+  title: Master Data API - Branch
+  description: API endpoints for managing branches.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+
+components:
+  schemas:
+    Branch:
+      type: object
+      properties:
+        BranchID: { type: integer, example: 1 }
+        BranchCode: { type: string, example: "HYD-MAIN" }
+        BranchName: { type: string, example: "Hyderabad Main Branch" }
+        BranchDescription:
+          { type: string, example: "Primary operations center." }
+        StreetAddress1: { type: string, example: "123 Hi-Tech City Road" }
+        StreetAddress2: { type: string, example: "Madhapur" }
+        CityID: { type: integer, example: 1 }
+        CityName: { type: string, example: "Hyderabad" }
+        StateID: { type: integer, example: 1000 }
+        StateName: { type: string, example: "Telangana" }
+        ZoneID: { type: integer, example: 1 }
+        ZoneName: { type: string, example: "South Zone" }
+        CountryID: { type: integer, example: 1 }
+        CountryName: { type: string, example: "India" }
+        IsDefault: { type: boolean, example: true }
+        IsActive: { type: boolean, example: true }
+        CreatedDate: { type: string, format: date-time }
+        UpdatedDate: { type: string, format: date-time }
+        CreatedByUserName: { type: string, example: "admin" }
+        UpdatedByUserName: { type: string, example: "admin" }
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
+paths:
+  /master/branch/addBranch:
+    post:
+      tags: [Branch]
+      summary: Add a new branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                [
+                  BranchCode,
+                  BranchName,
+                  StreetAddress1,
+                  CountryID,
+                  StateID,
+                  CityID,
+                  ZoneID,
+                  IsActive,
+                  user_id,
+                ]
+              properties:
+                BranchCode: { type: string, example: "HYD-MAIN" }
+                BranchName: { type: string, example: "Hyderabad Main Branch" }
+                BranchDescription:
+                  { type: string, example: "Primary operations center." }
+                StreetAddress1:
+                  { type: string, example: "123 Hi-Tech City Road" }
+                StreetAddress2: { type: string, example: "Madhapur" }
+                CountryID: { type: integer, example: 1 }
+                StateID: { type: integer, example: 1000 }
+                CityID: { type: integer, example: 1 }
+                ZoneID: { type: integer, example: 1 }
+                IsActive: { type: boolean, example: true }
+                IsDefault:
+                  {
+                    type: boolean,
+                    example: false,
+                    description: "If true, any other default branch will be unset.",
+                  }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "201":
+          description: Branch added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  {
+                    message: { type: string },
+                    data: { $ref: "#/components/schemas/Branch" },
+                  }
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /master/branch/getAllBranches:
+    post:
+      tags: [Branch]
+      summary: Get a paginated list of branches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer, example: 1 }
+                pageSize: { type: integer, example: 10 }
+                IsActive: { type: boolean }
+                includeDeleted: { type: boolean }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: A paginated list of branches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID: { type: integer }
+                        BranchCode: { type: string }
+                        BranchName: { type: string }
+                        IsActive: { type: boolean }
+                        IsDefault: { type: boolean }
+                        CityName: { type: string }
+                        StateName: { type: string }
+                        CountryName: { type: string }
+                  pagination:
+                    type: object
+                    properties:
+                      totalItems: { type: integer }
+                      totalPages: { type: integer }
+                      currentPage: { type: integer }
+                      pageSize: { type: integer }
+        "400":
+          description: Bad request
+
+  /master/branch/getBranch:
+    post:
+      tags: [Branch]
+      summary: Get a single branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [BranchID, user_id]
+              properties:
+                BranchID: { type: integer, example: 1 }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: "#/components/schemas/Branch" }
+        "400":
+          description: Bad request
+
+  /master/branch/updateBranch:
+    post:
+      tags: [Branch]
+      summary: Update an existing branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                [
+                  BranchID,
+                  BranchCode,
+                  BranchName,
+                  StreetAddress1,
+                  CountryID,
+                  StateID,
+                  CityID,
+                  ZoneID,
+                  IsActive,
+                  user_id,
+                ]
+              properties:
+                BranchID: { type: integer, example: 1 }
+                BranchCode: { type: string, example: "HYD-MAIN-NEW" }
+                BranchName:
+                  { type: string, example: "Hyderabad Main Operations" }
+                BranchDescription:
+                  { type: string, example: "Primary operations center." }
+                StreetAddress1:
+                  { type: string, example: "123 Hi-Tech City Road" }
+                StreetAddress2: { type: string, example: "Madhapur" }
+                CountryID: { type: integer, example: 1 }
+                StateID: { type: integer, example: 1000 }
+                CityID: { type: integer, example: 1 }
+                ZoneID: { type: integer, example: 1 }
+                IsActive: { type: boolean, example: true }
+                IsDefault:
+                  {
+                    type: boolean,
+                    example: true,
+                    description: "If true, any other default branch will be unset.",
+                  }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: Branch updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+                  data: { $ref: "#/components/schemas/Branch" }
+        "400":
+          description: Bad request
+
+  /master/branch/deleteBranch:
+    post:
+      tags: [Branch]
+      summary: Delete a branch (soft delete)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [BranchID, user_id]
+              properties:
+                BranchID: { type: integer, example: 1 }
+                user_id: { type: integer, example: 1 }
+      responses:
+        "200":
+          description: Branch deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: { type: string }
+        "400":
+          description: Bad request

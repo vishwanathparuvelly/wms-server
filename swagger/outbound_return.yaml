@@ -1,0 +1,2573 @@
+openapi: 3.1.0
+info:
+  title: SOFTSOL_OUTBOUND_RETURNS
+  description: Postman collection for Outbound Return Process (Sales Order Returns) APIs
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:3000
+paths:
+  /sales_order_return/getNewSalesOrderReturn:
+    post:
+      summary: Create New Sales Order Return
+      description: Create New Sales Order Return
+      operationId: createNewSalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      SalesOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: New Sales Order Return fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      SalesOrderReturnDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      total_MRP: 0
+                      total_quantity: 0
+                    message: New Sales Order Return fetched Successfully
+  /sales_order_return/getSalesOrderReturn:
+    post:
+      summary: Get Sales Order Return
+      description: Get Sales Order Return
+      operationId: getSalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      SalesOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnStatus:
+                        type: string
+                        example: Draft
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerName: Customer A
+                      SalesOrderReturnDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnStatus: Draft
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+  /sales_order_return/getAllSalesOrderReturns:
+    post:
+      summary: Get All Sales Order Returns
+      description: Get All Sales Order Returns
+      operationId: getAllSalesOrderReturns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        SalesOrderReturnDate:
+                          type: string
+                          example: '2025-08-04'
+                        SalesOrderReturnID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnStatus:
+                          type: string
+                          example: Draft
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_MRP:
+                          type: number
+                          example: 1000
+                        total_quantity:
+                          type: number
+                          example: 100
+                    example:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerName: Customer A
+                        SalesOrderReturnDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnStatus: Draft
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerName: Customer A
+                        SalesOrderReturnDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnStatus: Draft
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+  /sales_order_return/updateSalesOrderReturn:
+    post:
+      summary: Update Sales Order Return
+      description: Update Sales Order Return
+      operationId: updateSalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 1
+                CustomerID:
+                  type: number
+                  example: 1
+                DeliveryDate:
+                  type: string
+                  example: '2025-08-10'
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+                SalesOrderReturnStatus:
+                  type: string
+                  example: Open
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BranchID: 1
+              CustomerID: 1
+              DeliveryDate: '2025-08-10'
+              SalesOrderReturnID: 1
+              SalesOrderReturnStatus: Open
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      DeliveryDate:
+                        type: string
+                        example: '2025-08-10'
+                      SalesOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnStatus:
+                        type: string
+                        example: Open
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+                  message:
+                    type: string
+                    example: Sales Order Return updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      DeliveryDate: '2025-08-10'
+                      SalesOrderReturnDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnStatus: Open
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+                    message: Sales Order Return updated successfully
+  /sales_order_return/deleteSalesOrderReturn:
+    post:
+      summary: Delete Sales Order Return
+      description: Delete Sales Order Return
+      operationId: deleteSalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Sales Order Return deleted successfully
+              examples:
+                Success:
+                  value:
+                    message: Sales Order Return deleted successfully
+  /sales_order_return/addNewProductForSalesOrderReturn:
+    post:
+      summary: Add New Product for Sales Order Return
+      description: Add New Product for Sales Order Return
+      operationId: addNewProductForSalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: BATCH001
+                BranchID:
+                  type: number
+                  example: 1
+                CustomerID:
+                  type: number
+                  example: 1
+                Discount:
+                  type: number
+                  example: 2
+                MRP:
+                  type: number
+                  example: 20
+                ProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+                SLOCID:
+                  type: number
+                  example: 1
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BatchNumber: BATCH001
+              BranchID: 1
+              CustomerID: 1
+              Discount: 2
+              MRP: 20
+              ProductID: 1
+              Quantity: 50
+              SLOCID: 1
+              SalesOrderReturnID: 1
+              UOMID: 1
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      Discount:
+                        type: number
+                        example: 2
+                      MRP:
+                        type: number
+                        example: 20
+                      Pending_Quantity:
+                        type: number
+                        example: 50
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      Quantity:
+                        type: number
+                        example: 50
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 900
+                      Total_Product_Discount:
+                        type: number
+                        example: 100
+                      Total_Product_MRP:
+                        type: number
+                        example: 1000
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                  message:
+                    type: string
+                    example: Product added to Sales Order Return successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      Discount: 2
+                      MRP: 20
+                      Pending_Quantity: 50
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      Quantity: 50
+                      SLOCID: 1
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnProductID: 1
+                      Total_Product_Amount: 900
+                      Total_Product_Discount: 100
+                      Total_Product_MRP: 1000
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                    message: Product added to Sales Order Return successfully
+  /sales_order_return/getSalesOrderReturnProduct:
+    post:
+      summary: Get Sales Order Return Product
+      description: Get Sales Order Return Product
+      operationId: getSalesOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      Discount:
+                        type: number
+                        example: 2
+                      MRP:
+                        type: number
+                        example: 20
+                      Pending_Quantity:
+                        type: number
+                        example: 50
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      Quantity:
+                        type: number
+                        example: 50
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 900
+                      Total_Product_Discount:
+                        type: number
+                        example: 100
+                      Total_Product_MRP:
+                        type: number
+                        example: 1000
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      Discount: 2
+                      MRP: 20
+                      Pending_Quantity: 50
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      Quantity: 50
+                      SLOCID: 1
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnProductID: 1
+                      Total_Product_Amount: 900
+                      Total_Product_Discount: 100
+                      Total_Product_MRP: 1000
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+  /sales_order_return/getSalesOrderReturnAllProducts:
+    post:
+      summary: Get All Sales Order Return Products
+      description: Get All Sales Order Return Products
+      operationId: getAllSalesOrderReturnProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: BATCH001
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerID:
+                          type: number
+                          example: 1
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        Discount:
+                          type: number
+                          example: 2
+                        MRP:
+                          type: number
+                          example: 20
+                        Pending_Quantity:
+                          type: number
+                          example: 50
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        Quantity:
+                          type: number
+                          example: 50
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnProductID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 900
+                        Total_Product_Discount:
+                          type: number
+                          example: 100
+                        Total_Product_MRP:
+                          type: number
+                          example: 1000
+                        UOMID:
+                          type: number
+                          example: 1
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        Quantity: 50
+                        SLOCID: 1
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        Quantity: 50
+                        SLOCID: 1
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+  /sales_order_return/updateSalesOrderReturnProduct:
+    post:
+      summary: Update Sales Order Return Product
+      description: Update Sales Order Return Product
+      operationId: updateSalesOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: BATCH001
+                Discount:
+                  type: number
+                  example: 3
+                MRP:
+                  type: number
+                  example: 22
+                ProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 60
+                SLOCID:
+                  type: number
+                  example: 1
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 1
+            example:
+              BatchNumber: BATCH001
+              Discount: 3
+              MRP: 22
+              ProductID: 1
+              Quantity: 60
+              SLOCID: 1
+              SalesOrderReturnID: 1
+              SalesOrderReturnProductID: 1
+              UOMID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      Discount:
+                        type: number
+                        example: 3
+                      MRP:
+                        type: number
+                        example: 22
+                      Pending_Quantity:
+                        type: number
+                        example: 60
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      Quantity:
+                        type: number
+                        example: 60
+                      SLOCID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 1140
+                      Total_Product_Discount:
+                        type: number
+                        example: 180
+                      Total_Product_MRP:
+                        type: number
+                        example: 1320
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                  message:
+                    type: string
+                    example: Product updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      Discount: 3
+                      MRP: 22
+                      Pending_Quantity: 60
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      Quantity: 60
+                      SLOCID: 1
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnProductID: 1
+                      Total_Product_Amount: 1140
+                      Total_Product_Discount: 180
+                      Total_Product_MRP: 1320
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                    message: Product updated Successfully
+  /sales_order_return/deleteSalesOrderReturnProduct:
+    post:
+      summary: Delete Sales Order Return Product
+      description: Delete Sales Order Return Product
+      operationId: deleteSalesOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnID: 1
+              SalesOrderReturnProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: done
+                  message:
+                    type: string
+                    example: Product deleted from Sales Order Return successfully
+              examples:
+                Success:
+                  value:
+                    data: done
+                    message: Product deleted from Sales Order Return successfully
+  /sales_order_return/getNewSalesOrderReturnReceiving:
+    post:
+      summary: Create New Sales Order Return Receiving
+      description: Create New Sales Order Return Receiving
+      operationId: createNewSalesOrderReturnReceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      ReceivingDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnReceivingID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnReceivingNumber:
+                        type: string
+                        example: SORR-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: Sales Order Return Receiving fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      ReceivingDate: '2025-08-04'
+                      SalesOrderReturnReceivingID: 1
+                      SalesOrderReturnReceivingNumber: SORR-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      total_quantity: 0
+                    message: Sales Order Return Receiving fetched Successfully
+  /sales_order_return/getSalesOrderReturnReceiving:
+    post:
+      summary: Get Sales Order Return Receiving
+      description: Get Sales Order Return Receiving
+      operationId: getSalesOrderReturnReceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      ReceivingDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnReceivingID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnReceivingNumber:
+                        type: string
+                        example: SORR-001
+                      SalesOrderReturnReceivingStatus:
+                        type: string
+                        example: Open
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_quantity:
+                        type: number
+                        example: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      InvoiceNumber: INV001
+                      ReceivingDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnReceivingID: 1
+                      SalesOrderReturnReceivingNumber: SORR-001
+                      SalesOrderReturnReceivingStatus: Open
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_quantity: 100
+  /sales_order_return/getAllSalesOrderReturnReceivings:
+    post:
+      summary: Get All Sales Order Return Receivings
+      description: Get All Sales Order Return Receivings
+      operationId: getAllSalesOrderReturnReceivings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerID:
+                          type: number
+                          example: 1
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        InvoiceNumber:
+                          type: string
+                          example: INV001
+                        ReceivingDate:
+                          type: string
+                          example: '2025-08-04'
+                        SalesOrderReturnID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnReceivingID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnReceivingNumber:
+                          type: string
+                          example: SORR-001
+                        SalesOrderReturnReceivingStatus:
+                          type: string
+                          example: Open
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_quantity:
+                          type: number
+                          example: 100
+                    example:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        InvoiceNumber: INV001
+                        ReceivingDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        SalesOrderReturnReceivingStatus: Open
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_quantity: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        InvoiceNumber: INV001
+                        ReceivingDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        SalesOrderReturnReceivingStatus: Open
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_quantity: 100
+  /sales_order_return/updateSalesOrderReturnReceiving:
+    post:
+      summary: Update Sales Order Return Receiving
+      description: Update Sales Order Return Receiving
+      operationId: updateSalesOrderReturnReceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 1
+                CustomerID:
+                  type: number
+                  example: 1
+                InvoiceNumber:
+                  type: string
+                  example: INV001
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BranchID: 1
+              CustomerID: 1
+              InvoiceNumber: INV001
+              SalesOrderReturnID: 1
+              SalesOrderReturnReceivingID: 1
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      ReceivingDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnReceivingID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnReceivingNumber:
+                        type: string
+                        example: SORR-001
+                      SalesOrderReturnReceivingStatus:
+                        type: string
+                        example: Open
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_quantity:
+                        type: number
+                        example: 100
+                  message:
+                    type: string
+                    example: Sales Order Return Receiving updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      InvoiceNumber: INV001
+                      ReceivingDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnReceivingID: 1
+                      SalesOrderReturnReceivingNumber: SORR-001
+                      SalesOrderReturnReceivingStatus: Open
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_quantity: 100
+                    message: Sales Order Return Receiving updated Successfully
+  /sales_order_return/updateSalesOrderReturnReceivingStatus:
+    post:
+      summary: Update Sales Order Return Receiving Status
+      description: Update Sales Order Return Receiving Status
+      operationId: updateSalesOrderReturnReceivingStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingStatus:
+                  type: string
+                  example: Received
+            example:
+              SalesOrderReturnReceivingID: 1
+              SalesOrderReturnReceivingStatus: Received
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      InvoiceNumber:
+                        type: string
+                        example: INV001
+                      ReceivingDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnReceivingID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnReceivingNumber:
+                        type: string
+                        example: SORR-001
+                      SalesOrderReturnReceivingStatus:
+                        type: string
+                        example: Received
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_quantity:
+                        type: number
+                        example: 100
+                  message:
+                    type: string
+                    example: Sales Order Return Receiving status updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      InvoiceNumber: INV001
+                      ReceivingDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnReceivingID: 1
+                      SalesOrderReturnReceivingNumber: SORR-001
+                      SalesOrderReturnReceivingStatus: Received
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_quantity: 100
+                    message: Sales Order Return Receiving status updated Successfully
+  /sales_order_return/deleteSalesOrderReturnReceiving:
+    post:
+      summary: Delete Sales Order Return Receiving
+      description: Delete Sales Order Return Receiving
+      operationId: deleteSalesOrderReturnReceiving
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: done
+                  message:
+                    type: string
+                    example: Sales Order Return Receiving deleted successfully
+              examples:
+                Success:
+                  value:
+                    data: done
+                    message: Sales Order Return Receiving deleted successfully
+  /putaway_sort/getAllSalesOrderReturnPutawayOrders:
+    post:
+      summary: Get All Sales Order Return Putaway Orders
+      description: Get All Sales Order Return Putaway Orders
+      operationId: getAllSalesOrderReturnPutawayOrders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerID:
+                          type: number
+                          example: 1
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        ReceivingDate:
+                          type: string
+                          example: '2025-08-04'
+                        SalesOrderReturnID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnReceivingID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnReceivingNumber:
+                          type: string
+                          example: SORR-001
+                        SalesOrderReturnReceivingStatus:
+                          type: string
+                          example: PutAway Started
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_quantity:
+                          type: number
+                          example: 100
+                    example:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        ReceivingDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        SalesOrderReturnReceivingStatus: PutAway Started
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_quantity: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        ReceivingDate: '2025-08-04'
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        SalesOrderReturnReceivingStatus: PutAway Started
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_quantity: 100
+  /putaway_sort/updateNewSalesOrderReturnPutawayOrder:
+    post:
+      summary: Update New Sales Order Return Putaway Order
+      description: Update New Sales Order Return Putaway Order
+      operationId: updateNewSalesOrderReturnPutawayOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      CustomerID:
+                        type: number
+                        example: 1
+                      CustomerName:
+                        type: string
+                        example: Customer A
+                      ReceivingDate:
+                        type: string
+                        example: '2025-08-04'
+                      SalesOrderReturnID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnNumber:
+                        type: string
+                        example: SOR-001
+                      SalesOrderReturnReceivingID:
+                        type: number
+                        example: 1
+                      SalesOrderReturnReceivingNumber:
+                        type: string
+                        example: SORR-001
+                      SalesOrderReturnReceivingStatus:
+                        type: string
+                        example: PutAway Started
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_quantity:
+                        type: number
+                        example: 100
+                  message:
+                    type: string
+                    example: New Sales Order Return putaway order updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      CustomerID: 1
+                      CustomerName: Customer A
+                      ReceivingDate: '2025-08-04'
+                      SalesOrderReturnID: 1
+                      SalesOrderReturnNumber: SOR-001
+                      SalesOrderReturnReceivingID: 1
+                      SalesOrderReturnReceivingNumber: SORR-001
+                      SalesOrderReturnReceivingStatus: PutAway Started
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_quantity: 100
+                    message: New Sales Order Return putaway order updated Successfully
+  /putaway_sort/getSalesOrderReturnAllPendingProductsForPutaway:
+    post:
+      summary: Get All Pending Products for Putaway
+      description: Get All Pending Products for Putaway
+      operationId: getAllPendingProductsForPutaway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: BATCH001
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerID:
+                          type: number
+                          example: 1
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        Discount:
+                          type: number
+                          example: 2
+                        MRP:
+                          type: number
+                          example: 20
+                        Pending_Quantity:
+                          type: number
+                          example: 50
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        Quantity:
+                          type: number
+                          example: 50
+                        SLOCID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnProductID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 900
+                        Total_Product_Discount:
+                          type: number
+                          example: 100
+                        Total_Product_MRP:
+                          type: number
+                          example: 1000
+                        UOMID:
+                          type: number
+                          example: 1
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        Quantity: 50
+                        SLOCID: 1
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        CustomerID: 1
+                        CustomerName: Customer A
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        Quantity: 50
+                        SLOCID: 1
+                        SalesOrderReturnID: 1
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+  /putaway_sort/getAllAvailablePalletTypesForSalesOrderReturnProduct:
+    post:
+      summary: Get All Available Pallet Types for Sales Order Return Product
+      description: Get All Available Pallet Types for Sales Order Return Product
+      operationId: getAllAvailablePalletTypesForSalesOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        PalletTypeID:
+                          type: number
+                          example: 1
+                        PalletTypeMaxCapacity:
+                          type: number
+                          example: 100
+                        Palletname:
+                          type: string
+                          example: Pallet A
+                    example:
+                      - PalletTypeID: 1
+                        PalletTypeMaxCapacity: 100
+                        Palletname: Pallet A
+              examples:
+                Success:
+                  value:
+                    data:
+                      - PalletTypeID: 1
+                        PalletTypeMaxCapacity: 100
+                        Palletname: Pallet A
+  /putaway_sort/getAllSalesOrderReturnPutawayOrderAllocatedProducts:
+    post:
+      summary: Get All Sales Order Return Putaway Order Allocated Products
+      description: Get All Sales Order Return Putaway Order Allocated Products
+      operationId: getAllSalesOrderReturnPutawayOrderAllocatedProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ActionType:
+                          type: number
+                          example: 4
+                        AllocatedDate:
+                          type: string
+                          example: '2025-08-04'
+                        AllocatedQuantity:
+                          type: number
+                          example: 50
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: BIN001
+                        BinProductLogID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        CustomerName:
+                          type: string
+                          example: Customer A
+                        PalletTypeID:
+                          type: number
+                          example: 1
+                        Palletname:
+                          type: string
+                          example: Pallet A
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        SalesOrderReturnNumber:
+                          type: string
+                          example: SOR-001
+                        SalesOrderReturnProductID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnReceivingID:
+                          type: number
+                          example: 1
+                        SalesOrderReturnReceivingNumber:
+                          type: string
+                          example: SORR-001
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - ActionType: 4
+                        AllocatedDate: '2025-08-04'
+                        AllocatedQuantity: 50
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinProductLogID: 1
+                        BranchName: Branch 1
+                        CreatedByUserName: Admin
+                        CustomerName: Customer A
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - ActionType: 4
+                        AllocatedDate: '2025-08-04'
+                        AllocatedQuantity: 50
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinProductLogID: 1
+                        BranchName: Branch 1
+                        CreatedByUserName: Admin
+                        CustomerName: Customer A
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        SalesOrderReturnNumber: SOR-001
+                        SalesOrderReturnProductID: 1
+                        SalesOrderReturnReceivingID: 1
+                        SalesOrderReturnReceivingNumber: SORR-001
+                        WarehouseName: Warehouse 1
+  /putaway_sort/suggestBinForPutawaySalesOrderReturn:
+    post:
+      summary: Suggest Bin for Putaway Sales Order Return
+      description: Suggest Bin for Putaway Sales Order Return
+      operationId: suggestBinForPutawaySalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ManufactureDate:
+                  type: string
+                  example: '2025-07-01'
+                Quantity:
+                  type: number
+                  example: 50
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              ManufactureDate: '2025-07-01'
+              Quantity: 50
+              SalesOrderReturnProductID: 1
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 100
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+                  message:
+                    type: string
+                    example: Fetched Bin Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 100
+                      BinID: 1
+                      BinNumber: BIN001
+                      BinStatus: New
+                      FilledQuantity: 0
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+                    message: Fetched Bin Successfully
+  /putaway_sort/fetchAllAvailableBinsForPutawaySalesOrderReturn:
+    post:
+      summary: Fetch All Available Bins for Putaway Sales Order Return
+      description: Fetch All Available Bins for Putaway Sales Order Return
+      operationId: fetchAllAvailableBinsForPutawaySalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ManufactureDate:
+                  type: string
+                  example: '2025-07-01'
+                Quantity:
+                  type: number
+                  example: 50
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              ManufactureDate: '2025-07-01'
+              Quantity: 50
+              SalesOrderReturnProductID: 1
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AvailableQuantity:
+                          type: number
+                          example: 100
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: BIN001
+                        BinStatus:
+                          type: string
+                          example: New
+                        FilledQuantity:
+                          type: number
+                          example: 0
+                        MaxQuantity:
+                          type: number
+                          example: 100
+                        PalletTypeID:
+                          type: number
+                          example: 1
+                        Palletname:
+                          type: string
+                          example: Pallet A
+                    example:
+                      - AvailableQuantity: 100
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinStatus: New
+                        FilledQuantity: 0
+                        MaxQuantity: 100
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+              examples:
+                Success:
+                  value:
+                    data:
+                      - AvailableQuantity: 100
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinStatus: New
+                        FilledQuantity: 0
+                        MaxQuantity: 100
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+  /putaway_sort/validateBinNumberForPutawaySalesOrderReturn:
+    post:
+      summary: Validate Bin Number for Putaway Sales Order Return
+      description: Validate Bin Number for Putaway Sales Order Return
+      operationId: validateBinNumberForPutawaySalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinNumber:
+                  type: string
+                  example: BIN001
+                ManufactureDate:
+                  type: string
+                  example: '2025-07-01'
+                Quantity:
+                  type: number
+                  example: 50
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+            example:
+              BinNumber: BIN001
+              ManufactureDate: '2025-07-01'
+              Quantity: 50
+              SalesOrderReturnProductID: 1
+              SalesOrderReturnReceivingID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 100
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 100
+                      BinID: 1
+                      BinNumber: BIN001
+                      BinStatus: New
+                      FilledQuantity: 0
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+  /putaway_sort/putProductIntoBinForPutawaySalesOrderReturn:
+    post:
+      summary: Put Product Into Bin for Putaway Sales Order Return
+      description: Put Product Into Bin for Putaway Sales Order Return
+      operationId: putProductIntoBinForPutawaySalesOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinID:
+                  type: number
+                  example: 1
+                MRP:
+                  type: number
+                  example: 20
+                ManufactureDate:
+                  type: string
+                  example: '2025-07-01'
+                Quantity:
+                  type: number
+                  example: 50
+                SLOCID:
+                  type: number
+                  example: 1
+                SalesOrderReturnProductID:
+                  type: number
+                  example: 1
+                SalesOrderReturnReceivingID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 1
+            example:
+              BinID: 1
+              MRP: 20
+              ManufactureDate: '2025-07-01'
+              Quantity: 50
+              SLOCID: 1
+              SalesOrderReturnProductID: 1
+              SalesOrderReturnReceivingID: 1
+              UOMID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 50
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      FilledQuantity:
+                        type: number
+                        example: 50
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+                  message:
+                    type: string
+                    example: Product allocated to bin successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 50
+                      BinID: 1
+                      BinNumber: BIN001
+                      FilledQuantity: 50
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+                    message: Product allocated to bin successfully
+tags: []

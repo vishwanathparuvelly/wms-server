@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Pallet Type Master API
+  description: API endpoints for managing Pallet Type master data.
+  version: 1.0.0
+servers:
+  - url: /api/master
+    description: Development server
+
+components:
+  schemas:
+    PalletType:
+      type: object
+      properties:
+        PalletTypeID:
+          type: integer
+        PalletName:
+          type: string
+        Length:
+          type: number
+          format: decimal
+        Breadth:
+          type: number
+          format: decimal
+        Height:
+          type: number
+          format: decimal
+        UOMID:
+          type: integer
+        UOMName:
+          type: string
+        IsActive:
+          type: boolean
+      required:
+        - PalletName
+        - Length
+        - Breadth
+        - Height
+        - UOMID
+        - IsActive
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /pallet-type/addPalletType:
+    post:
+      summary: Add a new Pallet Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PalletName:
+                  type: string
+                Length:
+                  type: number
+                Breadth:
+                  type: number
+                Height:
+                  type: number
+                UOMID:
+                  type: integer
+                IsActive:
+                  type: boolean
+      responses:
+        "201":
+          description: Pallet Type added successfully
+
+  /pallet-type/getAllPalletTypes:
+    post:
+      summary: Get a list of all Pallet Types
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                pageSize:
+                  type: integer
+                search:
+                  type: string
+                sortBy:
+                  type: string
+                sortOrder:
+                  type: string
+      responses:
+        "200":
+          description: A list of pallet types
+
+  /pallet-type/updatePalletType:
+    post:
+      summary: Update an existing Pallet Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PalletTypeID:
+                  type: integer
+                PalletName:
+                  type: string
+                Length:
+                  type: number
+                Breadth:
+                  type: number
+                Height:
+                  type: number
+                UOMID:
+                  type: integer
+                IsActive:
+                  type: boolean
+      responses:
+        "200":
+          description: Pallet Type updated successfully
+
+  /pallet-type/deletePalletType:
+    post:
+      summary: Delete a Pallet Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PalletTypeID:
+                  type: integer
+      responses:
+        "200":
+          description: Pallet Type deleted successfully
+
+  /pallet-type/getPalletTypesLite:
+    post:
+      summary: Get a lightweight list of active Pallet Types
+      responses:
+        "200":
+          description: A lite list of pallet types for dropdowns.

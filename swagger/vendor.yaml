@@ -1,0 +1,40 @@
+# swagger/vendor.yaml (Conceptual Documentation)
+openapi: 3.0.0
+info:
+  title: Vendor Master API
+  version: 1.0.0
+  description: API for managing Vendor Master Data.
+paths:
+  /master/vendor/addVendor:
+    post:
+      summary: Add a new Vendor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                VendorCode: { type: string }
+                VendorName: { type: string }
+                BusinessType: { type: string }
+                StreetAddress1: { type: string }
+                CountryID: { type: integer }
+                user_id: { type: integer }
+      responses:
+        "201": { description: Vendor added successfully }
+  /master/vendor/getAllVendors:
+    post:
+      summary: Get list of all Vendors with pagination, search, and sorting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer }
+                pageSize: { type: integer }
+                search: { type: string }
+                sortBy: { type: string }
+      responses:
+        "200": { description: Success }
+  # ... (Similar definitions for getVendor, updateVendor, deleteVendor)

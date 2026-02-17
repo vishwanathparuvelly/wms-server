@@ -1,0 +1,2397 @@
+openapi: 3.1.0
+info:
+  title: SOFTSOL_INBOUND_RETURNS
+  description: Postman collection for Inbound Return Process (Purchase Order Returns) APIs
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:3000
+paths:
+  /purchase_order_return/getNewPurchaseOrderReturn:
+    post:
+      summary: Create New Purchase Order Return
+      description: Create New Purchase Order Return
+      operationId: createNewPurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      PurchaseOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      total_MRP:
+                        type: number
+                        example: 0
+                      total_quantity:
+                        type: number
+                        example: 0
+                  message:
+                    type: string
+                    example: New Purchase Order Return fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      PurchaseOrderReturnDate: '2025-08-04'
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      total_MRP: 0
+                      total_quantity: 0
+                    message: New Purchase Order Return fetched Successfully
+  /purchase_order_return/getPurchaseOrderReturn:
+    post:
+      summary: Get Purchase Order Return
+      description: Get Purchase Order Return
+      operationId: getPurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      PurchaseOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnStatus:
+                        type: string
+                        example: Draft
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      PurchaseOrderReturnDate: '2025-08-04'
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnStatus: Draft
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VendorName: Vendor A
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+  /purchase_order_return/getAllPurchaseOrderReturns:
+    post:
+      summary: Get All Purchase Order Returns
+      description: Get All Purchase Order Returns
+      operationId: getAllPurchaseOrderReturns
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        PurchaseOrderReturnDate:
+                          type: string
+                          example: '2025-08-04'
+                        PurchaseOrderReturnID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnNumber:
+                          type: string
+                          example: POR-001
+                        PurchaseOrderReturnStatus:
+                          type: string
+                          example: Draft
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_MRP:
+                          type: number
+                          example: 1000
+                        total_quantity:
+                          type: number
+                          example: 100
+                    example:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnDate: '2025-08-04'
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnStatus: Draft
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnDate: '2025-08-04'
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnStatus: Draft
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+  /purchase_order_return/updatePurchaseOrderReturn:
+    post:
+      summary: Update Purchase Order Return
+      description: Update Purchase Order Return
+      operationId: updatePurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 1
+                DeliveryAddress:
+                  type: string
+                  example: 123 Warehouse St
+                DeliveryDate:
+                  type: string
+                  example: '2025-08-10'
+                PersonInChargeCustomer:
+                  type: string
+                  example: Jane Smith
+                PersonInChargeInternal:
+                  type: string
+                  example: John Doe
+                PersonInChargeVendor:
+                  type: string
+                  example: Vendor Contact
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnStatus:
+                  type: string
+                  example: Open
+                Remarks:
+                  type: string
+                  example: Updated return
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BranchID: 1
+              DeliveryAddress: 123 Warehouse St
+              DeliveryDate: '2025-08-10'
+              PersonInChargeCustomer: Jane Smith
+              PersonInChargeInternal: John Doe
+              PersonInChargeVendor: Vendor Contact
+              PurchaseOrderReturnID: 1
+              PurchaseOrderReturnStatus: Open
+              Remarks: Updated return
+              VendorID: 1
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      DeliveryAddress:
+                        type: string
+                        example: 123 Warehouse St
+                      DeliveryDate:
+                        type: string
+                        example: '2025-08-10'
+                      PersonInChargeCustomer:
+                        type: string
+                        example: Jane Smith
+                      PersonInChargeInternal:
+                        type: string
+                        example: John Doe
+                      PersonInChargeVendor:
+                        type: string
+                        example: Vendor Contact
+                      PurchaseOrderReturnDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnStatus:
+                        type: string
+                        example: Open
+                      Remarks:
+                        type: string
+                        example: Updated return
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+                  message:
+                    type: string
+                    example: Purchase Order Return updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      DeliveryAddress: 123 Warehouse St
+                      DeliveryDate: '2025-08-10'
+                      PersonInChargeCustomer: Jane Smith
+                      PersonInChargeInternal: John Doe
+                      PersonInChargeVendor: Vendor Contact
+                      PurchaseOrderReturnDate: '2025-08-04'
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnStatus: Open
+                      Remarks: Updated return
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+                    message: Purchase Order Return updated successfully
+  /purchase_order_return/deletePurchaseOrderReturn:
+    post:
+      summary: Delete Purchase Order Return
+      description: Delete Purchase Order Return
+      operationId: deletePurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Purchase Order Return deleted successfully
+              examples:
+                Success:
+                  value:
+                    message: Purchase Order Return deleted successfully
+  /purchase_order_return/getAllAvailableBinProducts:
+    post:
+      summary: Get All Available Bin Products
+      description: Get All Available Bin Products
+      operationId: getAllAvailableBinProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BrandName:
+                          type: string
+                          example: Brand A
+                        LineName:
+                          type: string
+                          example: Line 1
+                        PackagingTypeName:
+                          type: string
+                          example: Box
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductConsumeName:
+                          type: string
+                          example: Consumable
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        ProductTypeName:
+                          type: string
+                          example: Type A
+                        UOMCode:
+                          type: string
+                          example: EA
+                        UOMDescription:
+                          type: string
+                          example: Each unit
+                        UOMID:
+                          type: number
+                          example: 1
+                        UOMName:
+                          type: string
+                          example: Each
+                    example:
+                      - BrandName: Brand A
+                        LineName: Line 1
+                        PackagingTypeName: Box
+                        ProductCode: PROD001
+                        ProductConsumeName: Consumable
+                        ProductID: 1
+                        ProductName: Product A
+                        ProductTypeName: Type A
+                        UOMCode: EA
+                        UOMDescription: Each unit
+                        UOMID: 1
+                        UOMName: Each
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BrandName: Brand A
+                        LineName: Line 1
+                        PackagingTypeName: Box
+                        ProductCode: PROD001
+                        ProductConsumeName: Consumable
+                        ProductID: 1
+                        ProductName: Product A
+                        ProductTypeName: Type A
+                        UOMCode: EA
+                        UOMDescription: Each unit
+                        UOMID: 1
+                        UOMName: Each
+  /purchase_order_return/getAllBinProductsBatchNumbers:
+    post:
+      summary: Get All Bin Products Batch Numbers
+      description: Get All Bin Products Batch Numbers
+      operationId: getAllBinProductsBatchNumbers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductID:
+                  type: number
+                  example: 1
+            example:
+              ProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      example: BATCH001
+                    example:
+                      - BATCH001
+                      - BATCH002
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BATCH001
+                      - BATCH002
+  /purchase_order_return/addNewProductForPurchaseOrderReturn:
+    post:
+      summary: Add New Product for Purchase Order Return
+      description: Add New Product for Purchase Order Return
+      operationId: addNewProductForPurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: BATCH001
+                BranchID:
+                  type: number
+                  example: 1
+                Discount:
+                  type: number
+                  example: 2
+                MRP:
+                  type: number
+                  example: 20
+                ProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+                SLOCID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 1
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BatchNumber: BATCH001
+              BranchID: 1
+              Discount: 2
+              MRP: 20
+              ProductID: 1
+              PurchaseOrderReturnID: 1
+              Quantity: 50
+              SLOCID: 1
+              UOMID: 1
+              VendorID: 1
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      Discount:
+                        type: number
+                        example: 2
+                      MRP:
+                        type: number
+                        example: 20
+                      Pending_Quantity:
+                        type: number
+                        example: 50
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Quantity:
+                        type: number
+                        example: 50
+                      SLOCID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 900
+                      Total_Product_Discount:
+                        type: number
+                        example: 100
+                      Total_Product_MRP:
+                        type: number
+                        example: 1000
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                  message:
+                    type: string
+                    example: Product added to Purchase Order Return successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      Discount: 2
+                      MRP: 20
+                      Pending_Quantity: 50
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnProductID: 1
+                      Quantity: 50
+                      SLOCID: 1
+                      Total_Product_Amount: 900
+                      Total_Product_Discount: 100
+                      Total_Product_MRP: 1000
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                    message: Product added to Purchase Order Return successfully
+  /purchase_order_return/getPurchaseOrderReturnProduct:
+    post:
+      summary: Get Purchase Order Return Product
+      description: Get Purchase Order Return Product
+      operationId: getPurchaseOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      Discount:
+                        type: number
+                        example: 2
+                      MRP:
+                        type: number
+                        example: 20
+                      Pending_Quantity:
+                        type: number
+                        example: 50
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Quantity:
+                        type: number
+                        example: 50
+                      SLOCID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 900
+                      Total_Product_Discount:
+                        type: number
+                        example: 100
+                      Total_Product_MRP:
+                        type: number
+                        example: 1000
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      Discount: 2
+                      MRP: 20
+                      Pending_Quantity: 50
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnProductID: 1
+                      Quantity: 50
+                      SLOCID: 1
+                      Total_Product_Amount: 900
+                      Total_Product_Discount: 100
+                      Total_Product_MRP: 1000
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+  /purchase_order_return/getPurchaseOrderReturnAllProducts:
+    post:
+      summary: Get All Purchase Order Return Products
+      description: Get All Purchase Order Return Products
+      operationId: getAllPurchaseOrderReturnProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: BATCH001
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        Discount:
+                          type: number
+                          example: 2
+                        MRP:
+                          type: number
+                          example: 20
+                        Pending_Quantity:
+                          type: number
+                          example: 50
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        PurchaseOrderReturnID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnNumber:
+                          type: string
+                          example: POR-001
+                        PurchaseOrderReturnProductID:
+                          type: number
+                          example: 1
+                        Quantity:
+                          type: number
+                          example: 50
+                        SLOCID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 900
+                        Total_Product_Discount:
+                          type: number
+                          example: 100
+                        Total_Product_MRP:
+                          type: number
+                          example: 1000
+                        UOMID:
+                          type: number
+                          example: 1
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnProductID: 1
+                        Quantity: 50
+                        SLOCID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnProductID: 1
+                        Quantity: 50
+                        SLOCID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+  /purchase_order_return/updatePurchaseOrderReturnProduct:
+    post:
+      summary: Update Purchase Order Return Product
+      description: Update Purchase Order Return Product
+      operationId: updatePurchaseOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchNumber:
+                  type: string
+                  example: BATCH001
+                Discount:
+                  type: number
+                  example: 3
+                MRP:
+                  type: number
+                  example: 22
+                ProductID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 60
+                SLOCID:
+                  type: number
+                  example: 1
+                UOMID:
+                  type: number
+                  example: 1
+            example:
+              BatchNumber: BATCH001
+              Discount: 3
+              MRP: 22
+              ProductID: 1
+              PurchaseOrderReturnID: 1
+              PurchaseOrderReturnProductID: 1
+              Quantity: 60
+              SLOCID: 1
+              UOMID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BatchNumber:
+                        type: string
+                        example: BATCH001
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      Discount:
+                        type: number
+                        example: 3
+                      MRP:
+                        type: number
+                        example: 22
+                      Pending_Quantity:
+                        type: number
+                        example: 60
+                      Picked_Quantity:
+                        type: number
+                        example: 0
+                      ProductCode:
+                        type: string
+                        example: PROD001
+                      ProductID:
+                        type: number
+                        example: 1
+                      ProductName:
+                        type: string
+                        example: Product A
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnProductID:
+                        type: number
+                        example: 1
+                      Quantity:
+                        type: number
+                        example: 60
+                      SLOCID:
+                        type: number
+                        example: 1
+                      Total_Product_Amount:
+                        type: number
+                        example: 1140
+                      Total_Product_Discount:
+                        type: number
+                        example: 180
+                      Total_Product_MRP:
+                        type: number
+                        example: 1320
+                      UOMID:
+                        type: number
+                        example: 1
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                  message:
+                    type: string
+                    example: Purchase Order Return product updated successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BatchNumber: BATCH001
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      Discount: 3
+                      MRP: 22
+                      Pending_Quantity: 60
+                      Picked_Quantity: 0
+                      ProductCode: PROD001
+                      ProductID: 1
+                      ProductName: Product A
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnProductID: 1
+                      Quantity: 60
+                      SLOCID: 1
+                      Total_Product_Amount: 1140
+                      Total_Product_Discount: 180
+                      Total_Product_MRP: 1320
+                      UOMID: 1
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                    message: Purchase Order Return product updated successfully
+  /purchase_order_return/deletePurchaseOrderReturnProduct:
+    post:
+      summary: Delete Purchase Order Return Product
+      description: Delete Purchase Order Return Product
+      operationId: deletePurchaseOrderReturnProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+              PurchaseOrderReturnProductID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: done
+                  message:
+                    type: string
+                    example: Purchase Order Return product deleted successfully
+              examples:
+                Success:
+                  value:
+                    data: done
+                    message: Purchase Order Return product deleted successfully
+  /picklist_port/getAllPickListOrdersPurchaseOrderReturn:
+    post:
+      summary: Get All Picklist Orders Purchase Order Return
+      description: Get All Picklist Orders Purchase Order Return
+      operationId: getAllPicklistOrdersPurchaseOrderReturn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        PurchaseOrderReturnID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnNumber:
+                          type: string
+                          example: POR-001
+                        PurchaseOrderReturnStatus:
+                          type: string
+                          example: Picklist Started
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_MRP:
+                          type: number
+                          example: 1000
+                        total_quantity:
+                          type: number
+                          example: 100
+                    example:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnStatus: Picklist Started
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnStatus: Picklist Started
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+  /picklist_port/getPurchaseOrderReturnAllPendingProductsForPicklist:
+    post:
+      summary: Get All Pending Products for Picklist
+      description: Get All Pending Products for Picklist
+      operationId: getAllPendingProductsForPicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BatchNumber:
+                          type: string
+                          example: BATCH001
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        Discount:
+                          type: number
+                          example: 2
+                        MRP:
+                          type: number
+                          example: 20
+                        Pending_Quantity:
+                          type: number
+                          example: 50
+                        Picked_Quantity:
+                          type: number
+                          example: 0
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        PurchaseOrderReturnID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnNumber:
+                          type: string
+                          example: POR-001
+                        PurchaseOrderReturnProductID:
+                          type: number
+                          example: 1
+                        Quantity:
+                          type: number
+                          example: 50
+                        SLOCID:
+                          type: number
+                          example: 1
+                        Total_Product_Amount:
+                          type: number
+                          example: 900
+                        Total_Product_Discount:
+                          type: number
+                          example: 100
+                        Total_Product_MRP:
+                          type: number
+                          example: 1000
+                        UOMID:
+                          type: number
+                          example: 1
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnProductID: 1
+                        Quantity: 50
+                        SLOCID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BatchNumber: BATCH001
+                        BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        Discount: 2
+                        MRP: 20
+                        Pending_Quantity: 50
+                        Picked_Quantity: 0
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnProductID: 1
+                        Quantity: 50
+                        SLOCID: 1
+                        Total_Product_Amount: 900
+                        Total_Product_Discount: 100
+                        Total_Product_MRP: 1000
+                        UOMID: 1
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+  /picklist_port/getAllPicklistOrderPickedProductsPurchaseOrderReturn:
+    post:
+      summary: Get All Picklist Order Picked Products
+      description: Get All Picklist Order Picked Products
+      operationId: getAllPicklistOrderPickedProducts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ActionType:
+                          type: number
+                          example: 3
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: BIN001
+                        BinProductLogID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        PalletTypeID:
+                          type: number
+                          example: 1
+                        Palletname:
+                          type: string
+                          example: Pallet A
+                        PickedDate:
+                          type: string
+                          example: '2025-08-04'
+                        PickedQuantity:
+                          type: number
+                          example: 50
+                        ProductCode:
+                          type: string
+                          example: PROD001
+                        ProductID:
+                          type: number
+                          example: 1
+                        ProductName:
+                          type: string
+                          example: Product A
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                    example:
+                      - ActionType: 3
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinProductLogID: 1
+                        BranchName: Branch 1
+                        CreatedByUserName: Admin
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+                        PickedDate: '2025-08-04'
+                        PickedQuantity: 50
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+              examples:
+                Success:
+                  value:
+                    data:
+                      - ActionType: 3
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinProductLogID: 1
+                        BranchName: Branch 1
+                        CreatedByUserName: Admin
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+                        PickedDate: '2025-08-04'
+                        PickedQuantity: 50
+                        ProductCode: PROD001
+                        ProductID: 1
+                        ProductName: Product A
+                        VendorName: Vendor A
+                        WarehouseName: Warehouse 1
+  /picklist_port/suggestBinForPicklistPurchaseOrderReturn:
+    post:
+      summary: Suggest Bin for Picklist
+      description: Suggest Bin for Picklist
+      operationId: suggestBinForPicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+            example:
+              PurchaseOrderReturnProductID: 1
+              Quantity: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 50
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      BinStatus:
+                        type: string
+                        example: Partial
+                      FilledQuantity:
+                        type: number
+                        example: 50
+                      ManufactureDate:
+                        type: string
+                        example: '2025-07-01'
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+                  message:
+                    type: string
+                    example: Fetched Bin Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 50
+                      BinID: 1
+                      BinNumber: BIN001
+                      BinStatus: Partial
+                      FilledQuantity: 50
+                      ManufactureDate: '2025-07-01'
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+                    message: Fetched Bin Successfully
+  /picklist_port/fetchAllAvailableBinsForPicklistPurchaseOrderReturn:
+    post:
+      summary: Fetch All Available Bins for Picklist
+      description: Fetch All Available Bins for Picklist
+      operationId: fetchAllAvailableBinsForPicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+            example:
+              PurchaseOrderReturnProductID: 1
+              Quantity: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AvailableQuantity:
+                          type: number
+                          example: 50
+                        BinID:
+                          type: number
+                          example: 1
+                        BinNumber:
+                          type: string
+                          example: BIN001
+                        BinStatus:
+                          type: string
+                          example: Partial
+                        FilledQuantity:
+                          type: number
+                          example: 50
+                        ManufactureDate:
+                          type: string
+                          example: '2025-07-01'
+                        MaxQuantity:
+                          type: number
+                          example: 100
+                        PalletTypeID:
+                          type: number
+                          example: 1
+                        Palletname:
+                          type: string
+                          example: Pallet A
+                    example:
+                      - AvailableQuantity: 50
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinStatus: Partial
+                        FilledQuantity: 50
+                        ManufactureDate: '2025-07-01'
+                        MaxQuantity: 100
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+              examples:
+                Success:
+                  value:
+                    data:
+                      - AvailableQuantity: 50
+                        BinID: 1
+                        BinNumber: BIN001
+                        BinStatus: Partial
+                        FilledQuantity: 50
+                        ManufactureDate: '2025-07-01'
+                        MaxQuantity: 100
+                        PalletTypeID: 1
+                        Palletname: Pallet A
+  /picklist_port/validateBinNumberForPicklistPurchaseOrderReturn:
+    post:
+      summary: Validate Bin Number for Picklist
+      description: Validate Bin Number for Picklist
+      operationId: validateBinNumberForPicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinNumber:
+                  type: string
+                  example: BIN001
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+            example:
+              BinNumber: BIN001
+              PurchaseOrderReturnProductID: 1
+              Quantity: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 50
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      BinStatus:
+                        type: string
+                        example: Partial
+                      FilledQuantity:
+                        type: number
+                        example: 50
+                      ManufactureDate:
+                        type: string
+                        example: '2025-07-01'
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 50
+                      BinID: 1
+                      BinNumber: BIN001
+                      BinStatus: Partial
+                      FilledQuantity: 50
+                      ManufactureDate: '2025-07-01'
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+  /picklist_port/pickProductFromBinForPicklistPurchaseOrderReturn:
+    post:
+      summary: Pick Product from Bin for Picklist
+      description: Pick Product from Bin for Picklist
+      operationId: pickProductFromBinForPicklist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BinID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnProductID:
+                  type: number
+                  example: 1
+                Quantity:
+                  type: number
+                  example: 50
+            example:
+              BinID: 1
+              PurchaseOrderReturnProductID: 1
+              Quantity: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      AvailableQuantity:
+                        type: number
+                        example: 100
+                      BinID:
+                        type: number
+                        example: 1
+                      BinNumber:
+                        type: string
+                        example: BIN001
+                      BinStatus:
+                        type: string
+                        example: New
+                      FilledQuantity:
+                        type: number
+                        example: 0
+                      MaxQuantity:
+                        type: number
+                        example: 100
+                      PalletTypeID:
+                        type: number
+                        example: 1
+                      Palletname:
+                        type: string
+                        example: Pallet A
+                  message:
+                    type: string
+                    example: Product picked successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      AvailableQuantity: 100
+                      BinID: 1
+                      BinNumber: BIN001
+                      BinStatus: New
+                      FilledQuantity: 0
+                      MaxQuantity: 100
+                      PalletTypeID: 1
+                      Palletname: Pallet A
+                    message: Product picked successfully
+  /shipment_port/getNewPurchaseOrderReturnShipment:
+    post:
+      summary: Create New Purchase Order Return Shipment
+      description: Create New Purchase Order Return Shipment
+      operationId: createNewPurchaseOrderReturnShipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      PurchaseOrderReturnShipmentDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnShipmentID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnShipmentNumber:
+                        type: string
+                        example: PORS-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                  message:
+                    type: string
+                    example: New Purchase Order Return Shipment fetched Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      PurchaseOrderReturnShipmentDate: '2025-08-04'
+                      PurchaseOrderReturnShipmentID: 1
+                      PurchaseOrderReturnShipmentNumber: PORS-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                    message: New Purchase Order Return Shipment fetched Successfully
+  /shipment_port/getPurchaseOrderReturnShipment:
+    post:
+      summary: Get Purchase Order Return Shipment
+      description: Get Purchase Order Return Shipment
+      operationId: getPurchaseOrderReturnShipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                PurchaseOrderReturnShipmentID:
+                  type: number
+                  example: 1
+            example:
+              PurchaseOrderReturnShipmentID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnShipmentDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnShipmentID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnShipmentNumber:
+                        type: string
+                        example: PORS-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VehicleTypeCapacityTonnes:
+                        type: number
+                        example: 5
+                      VehicleTypeID:
+                        type: number
+                        example: 1
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+                      vehicleTypeName:
+                        type: string
+                        example: Truck
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnShipmentDate: '2025-08-04'
+                      PurchaseOrderReturnShipmentID: 1
+                      PurchaseOrderReturnShipmentNumber: PORS-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VehicleTypeCapacityTonnes: 5
+                      VehicleTypeID: 1
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+                      vehicleTypeName: Truck
+  /shipment_port/getAllPurchaseOrderReturnShipments:
+    post:
+      summary: Get All Purchase Order Return Shipments
+      description: Get All Purchase Order Return Shipments
+      operationId: getAllPurchaseOrderReturnShipments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            example: {}
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        BranchID:
+                          type: number
+                          example: 1
+                        BranchName:
+                          type: string
+                          example: Branch 1
+                        CreatedBy:
+                          type: number
+                          example: 1
+                        CreatedByUserName:
+                          type: string
+                          example: Admin
+                        PurchaseOrderReturnID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnNumber:
+                          type: string
+                          example: POR-001
+                        PurchaseOrderReturnShipmentDate:
+                          type: string
+                          example: '2025-08-04'
+                        PurchaseOrderReturnShipmentID:
+                          type: number
+                          example: 1
+                        PurchaseOrderReturnShipmentNumber:
+                          type: string
+                          example: PORS-001
+                        UpdatedBy:
+                          type: number
+                          example: 1
+                        UpdatedByUserName:
+                          type: string
+                          example: Admin
+                        VehicleTypeCapacityTonnes:
+                          type: number
+                          example: 5
+                        VehicleTypeID:
+                          type: number
+                          example: 1
+                        VendorID:
+                          type: number
+                          example: 1
+                        VendorName:
+                          type: string
+                          example: Vendor A
+                        WarehouseID:
+                          type: number
+                          example: 1
+                        WarehouseName:
+                          type: string
+                          example: Warehouse 1
+                        total_MRP:
+                          type: number
+                          example: 1000
+                        total_quantity:
+                          type: number
+                          example: 100
+                        vehicleTypeName:
+                          type: string
+                          example: Truck
+                    example:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnShipmentDate: '2025-08-04'
+                        PurchaseOrderReturnShipmentID: 1
+                        PurchaseOrderReturnShipmentNumber: PORS-001
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VehicleTypeCapacityTonnes: 5
+                        VehicleTypeID: 1
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+                        vehicleTypeName: Truck
+              examples:
+                Success:
+                  value:
+                    data:
+                      - BranchID: 1
+                        BranchName: Branch 1
+                        CreatedBy: 1
+                        CreatedByUserName: Admin
+                        PurchaseOrderReturnID: 1
+                        PurchaseOrderReturnNumber: POR-001
+                        PurchaseOrderReturnShipmentDate: '2025-08-04'
+                        PurchaseOrderReturnShipmentID: 1
+                        PurchaseOrderReturnShipmentNumber: PORS-001
+                        UpdatedBy: 1
+                        UpdatedByUserName: Admin
+                        VehicleTypeCapacityTonnes: 5
+                        VehicleTypeID: 1
+                        VendorID: 1
+                        VendorName: Vendor A
+                        WarehouseID: 1
+                        WarehouseName: Warehouse 1
+                        total_MRP: 1000
+                        total_quantity: 100
+                        vehicleTypeName: Truck
+  /shipment_port/updatePurchaseOrderReturnShipment:
+    post:
+      summary: Update Purchase Order Return Shipment
+      description: Update Purchase Order Return Shipment
+      operationId: updatePurchaseOrderReturnShipment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BranchID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnID:
+                  type: number
+                  example: 1
+                PurchaseOrderReturnShipmentID:
+                  type: number
+                  example: 1
+                VehicleTypeID:
+                  type: number
+                  example: 1
+                VendorID:
+                  type: number
+                  example: 1
+                WarehouseID:
+                  type: number
+                  example: 1
+            example:
+              BranchID: 1
+              PurchaseOrderReturnID: 1
+              PurchaseOrderReturnShipmentID: 1
+              VehicleTypeID: 1
+              VendorID: 1
+              WarehouseID: 1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      BranchID:
+                        type: number
+                        example: 1
+                      BranchName:
+                        type: string
+                        example: Branch 1
+                      CreatedBy:
+                        type: number
+                        example: 1
+                      CreatedByUserName:
+                        type: string
+                        example: Admin
+                      PurchaseOrderReturnID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnNumber:
+                        type: string
+                        example: POR-001
+                      PurchaseOrderReturnShipmentDate:
+                        type: string
+                        example: '2025-08-04'
+                      PurchaseOrderReturnShipmentID:
+                        type: number
+                        example: 1
+                      PurchaseOrderReturnShipmentNumber:
+                        type: string
+                        example: PORS-001
+                      UpdatedBy:
+                        type: number
+                        example: 1
+                      UpdatedByUserName:
+                        type: string
+                        example: Admin
+                      VehicleTypeCapacityTonnes:
+                        type: number
+                        example: 5
+                      VehicleTypeID:
+                        type: number
+                        example: 1
+                      VendorID:
+                        type: number
+                        example: 1
+                      VendorName:
+                        type: string
+                        example: Vendor A
+                      WarehouseID:
+                        type: number
+                        example: 1
+                      WarehouseName:
+                        type: string
+                        example: Warehouse 1
+                      total_MRP:
+                        type: number
+                        example: 1000
+                      total_quantity:
+                        type: number
+                        example: 100
+                      vehicleTypeName:
+                        type: string
+                        example: Truck
+                  message:
+                    type: string
+                    example: Purchase Order Return Shipment updated Successfully
+              examples:
+                Success:
+                  value:
+                    data:
+                      BranchID: 1
+                      BranchName: Branch 1
+                      CreatedBy: 1
+                      CreatedByUserName: Admin
+                      PurchaseOrderReturnID: 1
+                      PurchaseOrderReturnNumber: POR-001
+                      PurchaseOrderReturnShipmentDate: '2025-08-04'
+                      PurchaseOrderReturnShipmentID: 1
+                      PurchaseOrderReturnShipmentNumber: PORS-001
+                      UpdatedBy: 1
+                      UpdatedByUserName: Admin
+                      VehicleTypeCapacityTonnes: 5
+                      VehicleTypeID: 1
+                      VendorID: 1
+                      VendorName: Vendor A
+                      WarehouseID: 1
+                      WarehouseName: Warehouse 1
+                      total_MRP: 1000
+                      total_quantity: 100
+                      vehicleTypeName: Truck
+                    message: Purchase Order Return Shipment updated Successfully
+tags: []

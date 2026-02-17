@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  title: Master Data API - Zone
+  description: API endpoints for managing zones.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api
+    description: Development server
+
+components:
+  schemas:
+    Zone:
+      type: object
+      properties:
+        ZoneID:
+          type: integer
+          example: 1
+        ZoneName:
+          type: string
+          example: "South Zone"
+        ZoneCode:
+          type: string
+          example: "SOUTH"
+        CountryID:
+          type: integer
+          example: 101
+        CountryName:
+          type: string
+          example: "India"
+        IsActive:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A message describing the error.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
+paths:
+  /master/zone/addZone:
+    post:
+      tags: [Zone]
+      summary: Add a new zone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ZoneName, ZoneCode, CountryID, IsActive, user_id]
+              properties:
+                ZoneName:
+                  type: string
+                  example: "South Zone"
+                ZoneCode:
+                  type: string
+                  example: "SOUTH"
+                CountryID:
+                  type: integer
+                  description: The ID of a valid, existing parent country.
+                  example: 101
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: Zone added successfully
+        "400":
+          description: Bad request
+
+  /master/zone/getAllZones:
+    post:
+      tags: [Zone]
+      summary: Get a paginated list of zones
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  example: 1
+                pageSize:
+                  type: integer
+                  example: 10
+                CountryID:
+                  type: integer
+                IsActive:
+                  type: boolean
+                includeDeleted:
+                  type: boolean
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: A paginated list of zones
+        "400":
+          description: Bad request
+
+  /master/zone/getZone:
+    post:
+      tags: [Zone]
+      summary: Get a single zone by its ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ZoneID, user_id]
+              properties:
+                ZoneID:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Successful response
+        "400":
+          description: Zone not found
+
+  /master/zone/updateZone:
+    post:
+      tags: [Zone]
+      summary: Update an existing zone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                [ZoneID, ZoneName, ZoneCode, CountryID, IsActive, user_id]
+              properties:
+                ZoneID:
+                  type: integer
+                  example: 1
+                ZoneName:
+                  type: string
+                  example: "Southern Zone"
+                ZoneCode:
+                  type: string
+                  example: "SZ"
+                CountryID:
+                  type: integer
+                  example: 101
+                IsActive:
+                  type: boolean
+                  example: true
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Zone updated successfully
+        "400":
+          description: Bad request
+
+  /master/zone/deleteZone:
+    post:
+      tags: [Zone]
+      summary: Delete a zone (soft delete)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ZoneID, user_id]
+              properties:
+                ZoneID:
+                  type: integer
+                  example: 1
+                user_id:
+                  type: integer
+                  example: 1
+      responses:
+        "200":
+          description: Zone deleted successfully
+        "400":
+          description: Bad request

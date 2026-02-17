@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "prod": "node index.js",
+    "db:setup": "node db-setup.js",
+    "seed:demo": "node seed-demo-data.js",
+    "migrate": "node run-migrations.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "config": "^3.3.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "fast-csv": "^5.0.5",
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mssql": "^11.0.1",
+    "multer": "^2.0.2",
+    "swagger-ui-express": "^5.0.1",
+    "xlsx": "^0.18.5"
+  }
+}

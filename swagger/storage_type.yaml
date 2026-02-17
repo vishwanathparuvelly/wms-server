@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  title: Storage Type Master API
+  description: API endpoints for managing Storage Type master data.
+  version: 1.0.0
+servers:
+  - url: /api/master
+    description: Development server
+
+components:
+  schemas:
+    StorageType:
+      type: object
+      properties:
+        StorageTypeID:
+          type: integer
+        StorageTypeName:
+          type: string
+        StorageTypeDescription:
+          type: string
+        IsActive:
+          type: boolean
+      required:
+        - StorageTypeName
+        - StorageTypeDescription
+        - IsActive
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /storage-type/addStorageType:
+    post:
+      summary: Add a new Storage Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StorageTypeName:
+                  type: string
+                StorageTypeDescription:
+                  type: string
+                IsActive:
+                  type: boolean
+      responses:
+        "201":
+          description: Storage Type added successfully
+
+  /storage-type/getAllStorageTypes:
+    post:
+      summary: Get a list of all Storage Types
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                pageSize:
+                  type: integer
+                search:
+                  type: string
+                sortBy:
+                  type: string
+                sortOrder:
+                  type: string
+      responses:
+        "200":
+          description: A list of storage types
+
+  /storage-type/updateStorageType:
+    post:
+      summary: Update an existing Storage Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StorageTypeID:
+                  type: integer
+                StorageTypeName:
+                  type: string
+                StorageTypeDescription:
+                  type: string
+                IsActive:
+                  type: boolean
+      responses:
+        "200":
+          description: Storage Type updated successfully
+
+  /storage-type/deleteStorageType:
+    post:
+      summary: Delete a Storage Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StorageTypeID:
+                  type: integer
+      responses:
+        "200":
+          description: Storage Type deleted successfully
+
+  /storage-type/getStorageTypesLite:
+    post:
+      summary: Get a lightweight list of active Storage Types
+      responses:
+        "200":
+          description: A lite list of storage types for dropdowns.

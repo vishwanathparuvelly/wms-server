@@ -1,0 +1,132 @@
+# swagger/uom.yaml
+
+openapi: 3.0.0
+info:
+  title: WMS API - Master (UOM)
+  description: API endpoints for managing Units of Measurement.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api/master
+    description: Development server
+
+components:
+  schemas:
+    UOM:
+      type: object
+      properties:
+        UOMID: { type: integer }
+        UOMCode: { type: string }
+        UOMName: { type: string }
+        UOMDescription: { type: string }
+        IsActive: { type: boolean }
+      required:
+        - UOMCode
+        - UOMName
+        - UOMDescription
+        - IsActive
+
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+
+security:
+  - bearerAuth: []
+
+paths:
+  /uom/addUOM:
+    post:
+      summary: Add a new UOM
+      tags: [UOM]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                UOMCode: { type: string }
+                UOMName: { type: string }
+                UOMDescription: { type: string }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "201": { description: "UOM created" }
+
+  /uom/updateUOM:
+    post:
+      summary: Update an existing UOM
+      tags: [UOM]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                UOMID: { type: integer }
+                UOMCode: { type: string }
+                UOMName: { type: string }
+                UOMDescription: { type: string }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "200": { description: "UOM updated" }
+
+  /uom/getUOM:
+    post:
+      summary: Get a single UOM by ID
+      tags: [UOM]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: { UOMID: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json: { schema: { $ref: "#/components/schemas/UOM" } }
+
+  /uom/getAllUOMs:
+    post:
+      summary: Get a list of all UOMs (paginated)
+      tags: [UOM]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer }
+                pageSize: { type: integer }
+                search: { type: string, nullable: true }
+                sortBy: { type: string, nullable: true }
+                sortOrder: { type: string, enum: [asc, desc], nullable: true }
+                IsActive: { type: boolean, nullable: true }
+      responses:
+        "200": { description: "A list of UOMs." }
+
+  /uom/deleteUOM:
+    post:
+      summary: Delete a UOM
+      tags: [UOM]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                UOMID: { type: integer }
+                user_id: { type: integer }
+      responses:
+        "200": { description: "UOM deleted" }
+
+  /uom/getUOMsLite:
+    post:
+      summary: Get a simplified list of active UOMs for dropdowns
+      tags: [UOM]
+      responses:
+        "200": { description: OK }

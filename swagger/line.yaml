@@ -1,0 +1,121 @@
+# swagger/line.yaml
+
+openapi: 3.0.0
+info:
+  title: WMS API - Master (Line)
+  description: API endpoints for managing warehouse lines (e.g., Production, Packing).
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api/master
+    description: Development server
+
+components:
+  schemas:
+    Line:
+      type: object
+      properties:
+        LineID: { type: integer }
+        LineNumber: { type: string }
+        LineName: { type: string }
+        LineType:
+          {
+            type: string,
+            enum: [Production, Packing, QA, Other],
+            nullable: true,
+          }
+        WarehouseID: { type: integer, nullable: true }
+        WarehouseName: { type: string, nullable: true }
+        IsActive: { type: boolean }
+      required:
+        - LineNumber
+        - LineName
+        - IsActive
+
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+
+security:
+  - bearerAuth: []
+
+paths:
+  /line/addLine:
+    post:
+      summary: Add a new line
+      tags: [Line]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LineNumber: { type: string }
+                LineName: { type: string }
+                LineType:
+                  {
+                    type: string,
+                    enum: [Production, Packing, QA, Other],
+                    nullable: true,
+                  }
+                WarehouseID: { type: integer, nullable: true }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "201": { description: "Line created" }
+
+  /line/updateLine:
+    post:
+      summary: Update an existing line
+      tags: [Line]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LineID: { type: integer }
+                LineNumber: { type: string }
+                LineName: { type: string }
+                LineType:
+                  {
+                    type: string,
+                    enum: [Production, Packing, QA, Other],
+                    nullable: true,
+                  }
+                WarehouseID: { type: integer, nullable: true }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "200": { description: "Line updated" }
+
+  /line/getLine:
+    post:
+      summary: Get a single line by ID
+      tags: [Line]
+      # ... (rest of definition)
+
+  /line/getAllLines:
+    post:
+      summary: Get a list of all lines (paginated)
+      tags: [Line]
+      # ... (rest of definition)
+
+  /line/getLineTypes:
+    get:
+      summary: Get the list of available line types
+      tags: [Line]
+      responses:
+        "200": { description: "OK" }
+
+  /line/deleteLine:
+    post:
+      summary: Delete a line
+      tags: [Line]
+      # ... (rest of definition)
+
+  /line/getLinesLite:
+    post:
+      summary: Get a simplified list of active lines for dropdowns
+      tags: [Line]
+      # ... (rest of definition)

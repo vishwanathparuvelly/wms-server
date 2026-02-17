@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Warehouse Type Master API
+  description: API for fetching static warehouse types.
+  version: 1.0.0
+
+paths:
+  /api/warehouse-types/getall:
+    post:
+      summary: Get all active warehouse types
+      tags: [Warehouse Types]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: A list of warehouse types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        WarehouseTypeID: { type: integer, example: 1 }
+                        WarehouseTypeName: { type: string, example: "Owned" }
+                        WarehouseTypeDescription:
+                          {
+                            type: string,
+                            example: "Warehouse is owned by the company",
+                          }
+        "400":
+          description: Bad Request

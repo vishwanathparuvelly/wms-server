@@ -1,0 +1,28 @@
+{
+    "apps": [
+        {
+            "name": "wms-api",
+            "script": "./index.js",
+            "cwd": "./",
+            "instances": 2,
+            "exec_mode": "cluster",
+            "watch": false,
+            "env": {
+                "NODE_ENV": "dev",
+                "NODE_APP_INSTANCE": "",
+                "PORT": 3000,
+                "APP_NAME": "WMS API with dev config"
+            },
+            "env_prod": {
+                "NODE_ENV": "prod",
+                "NODE_APP_INSTANCE": "",
+                "PORT": 7501,
+                "APP_NAME": "WMS API with prod config"
+            },
+            "log_date_format": "YYYY-MM-DD HH:mm Z",
+            "error_file": "./logs/err.log",
+            "out_file": "./logs/out.log",
+            "merge_logs": true
+        }
+    ]
+}

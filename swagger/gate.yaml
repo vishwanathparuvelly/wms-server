@@ -1,0 +1,50 @@
+# REPLACE the entire content of gate.yaml with this refactored version.
+openapi: 3.0.0
+info:
+  title: Gate Master API
+  description: API endpoints for managing warehouse Gates.
+  version: 1.0.0
+servers:
+  - url: /api/master
+    description: Development server
+
+components:
+  schemas:
+    Gate:
+      type: object
+      properties:
+        GateID:
+          type: integer
+        GateName:
+          type: string
+        WarehouseID:
+          type: integer
+          nullable: true
+        GateSequenceNumber:
+          type: integer
+        Height:
+          type: number
+        Width:
+          type: number
+        UOMID:
+          type: integer
+          nullable: true
+        DistanceFromLeftCornerMeters:
+          type: number
+        Direction:
+          type: string
+          enum: [Inbound, Outbound, Inbound/Outbound]
+        GateTypeID:
+          type: integer
+          nullable: true
+        IsActive:
+          type: boolean
+      required:
+        - GateName
+        - GateSequenceNumber
+        - Height
+        - Width
+        - DistanceFromLeftCornerMeters
+        - Direction
+        - IsActive
+# ... The rest of the paths for getAll, update, delete, getLite should be included as before

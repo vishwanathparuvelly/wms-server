@@ -1,0 +1,160 @@
+# swagger/stack.yaml
+
+openapi: 3.0.0
+info:
+  title: WMS API - Master (Stack)
+  description: API endpoints for managing Stacks within compartments.
+  version: 1.0.0
+servers:
+  - url: http://localhost:7501/api/master
+    description: Development server
+
+components:
+  schemas:
+    Stack:
+      type: object
+      properties:
+        StackID:
+          type: integer
+        StackCode:
+          type: string
+        StackName:
+          type: string
+        CompartmentID:
+          type: integer
+        CompartmentName:
+          type: string
+        WarehouseName:
+          type: string
+        IsActive:
+          type: boolean
+      required:
+        - StackCode
+        - StackName
+        - CompartmentID
+        - IsActive
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+  /stack/addStack:
+    post:
+      summary: Add a new stack
+      tags: [Stack]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StackCode: { type: string }
+                StackName: { type: string }
+                CompartmentID: { type: integer }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "201": { description: "Stack created" }
+        "400": { description: "Bad request" }
+
+  /stack/updateStack:
+    post:
+      summary: Update an existing stack
+      tags: [Stack]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StackID: { type: integer }
+                StackCode: { type: string }
+                StackName: { type: string }
+                CompartmentID: { type: integer }
+                IsActive: { type: boolean }
+                user_id: { type: integer }
+      responses:
+        "200": { description: "Stack updated" }
+        "400": { description: "Bad request" }
+
+  /stack/getStack:
+    post:
+      summary: Get a single stack by ID
+      tags: [Stack]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StackID: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stack"
+
+  /stack/getAllStacks:
+    post:
+      summary: Get a list of all stacks (paginated)
+      tags: [Stack]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page: { type: integer }
+                pageSize: { type: integer }
+                search: { type: string, nullable: true }
+                sortBy: { type: string, nullable: true }
+                sortOrder: { type: string, enum: [asc, desc], nullable: true }
+                CompartmentID: { type: integer, nullable: true }
+                IsActive: { type: boolean, nullable: true }
+      responses:
+        "200": { description: "A list of stacks." }
+
+  /stack/deleteStack:
+    post:
+      summary: Delete a stack
+      tags: [Stack]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StackID: { type: integer }
+                user_id: { type: integer }
+      responses:
+        "200": { description: "Stack deleted" }
+
+  /stack/getStacksLite:
+    post:
+      summary: Get a simplified list of active stacks for dropdowns
+      tags: [Stack]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                CompartmentID:
+                  type: integer
+                  description: Optional. Filter stacks by a specific compartment.
+                  nullable: true
+      responses:
+        "200": { description: OK }
