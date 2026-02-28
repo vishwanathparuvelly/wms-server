@@ -4,6 +4,8 @@ const poController = require("../controller/PO_Controller");
 const soController = require("../controller/SO_Controller");
 const portController = require("../controller/PORT_Controller");
 const sortController = require("../controller/SORT_Controller");
+const documentController = require("../controller/Document_Controller");
+const { uploadSingle, handleUploadError } = require("../middleware/fileUpload");
 const masterRoutes = require("./master_route"); // <-- Import the new master router
 const dataHandlerRoutes = require("./dataHandler_Routes");
 
@@ -11,6 +13,32 @@ const dataHandlerRoutes = require("./dataHandler_Routes");
 // All routes defined in master_route.js will now be prefixed with /master
 router.use("/master", masterRoutes);
 router.use("/data", dataHandlerRoutes);
+
+// --- Document Routes ---
+router.post("/documents/upload", uploadSingle, handleUploadError, (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.uploadDocument(req, res, pool);
+});
+router.get("/documents/list/:entityType/:entityID", (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.getDocumentsByEntity(req, res, pool);
+});
+router.post("/documents/list", (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.getDocumentsByEntityPost(req, res, pool);
+});
+router.get("/documents/download/:documentID", (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.downloadDocument(req, res, pool);
+});
+router.delete("/documents/delete/:documentID", (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.deleteDocument(req, res, pool);
+});
+router.post("/documents/delete", (req, res) => {
+  const pool = req.app.locals.dbPool;
+  documentController.deleteDocumentPost(req, res, pool);
+});
 
 router
   .route("/purchase_order/newPurchaseOrder")

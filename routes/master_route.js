@@ -33,6 +33,8 @@ const gateTypeController = require("../controller/GateType_Controller");
 const vehicleTypeController = require("../controller/VehicleType_Controller");
 const productController = require("../controller/Product_Controller"); // <-- NEW IMPORT
 const categoryController = require("../controller/Category_Controller");
+const carrierController = require("../controller/Carrier_Controller");
+const lookupController = require("../controller/Lookup_Controller");
 
 // --- PRODUCT Module Routes ---
 router.route("/product/addProduct").post(productController.addProduct);
@@ -409,6 +411,18 @@ router.post(
 );
 
 router.post("/gate-type/getGateTypesLite", gateTypeController.getGateTypesLite);
+
+// --- Carrier Module Routes ---
+router.route("/carrier/addCarrier").post(carrierController.addCarrier);
+router.route("/carrier/getCarrier").post(carrierController.getCarrier);
+router.route("/carrier/getAllCarriers").post(carrierController.getAllCarriers);
+router.route("/carrier/updateCarrier").post(carrierController.updateCarrier);
+router.route("/carrier/deleteCarrier").post(carrierController.deleteCarrier);
+router.post("/carrier/getCarriersLite", carrierController.getCarriersLite);
+
+// --- Lookup Routes (PackingRequirements, CarrierPreferences) ---
+router.post("/lookup/getPackingRequirements", lookupController.getPackingRequirements);
+router.post("/lookup/getCarrierPreferences", lookupController.getCarrierPreferences);
 
 // --- Employee Module Routes ---
 router.route("/employee/addEmployee").post(employeeController.addEmployee);

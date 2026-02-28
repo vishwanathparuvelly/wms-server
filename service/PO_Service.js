@@ -78,6 +78,9 @@ async function getPurchaseOrder(pool, PurchaseOrderID) {
         V.VendorName,
         B.BranchName,
         W.WarehouseName,
+        C.CarrierName,
+        PR.PackingRequirementName,
+        CP.CarrierPreferenceName,
         (
             SELECT COALESCE(SUM(POP.Quantity), 0)
             FROM PurchaseOrderProducts POP
@@ -89,6 +92,9 @@ async function getPurchaseOrder(pool, PurchaseOrderID) {
         left join Vendors V ON PO.VendorID = V.VendorID
         left join Branches B ON PO.BranchID = B.BranchID
         left join Warehouses W ON PO.WarehouseID = W.WarehouseID
+        left join Carriers C ON PO.CarrierID = C.CarrierID
+        left join PackingRequirements PR ON PO.PackingRequirementID = PR.PackingRequirementID
+        left join CarrierPreferences CP ON PO.CarrierPreferenceID = CP.CarrierPreferenceID
         `;
     let request = pool.request();
     if (isNumeric) {
@@ -132,6 +138,9 @@ async function getAllPurchaseOrders(pool, values) {
         V.VendorName,
         B.BranchName,
         W.WarehouseName,
+        C.CarrierName,
+        PR.PackingRequirementName,
+        CP.CarrierPreferenceName,
         (
             SELECT COALESCE(SUM(POP.Quantity), 0)
             FROM PurchaseOrderProducts POP
@@ -143,6 +152,9 @@ async function getAllPurchaseOrders(pool, values) {
         left join Vendors V ON PO.VendorID = V.VendorID
         left join Branches B ON PO.BranchID = B.BranchID
         left join Warehouses W ON PO.WarehouseID = W.WarehouseID
+        left join Carriers C ON PO.CarrierID = C.CarrierID
+        left join PackingRequirements PR ON PO.PackingRequirementID = PR.PackingRequirementID
+        left join CarrierPreferences CP ON PO.CarrierPreferenceID = CP.CarrierPreferenceID
         WHERE PO.CreatedBy = @CreatedBy and PO.PurchaseOrderStatus != 'New' and PO.IsDeleted = 0
         `;
     if (values.PurchaseOrderStatus) {
@@ -171,7 +183,7 @@ async function getAllPurchaseOrders(pool, values) {
 
 async function updatePurchaseOrder(pool, values) {
   try {
-    let items = [
+    let requiredItems = [
       "PurchaseOrderID",
       "DeliveryDate",
       "PurchaseOrderStatus",
@@ -181,13 +193,11 @@ async function updatePurchaseOrder(pool, values) {
       "DeliveryAddress",
       "PersonInChargeInternal",
       "PersonInChargeVendor",
-      "TransporterName",
-      "VehicleNumber",
-      "LRNumber",
+      "CarrierID",
       "Remarks",
     ];
     let PurchaseOrder;
-    for (const key of items) {
+    for (const key of requiredItems) {
       if (!values[key]) {
         throw new CustomError(`Missing required field: ${key}`);
       }
@@ -246,9 +256,11 @@ async function updatePurchaseOrder(pool, values) {
             DeliveryAddress = @DeliveryAddress,
             PersonInChargeInternal = @PersonInChargeInternal,
             PersonInChargeVendor = @PersonInChargeVendor,
-            TransporterName = @TransporterName,
+            CarrierID = @CarrierID,
             VehicleNumber = @VehicleNumber,
             LRNumber = @LRNumber,
+            PackingRequirementID = @PackingRequirementID,
+            CarrierPreferenceID = @CarrierPreferenceID,
             Remarks = @Remarks,
             UpdatedBy = @UpdatedBy,
             UpdatedDate = GETDATE()
@@ -273,9 +285,11 @@ async function updatePurchaseOrder(pool, values) {
         sql.VarChar(100),
         values.PersonInChargeVendor,
       )
-      .input("TransporterName", sql.VarChar(100), values.TransporterName)
-      .input("VehicleNumber", sql.VarChar(50), values.VehicleNumber)
-      .input("LRNumber", sql.VarChar(50), values.LRNumber)
+      .input("CarrierID", sql.Int, parseInt(values.CarrierID))
+      .input("VehicleNumber", sql.VarChar(50), values.VehicleNumber || null)
+      .input("LRNumber", sql.VarChar(50), values.LRNumber || null)
+      .input("PackingRequirementID", sql.Int, values.PackingRequirementID ? parseInt(values.PackingRequirementID) : null)
+      .input("CarrierPreferenceID", sql.Int, values.CarrierPreferenceID ? parseInt(values.CarrierPreferenceID) : null)
       .input("Remarks", sql.VarChar(500), values.Remarks)
       .input("UpdatedBy", sql.Int, parseInt(user_id));
     let result = await request.query(query);
@@ -1230,7 +1244,7 @@ async function updatePurchaseOrderReceiving(pool, values) {
 
             UPDATE PurchaseOrders
             SET 
-                PurchaseOrderStatus = 'Completed',
+                PurchaseOrderStatus = 'Open',
                 UpdatedBy = @UpdatedBy,
                 UpdatedDate = GETDATE()
             WHERE PurchaseOrderID = @PurchaseOrderID;
@@ -1301,20 +1315,6 @@ async function updatePurchaseOrderReceivingStatus(pool, values) {
       }
     }
 
-    // Validate QuarantineEndDate for Received status
-    if (values.PurchaseOrderReceivingStatus === "Received") {
-      if (!values.QuarantineEndDate) {
-        throw new CustomError(
-          "QuarantineEndDate is required when status is 'Received'",
-        );
-      }
-      // Validate date format
-      const quarantineDate = new Date(values.QuarantineEndDate);
-      if (isNaN(quarantineDate.getTime())) {
-        throw new CustomError("Invalid QuarantineEndDate format");
-      }
-    }
-
     // Validate PurchaseOrderReceivingID
     if (isNaN(values.PurchaseOrderReceivingID)) {
       throw new CustomError(
@@ -1341,12 +1341,10 @@ async function updatePurchaseOrderReceivingStatus(pool, values) {
       );
     }
 
-    // Ensure BatchNumber and LOT Number columns exist in PurchaseOrderReceivings
+    // Ensure Comments column exists in PurchaseOrderReceivings
     const ensureColumnsQuery = `
-      IF COL_LENGTH('PurchaseOrderReceivings','BatchNumber') IS NULL
-        ALTER TABLE PurchaseOrderReceivings ADD BatchNumber NVARCHAR(100) NULL;
-      IF COL_LENGTH('PurchaseOrderReceivings','LOTNumber') IS NULL
-        ALTER TABLE PurchaseOrderReceivings ADD LOTNumber NVARCHAR(100) NULL;
+      IF COL_LENGTH('PurchaseOrderReceivings','Comments') IS NULL
+        ALTER TABLE PurchaseOrderReceivings ADD Comments NVARCHAR(500) NULL;
     `;
     await pool.request().query(ensureColumnsQuery);
 
@@ -1355,10 +1353,7 @@ async function updatePurchaseOrderReceivingStatus(pool, values) {
             UPDATE PurchaseOrderReceivings
             SET 
                 PurchaseOrderReceivingStatus = @PurchaseOrderReceivingStatus,
-                QuarantineEndDate = @QuarantineEndDate,
-                QuarantineRemark = @QuarantineRemark,
-                BatchNumber = @BatchNumber,
-                LOTNumber = @LOTNumber,
+                Comments = @Comments,
                 UpdatedBy = @UpdatedBy,
                 UpdatedDate = GETDATE()
             WHERE PurchaseOrderReceivingID = @PurchaseOrderReceivingID;
@@ -1388,24 +1383,9 @@ async function updatePurchaseOrderReceivingStatus(pool, values) {
         values.PurchaseOrderReceivingStatus,
       )
       .input(
-        "QuarantineEndDate",
-        sql.Date,
-        values.QuarantineEndDate || null,
-      )
-      .input(
-        "QuarantineRemark",
-        sql.VarChar(500),
-        values.QuarantineRemark || null,
-      )
-      .input(
-        "BatchNumber",
-        sql.NVarChar(100),
-        values.BatchNumber || null,
-      )
-      .input(
-        "LOTNumber",
-        sql.NVarChar(100),
-        values.LOTNumber || null,
+        "Comments",
+        sql.NVarChar(500),
+        values.Comments || null,
       )
       .input(
         "PurchaseOrderID",

@@ -294,13 +294,13 @@ async function addProduct(pool, values) {
             INSERT INTO Products (
                 ProductCode, ProductName, BrandID, ProductTypeID, UOMID, NetWeight, GrossWeight, ShelfLifeDays,
                 NearExpiryDays, Length, Breadth, Height, MinimumQty, ReorderLevelQty, LineID, ProductConsumeID,
-                PackagingTypeID, Category, HSNCode, DefaultSlocID, IsHazmat, IsActive, CreatedBy, UpdatedBy
+                PackagingTypeID, Category, HSNCode, DefaultSlocID, IsHazmat, MasterFormulaRecord, IsActive, CreatedBy, UpdatedBy
             )
             OUTPUT INSERTED.ProductID INTO @OutputTable
             VALUES (
                 @ProductCode, @ProductName, @BrandID, @ProductTypeID, @UOMID, @NetWeight, @GrossWeight, @ShelfLifeDays,
                 @NearExpiryDays, @Length, @Breadth, @Height, @MinimumQty, @ReorderLevelQty, @LineID, @ProductConsumeID,
-                @PackagingTypeID, @Category, @HSNCode, @DefaultSlocID, @IsHazmat, @IsActive, @UserID, @UserID
+                @PackagingTypeID, @Category, @HSNCode, @DefaultSlocID, @IsHazmat, @MasterFormulaRecord, @IsActive, @UserID, @UserID
             );
             SELECT ProductID FROM @OutputTable;
         `;
@@ -327,6 +327,7 @@ async function addProduct(pool, values) {
       .input("HSNCode", sql.NVarChar(50), productData.HSNCode)
       .input("DefaultSlocID", sql.Int, productData.DefaultSlocID)
       .input("IsHazmat", sql.Bit, productData.IsHazmat || false)
+      .input("MasterFormulaRecord", sql.NVarChar(255), productData.MasterFormulaRecord || null)
       .input("IsActive", sql.Bit, productData.IsActive)
       .input("UserID", sql.Int, user_id);
 
@@ -403,8 +404,8 @@ async function updateProduct(pool, values) {
                 NearExpiryDays = @NearExpiryDays, Length = @Length, Breadth = @Breadth, Height = @Height,
                 MinimumQty = @MinimumQty, ReorderLevelQty = @ReorderLevelQty, LineID = @LineID, 
                 ProductConsumeID = @ProductConsumeID, PackagingTypeID = @PackagingTypeID, Category = @Category, 
-                HSNCode = @HSNCode, DefaultSlocID = @DefaultSlocID, IsHazmat = @IsHazmat, IsActive = @IsActive, 
-                UpdatedBy = @UpdatedBy, UpdatedDate = GETDATE()
+                HSNCode = @HSNCode, DefaultSlocID = @DefaultSlocID, IsHazmat = @IsHazmat, MasterFormulaRecord = @MasterFormulaRecord,
+                IsActive = @IsActive, UpdatedBy = @UpdatedBy, UpdatedDate = GETDATE()
             WHERE ProductID = @ProductID;
         `;
     updateRequest
@@ -430,6 +431,7 @@ async function updateProduct(pool, values) {
       .input("HSNCode", sql.NVarChar(50), productData.HSNCode)
       .input("DefaultSlocID", sql.Int, productData.DefaultSlocID)
       .input("IsHazmat", sql.Bit, productData.IsHazmat || false)
+      .input("MasterFormulaRecord", sql.NVarChar(255), productData.MasterFormulaRecord || null)
       .input("IsActive", sql.Bit, productData.IsActive)
       .input("UpdatedBy", sql.Int, user_id);
 

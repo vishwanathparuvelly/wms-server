@@ -115,7 +115,11 @@ async function getAllMaterials(pool, values) {
 
 async function addMaterial(pool, values) {
   try {
-    const { MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, IsActive, user_id } = values;
+    const { 
+      MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, 
+      ManufacturerName, SupplierName, ManufacturerMaterialReference,
+      IsActive, user_id 
+    } = values;
 
     if (!MaterialCode || !MaterialName || IsActive === undefined || !user_id) {
       throw new CustomError(
@@ -137,9 +141,17 @@ async function addMaterial(pool, values) {
 
     const query = `
         DECLARE @OutputTable TABLE (MaterialID INT);
-        INSERT INTO Materials (MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, IsActive, CreatedBy, UpdatedBy)
+        INSERT INTO Materials (
+          MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, 
+          ManufacturerName, SupplierName, ManufacturerMaterialReference,
+          IsActive, CreatedBy, UpdatedBy
+        )
         OUTPUT INSERTED.MaterialID INTO @OutputTable
-        VALUES (@MaterialCode, @MaterialName, @MaterialDescription, @UOMID, @VendorID, @IsActive, @UserID, @UserID);
+        VALUES (
+          @MaterialCode, @MaterialName, @MaterialDescription, @UOMID, @VendorID, 
+          @ManufacturerName, @SupplierName, @ManufacturerMaterialReference,
+          @IsActive, @UserID, @UserID
+        );
         SELECT MaterialID FROM @OutputTable;
     `;
     const insertRequest = pool
@@ -149,6 +161,9 @@ async function addMaterial(pool, values) {
       .input("MaterialDescription", sql.NVarChar(sql.MAX), MaterialDescription || null)
       .input("UOMID", sql.Int, UOMID || null)
       .input("VendorID", sql.Int, VendorID || null)
+      .input("ManufacturerName", sql.NVarChar(255), ManufacturerName || null)
+      .input("SupplierName", sql.NVarChar(255), SupplierName || null)
+      .input("ManufacturerMaterialReference", sql.NVarChar(255), ManufacturerMaterialReference || null)
       .input("IsActive", sql.Bit, IsActive)
       .input("UserID", sql.Int, user_id);
 
@@ -175,7 +190,11 @@ async function updateMaterial(pool, values) {
     const { MaterialID, ...updateData } = values;
     if (!MaterialID) throw new CustomError("MaterialID is required for update.");
 
-    const { MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, IsActive, user_id } = updateData;
+    const { 
+      MaterialCode, MaterialName, MaterialDescription, UOMID, VendorID, 
+      ManufacturerName, SupplierName, ManufacturerMaterialReference,
+      IsActive, user_id 
+    } = updateData;
     const originalMaterial = await getMaterial(pool, MaterialID);
 
     // Check for duplicate code
@@ -198,6 +217,9 @@ async function updateMaterial(pool, values) {
             MaterialDescription = @MaterialDescription,
             UOMID = @UOMID,
             VendorID = @VendorID,
+            ManufacturerName = @ManufacturerName,
+            SupplierName = @SupplierName,
+            ManufacturerMaterialReference = @ManufacturerMaterialReference,
             IsActive = @IsActive, 
             UpdatedBy = @UpdatedBy, 
             UpdatedDate = GETDATE()
@@ -210,6 +232,9 @@ async function updateMaterial(pool, values) {
       .input("MaterialDescription", sql.NVarChar(sql.MAX), MaterialDescription || null)
       .input("UOMID", sql.Int, UOMID || null)
       .input("VendorID", sql.Int, VendorID || null)
+      .input("ManufacturerName", sql.NVarChar(255), ManufacturerName || null)
+      .input("SupplierName", sql.NVarChar(255), SupplierName || null)
+      .input("ManufacturerMaterialReference", sql.NVarChar(255), ManufacturerMaterialReference || null)
       .input("IsActive", sql.Bit, IsActive)
       .input("UpdatedBy", sql.Int, user_id)
       .input("MaterialID", sql.Int, MaterialID);

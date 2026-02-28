@@ -21,5 +21,13 @@
     "ALGORITHM": "HS256",
     "ISSUER": "yourdomain.com",
     "AUDIENCE": "yourdomain.com"
+  },
+  "minio": {
+    "endPoint": "localhost",
+    "port": 9000,
+    "useSSL": false,
+    "accessKey": "minioadmin",
+    "secretKey": "minioadmin",
+    "bucketName": "wms-documents"
   }
 }

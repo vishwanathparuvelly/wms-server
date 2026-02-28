@@ -928,6 +928,9 @@ const schema = {
       },
       { name: "UOMID", type: "INT", properties: "NULL" },
       { name: "VendorID", type: "INT", properties: "NULL" },
+      { name: "ManufacturerName", type: "NVARCHAR(255)", properties: "NULL" },
+      { name: "SupplierName", type: "NVARCHAR(255)", properties: "NULL" },
+      { name: "ManufacturerMaterialReference", type: "NVARCHAR(255)", properties: "NULL" },
       { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
       { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
       { name: "CreatedBy", type: "INT", properties: "NOT NULL" },
@@ -1640,6 +1643,7 @@ const schema = {
       { name: "HSNCode", type: "NVARCHAR(50)", properties: "NULL" },
       { name: "DefaultSlocID", type: "INT", properties: "NULL" },
       { name: "IsHazmat", type: "BIT", properties: "NOT NULL DEFAULT 0" },
+      { name: "MasterFormulaRecord", type: "NVARCHAR(255)", properties: "NULL" },
 
       { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
       { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
@@ -1706,6 +1710,81 @@ const schema = {
     ],
   },
 
+  // --- NEW: CARRIERS TABLE (must be before PurchaseOrders due to FK) ---
+  Carriers: {
+    tableName: "Carriers",
+    columns: [
+      {
+        name: "CarrierID",
+        type: "INT",
+        properties: "PRIMARY KEY IDENTITY(1,1)",
+      },
+      {
+        name: "CarrierName",
+        type: "NVARCHAR(100)",
+        properties: "NOT NULL UNIQUE",
+      },
+      {
+        name: "CarrierCode",
+        type: "NVARCHAR(50)",
+        properties: "NULL",
+      },
+      { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
+      { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
+      { name: "CreatedBy", type: "INT", properties: "NOT NULL" },
+      { name: "UpdatedBy", type: "INT", properties: "NOT NULL" },
+      {
+        name: "CreatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+      {
+        name: "UpdatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+    ],
+    foreignKeys: [],
+  },
+
+  // --- NEW: PACKING REQUIREMENTS TABLE (must be before PurchaseOrders due to FK) ---
+  PackingRequirements: {
+    tableName: "PackingRequirements",
+    columns: [
+      {
+        name: "PackingRequirementID",
+        type: "INT",
+        properties: "PRIMARY KEY IDENTITY(1,1)",
+      },
+      {
+        name: "PackingRequirementName",
+        type: "NVARCHAR(100)",
+        properties: "NOT NULL UNIQUE",
+      },
+      { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
+    ],
+    foreignKeys: [],
+  },
+
+  // --- NEW: CARRIER PREFERENCES TABLE (must be before PurchaseOrders due to FK) ---
+  CarrierPreferences: {
+    tableName: "CarrierPreferences",
+    columns: [
+      {
+        name: "CarrierPreferenceID",
+        type: "INT",
+        properties: "PRIMARY KEY IDENTITY(1,1)",
+      },
+      {
+        name: "CarrierPreferenceName",
+        type: "NVARCHAR(100)",
+        properties: "NOT NULL UNIQUE",
+      },
+      { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
+    ],
+    foreignKeys: [],
+  },
+
   // --- NEW: PURCHASE ORDER SCHEMA DEFINITIONS ---
   PurchaseOrders: {
     tableName: "PurchaseOrders",
@@ -1736,6 +1815,9 @@ const schema = {
       { name: "TransporterName", type: "NVARCHAR(100)", properties: "NULL" },
       { name: "VehicleNumber", type: "NVARCHAR(50)", properties: "NULL" },
       { name: "LRNumber", type: "NVARCHAR(50)", properties: "NULL" },
+      { name: "CarrierID", type: "INT", properties: "NULL" },
+      { name: "PackingRequirementID", type: "INT", properties: "NULL" },
+      { name: "CarrierPreferenceID", type: "INT", properties: "NULL" },
       { name: "Remarks", type: "NVARCHAR(500)", properties: "NULL" },
       { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
       { name: "CreatedBy", type: "INT", properties: "NOT NULL" },
@@ -1755,6 +1837,9 @@ const schema = {
       "CONSTRAINT FK_PurchaseOrders_Vendor FOREIGN KEY (VendorID) REFERENCES Vendors(VendorID)",
       "CONSTRAINT FK_PurchaseOrders_Warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouses(WarehouseID)",
       "CONSTRAINT FK_PurchaseOrders_Branch FOREIGN KEY (BranchID) REFERENCES Branches(BranchID)",
+      "CONSTRAINT FK_PurchaseOrders_Carrier FOREIGN KEY (CarrierID) REFERENCES Carriers(CarrierID)",
+      "CONSTRAINT FK_PurchaseOrders_PackingRequirement FOREIGN KEY (PackingRequirementID) REFERENCES PackingRequirements(PackingRequirementID)",
+      "CONSTRAINT FK_PurchaseOrders_CarrierPreference FOREIGN KEY (CarrierPreferenceID) REFERENCES CarrierPreferences(CarrierPreferenceID)",
     ],
   },
 
@@ -2093,7 +2178,91 @@ const schema = {
     ],
   },
 
-  // ... (rest of the file remains the same)
+  // --- NEW: DOCUMENTS TABLE (Shared across entities) ---
+  Documents: {
+    tableName: "Documents",
+    columns: [
+      {
+        name: "DocumentID",
+        type: "INT",
+        properties: "PRIMARY KEY IDENTITY(1,1)",
+      },
+      {
+        name: "EntityType",
+        type: "NVARCHAR(50)",
+        properties: "NOT NULL",
+      },
+      { name: "EntityID", type: "INT", properties: "NOT NULL" },
+      {
+        name: "FileName",
+        type: "NVARCHAR(255)",
+        properties: "NOT NULL",
+      },
+      {
+        name: "OriginalFileName",
+        type: "NVARCHAR(255)",
+        properties: "NOT NULL",
+      },
+      {
+        name: "FilePath",
+        type: "NVARCHAR(500)",
+        properties: "NOT NULL",
+      },
+      { name: "FileSize", type: "BIGINT", properties: "NULL" },
+      { name: "MimeType", type: "NVARCHAR(100)", properties: "NULL" },
+      { name: "DocumentType", type: "NVARCHAR(100)", properties: "NULL" },
+      { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
+      { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
+      { name: "CreatedBy", type: "INT", properties: "NOT NULL" },
+      { name: "UpdatedBy", type: "INT", properties: "NOT NULL" },
+      {
+        name: "CreatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+      {
+        name: "UpdatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+    ],
+    foreignKeys: [],
+  },
+
+  // --- NEW: PRODUCT MATERIALS TABLE ---
+  ProductMaterials: {
+    tableName: "ProductMaterials",
+    columns: [
+      {
+        name: "ProductMaterialID",
+        type: "INT",
+        properties: "PRIMARY KEY IDENTITY(1,1)",
+      },
+      { name: "ProductID", type: "INT", properties: "NOT NULL" },
+      { name: "MaterialID", type: "INT", properties: "NOT NULL" },
+      { name: "Quantity", type: "DECIMAL(18, 2)", properties: "NOT NULL" },
+      { name: "UOMID", type: "INT", properties: "NULL" },
+      { name: "IsActive", type: "BIT", properties: "NOT NULL DEFAULT 1" },
+      { name: "IsDeleted", type: "BIT", properties: "NOT NULL DEFAULT 0" },
+      { name: "CreatedBy", type: "INT", properties: "NOT NULL" },
+      { name: "UpdatedBy", type: "INT", properties: "NOT NULL" },
+      {
+        name: "CreatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+      {
+        name: "UpdatedDate",
+        type: "DATETIME",
+        properties: "NOT NULL DEFAULT GETDATE()",
+      },
+    ],
+    foreignKeys: [
+      "CONSTRAINT FK_ProductMaterials_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)",
+      "CONSTRAINT FK_ProductMaterials_Material FOREIGN KEY (MaterialID) REFERENCES Materials(MaterialID)",
+      "CONSTRAINT FK_ProductMaterials_UOM FOREIGN KEY (UOMID) REFERENCES UOMs(UOMID)",
+    ],
+  },
 
   AuditLogs: {
     tableName: "AuditLogs",

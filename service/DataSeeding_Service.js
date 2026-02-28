@@ -1,5 +1,6 @@
 const sql = require("mssql");
 const bcrypt = require("bcrypt");
+const { ensureLookupData } = require("./Lookup_Service");
 
 // Define all static warehouse types here. To add a new one, just add it to this array.
 const staticWarehouseTypes = [
@@ -295,6 +296,7 @@ async function seedInitialData(pool) {
   await seedRoles(pool);
   await seedLaborProviders(pool);
   await seedPurchaseOrderReceivingDefaults(pool);
+  await ensureLookupData(pool); // Seed PackingRequirements, CarrierPreferences
   // await seedSkills(pool);
 
   // In the future, you could add more seeders here
