@@ -1,3 +1,34 @@
 {
-    
-}
+    "server": {
+      "name": "Warehouse Inventory",
+      "port": 7501
+    },
+    "database": {
+      "DB_USER": "sa",
+      "DB_PASSWORD": "Dotsoft!2026!231!",
+      "DB_SERVER": "localhost",
+      "DB_PORT": "1433",
+      "DB_NAME": "Pharma",
+      "DB_ENCRYPT": true,
+      "DB_TRUST_SERVER_CERT": true,
+      "DB_POOL_MAX": 20,
+      "DB_POOL_MIN": 2,
+      "DB_POOL_IDLE": 30000
+    },
+    "jwt": {
+      "SECRET_KEY": "dHKoN2RRgK6WYolm/yEBkydhzocXKtE2dz7l1siNB3A=",
+      "EXPIRATION_TIME": "1h",
+      "ALGORITHM": "HS256",
+      "ISSUER": "yourdomain.com",
+      "AUDIENCE": "yourdomain.com"
+    },
+    "minio": {
+      "endPoint": "localhost",
+      "port": 9000,
+      "useSSL": false,
+      "accessKey": "minioadmin",
+      "secretKey": "minioadmin",
+      "bucketName": "wms-documents"
+    }
+  }
+  

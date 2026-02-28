@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // --- Server Startup Logic ---
 const APP_NAME = config.get("server.name") || "Warehouse Inventory";
-const PORT = config.get("server.port") || 7501;
+const PORT = process.env.PORT || config.get("server.port") || 7501;
 let pool;
 
 async function startServer() {
@@ -45,6 +45,7 @@ async function startServer() {
 startServer();
 
 // --- Routes & Middleware ---
+app.get("/api/health", (req, res) => res.status(200).json({ status: "ok" }));
 app.post("/api/Auth/login", validation.performLogin);
 app.use(validation.verifyToken);
 app.use(validation.validateUserId);
