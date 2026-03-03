@@ -6,7 +6,21 @@ const { CustomError } = require('../model/CustomError');
 
 async function getNewSalesOrder(pool, values) {
     try {
+        let dateStr = moment(new Date()).format('YYYYMMDD');
+
+        // Get the count of SOs created today to generate sequence number
+        let countQuery = `
+            SELECT COUNT(*) as countToday
+            FROM SalesOrders
+            WHERE CONVERT(DATE, SalesOrderDate) = CONVERT(DATE, GETDATE())
+        `;
+        let countResult = await pool.request().query(countQuery);
+        let sequence = (countResult.recordset[0].countToday + 1)
+            .toString()
+            .padStart(4, '0');
+
         let newSalesOrder = {
+            SalesOrderNumber: `SO${dateStr}${sequence}`,
             SalesOrderDate: moment(new Date()).format('YYYY-MM-DD'),
             CreatedBy: values.user_id,
             UpdatedBy: values.user_id
@@ -16,17 +30,18 @@ async function getNewSalesOrder(pool, values) {
                         SalesOrderID INT
                 );
                 INSERT INTO SalesOrders (
-                    SalesOrderDate, CreatedBy, UpdatedBy
+                    SalesOrderNumber, SalesOrderDate, CreatedBy, UpdatedBy
                 )
                 OUTPUT 
                     INSERTED.SalesOrderID
                 INTO @OutputTable
                 VALUES (
-                    @SalesOrderDate, @CreatedBy, @UpdatedBy
+                    @SalesOrderNumber, @SalesOrderDate, @CreatedBy, @UpdatedBy
                 );
                 SELECT * FROM @OutputTable;
             `;
         let request = pool.request()
+            .input('SalesOrderNumber', sql.VarChar(50), newSalesOrder.SalesOrderNumber)
             .input('SalesOrderDate', sql.Date, newSalesOrder.SalesOrderDate)
             .input('CreatedBy', sql.VarChar(100), newSalesOrder.CreatedBy)
             .input('UpdatedBy', sql.VarChar(100), newSalesOrder.UpdatedBy);
@@ -1501,7 +1516,21 @@ async function pickProductFromBinForPicklist(pool, values) {
 
 async function getNewSalesOrderShipment(pool, values) {
     try {
+        let dateStr = moment(new Date()).format('YYYYMMDD');
+
+        // Get the count of shipments created today to generate sequence number
+        let countQuery = `
+            SELECT COUNT(*) as countToday
+            FROM SalesOrderShipments
+            WHERE CONVERT(DATE, SalesOrderShipmentDate) = CONVERT(DATE, GETDATE())
+        `;
+        let countResult = await pool.request().query(countQuery);
+        let sequence = (countResult.recordset[0].countToday + 1)
+            .toString()
+            .padStart(4, '0');
+
         let shipmentOrder = {
+            SalesOrderShipmentNumber: `SOSH${dateStr}${sequence}`,
             SalesOrderShipmentDate: moment(new Date()).format('YYYY-MM-DD'),
             CreatedBy: values.user_id,
             UpdatedBy: values.user_id
@@ -1511,17 +1540,18 @@ async function getNewSalesOrderShipment(pool, values) {
                 SalesOrderShipmentID INT
             );
             INSERT INTO SalesOrderShipments (
-                SalesOrderShipmentDate, CreatedBy, UpdatedBy
+                SalesOrderShipmentNumber, SalesOrderShipmentDate, CreatedBy, UpdatedBy
             )
             OUTPUT 
                 INSERTED.SalesOrderShipmentID
             INTO @OutputTable
             VALUES (
-                @SalesOrderShipmentDate, @CreatedBy, @UpdatedBy
+                @SalesOrderShipmentNumber, @SalesOrderShipmentDate, @CreatedBy, @UpdatedBy
             );
             SELECT * FROM @OutputTable;
         `;
         let request = pool.request()
+            .input('SalesOrderShipmentNumber', sql.VarChar(50), shipmentOrder.SalesOrderShipmentNumber)
             .input('SalesOrderShipmentDate', sql.Date, shipmentOrder.SalesOrderShipmentDate)
             .input('CreatedBy', sql.Int, shipmentOrder.CreatedBy)
             .input('UpdatedBy', sql.Int, shipmentOrder.UpdatedBy);

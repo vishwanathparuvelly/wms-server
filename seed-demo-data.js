@@ -304,6 +304,15 @@ const demoData = {
     { code: 'PACK', name: 'Pack', description: 'Package unit' },
   ],
 
+  customerTypes: [
+    { name: 'Retail Pharmacy', description: 'Local retail pharmacies and drug stores' },
+    { name: 'Hospital', description: 'Hospital and medical centers' },
+    { name: 'Wholesale Distributor', description: 'Wholesale pharmaceutical distributors' },
+    { name: 'Clinic', description: 'Medical clinics and health centers' },
+    { name: 'Government Institution', description: 'Government hospitals and health departments' },
+    { name: 'Online Pharmacy', description: 'E-commerce pharmaceutical retailers' },
+  ],
+
   products: [
     { 
       code: 'PROD-001', 
@@ -1052,6 +1061,33 @@ async function seedProducts(pool, brandMap, productTypeMap, uomMap) {
   return productMap;
 }
 
+async function seedCustomerTypes(pool) {
+  log('\n👥 Seeding Customer Types...', colors.blue);
+  const customerTypeMap = {};
+  
+  for (const customerType of demoData.customerTypes) {
+    try {
+      const result = await pool.request()
+        .input('CustomerTypeName', sql.NVarChar(100), customerType.name)
+        .input('CustomerTypeDescription', sql.NVarChar(500), customerType.description)
+        .input('IsActive', sql.Bit, true)
+        .input('UserID', sql.Int, 1)
+        .query(`
+          INSERT INTO CustomerTypes (CustomerTypeName, CustomerTypeDescription, IsActive, CreatedBy, UpdatedBy)
+          OUTPUT INSERTED.CustomerTypeID
+          VALUES (@CustomerTypeName, @CustomerTypeDescription, @IsActive, @UserID, @UserID)
+        `);
+      
+      customerTypeMap[customerType.name] = result.recordset[0].CustomerTypeID;
+      log(`  ✓ ${customerType.name}`, colors.green);
+    } catch (err) {
+      log(`  ✗ Failed: ${customerType.name} - ${err.message}`, colors.red);
+    }
+  }
+  
+  return customerTypeMap;
+}
+
 async function seedDemoData() {
   separator();
   log('  PHARMACEUTICAL DEMO DATA SEEDING', colors.bright + colors.magenta);
@@ -1086,6 +1122,9 @@ async function seedDemoData() {
     const productTypeMap = await seedProductTypes(pool);
     const uomMap = await seedUOMs(pool);
     const productMap = await seedProducts(pool, brandMap, productTypeMap, uomMap);
+    
+    // Seed customer types
+    const customerTypeMap = await seedCustomerTypes(pool);
 
     // Success summary
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
@@ -1108,6 +1147,7 @@ async function seedDemoData() {
     log(`   ✓ ${Object.keys(productTypeMap).length} Product Types`, colors.green);
     log(`   ✓ ${Object.keys(uomMap).length} UOMs`, colors.green);
     log(`   ✓ ${Object.keys(productMap).length} Products`, colors.green);
+    log(`   ✓ ${Object.keys(customerTypeMap).length} Customer Types`, colors.green);
     
     log('\n🚀 Your pharma demo is ready!', colors.yellow);
     log('   Start the application: npm start', colors.blue);

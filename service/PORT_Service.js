@@ -6,7 +6,21 @@ const { CustomError } = require("../model/CustomError");
 
 async function getNewPurchaseOrderReturn(pool, values) {
   try {
+    let dateStr = moment(new Date()).format("YYYYMMDD");
+
+    // Get the count of returns created today to generate sequence number
+    let countQuery = `
+      SELECT COUNT(*) as countToday
+      FROM PurchaseOrderReturns
+      WHERE CONVERT(DATE, PurchaseOrderReturnDate) = CONVERT(DATE, GETDATE())
+    `;
+    let countResult = await pool.request().query(countQuery);
+    let sequence = (countResult.recordset[0].countToday + 1)
+      .toString()
+      .padStart(4, "0");
+
     let newPurchaseOrderReturn = {
+      PurchaseOrderReturnNumber: `POR${dateStr}${sequence}`,
       PurchaseOrderReturnDate: moment(new Date()).format("YYYY-MM-DD"),
       CreatedBy: values.user_id,
       UpdatedBy: values.user_id,
@@ -16,18 +30,23 @@ async function getNewPurchaseOrderReturn(pool, values) {
                         PurchaseOrderReturnID INT
                 );
                 INSERT INTO PurchaseOrderReturns (
-                    PurchaseOrderReturnDate, CreatedBy, UpdatedBy
+                    PurchaseOrderReturnNumber, PurchaseOrderReturnDate, CreatedBy, UpdatedBy
                 )
                 OUTPUT 
                     INSERTED.PurchaseOrderReturnID
                 INTO @OutputTable
                 VALUES (
-                    @PurchaseOrderReturnDate, @CreatedBy, @UpdatedBy
+                    @PurchaseOrderReturnNumber, @PurchaseOrderReturnDate, @CreatedBy, @UpdatedBy
                 );
                 SELECT * FROM @OutputTable;
             `;
     let request = pool
       .request()
+      .input(
+        "PurchaseOrderReturnNumber",
+        sql.VarChar(50),
+        newPurchaseOrderReturn.PurchaseOrderReturnNumber,
+      )
       .input(
         "PurchaseOrderReturnDate",
         sql.Date,

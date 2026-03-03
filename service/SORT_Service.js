@@ -33,7 +33,21 @@ async function findBestPalletForQuantity(pallets, userQuantity) {
 
 async function getNewSalesOrderReturn(pool, values) {
   try {
+    let dateStr = moment(new Date()).format("YYYYMMDD");
+
+    // Get the count of returns created today to generate sequence number
+    let countQuery = `
+      SELECT COUNT(*) as countToday
+      FROM SalesOrderReturns
+      WHERE CONVERT(DATE, SalesOrderReturnDate) = CONVERT(DATE, GETDATE())
+    `;
+    let countResult = await pool.request().query(countQuery);
+    let sequence = (countResult.recordset[0].countToday + 1)
+      .toString()
+      .padStart(4, "0");
+
     let newSalesOrderReturn = {
+      SalesOrderReturnNumber: `SOR${dateStr}${sequence}`,
       SalesOrderReturnDate: moment(new Date()).format("YYYY-MM-DD"),
       CreatedBy: values.user_id,
       UpdatedBy: values.user_id,
@@ -43,18 +57,23 @@ async function getNewSalesOrderReturn(pool, values) {
                         SalesOrderReturnID INT
                 );
                 INSERT INTO SalesOrderReturns (
-                    SalesOrderReturnDate, CreatedBy, UpdatedBy
+                    SalesOrderReturnNumber, SalesOrderReturnDate, CreatedBy, UpdatedBy
                 )
                 OUTPUT
                     INSERTED.SalesOrderReturnID
                 INTO @OutputTable
                 VALUES (
-                    @SalesOrderReturnDate, @CreatedBy, @UpdatedBy
+                    @SalesOrderReturnNumber, @SalesOrderReturnDate, @CreatedBy, @UpdatedBy
                 );
                 SELECT * FROM @OutputTable;
             `;
     let request = pool
       .request()
+      .input(
+        "SalesOrderReturnNumber",
+        sql.VarChar(50),
+        newSalesOrderReturn.SalesOrderReturnNumber,
+      )
       .input(
         "SalesOrderReturnDate",
         sql.Date,
@@ -855,7 +874,21 @@ async function deleteSalesOrderReturnProduct(pool, values) {
 
 async function getNewSalesOrderReturnReceiving(pool, values) {
   try {
+    let dateStr = moment(new Date()).format("YYYYMMDD");
+
+    // Get the count of return receivings created today to generate sequence number
+    let countQuery = `
+      SELECT COUNT(*) as countToday
+      FROM SalesOrderReturnReceivings
+      WHERE CONVERT(DATE, ReceivingDate) = CONVERT(DATE, GETDATE())
+    `;
+    let countResult = await pool.request().query(countQuery);
+    let sequence = (countResult.recordset[0].countToday + 1)
+      .toString()
+      .padStart(4, "0");
+
     let receivingOrder = {
+      SalesOrderReturnReceivingNumber: `SORREC${dateStr}${sequence}`,
       ReceivingDate: moment(new Date()).format("YYYY-MM-DD"),
       CreatedBy: values.user_id,
       UpdatedBy: values.user_id,
@@ -865,18 +898,23 @@ async function getNewSalesOrderReturnReceiving(pool, values) {
                         SalesOrderReturnReceivingID INT
                 );
                 INSERT INTO SalesOrderReturnReceivings (
-                    ReceivingDate, CreatedBy, UpdatedBy
+                    SalesOrderReturnReceivingNumber, ReceivingDate, CreatedBy, UpdatedBy
                 )
                 OUTPUT
                     INSERTED.SalesOrderReturnReceivingID
                 INTO @OutputTable
                 VALUES (
-                    @ReceivingDate, @CreatedBy, @UpdatedBy
+                    @SalesOrderReturnReceivingNumber, @ReceivingDate, @CreatedBy, @UpdatedBy
                 );
                 SELECT * FROM @OutputTable;
             `;
     let request = pool
       .request()
+      .input(
+        "SalesOrderReturnReceivingNumber",
+        sql.VarChar(50),
+        receivingOrder.SalesOrderReturnReceivingNumber,
+      )
       .input("ReceivingDate", sql.Date, receivingOrder.ReceivingDate)
       .input("CreatedBy", sql.Int, receivingOrder.CreatedBy)
       .input("UpdatedBy", sql.Int, receivingOrder.UpdatedBy);
