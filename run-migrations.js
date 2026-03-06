@@ -15,6 +15,7 @@ const { up: addMaterialSupportToPO } = require("./migrations/006_add_material_su
 const { up: addPurchaseOrderProductsColumns } = require("./migrations/007_add_purchaseorderproducts_columns");
 const { up: addQuarantineToReceiving } = require("./migrations/008_add_quarantine_to_receiving");
 const { up: addMaterialSupportToBinProducts } = require("./migrations/009_add_material_support_to_bin_products");
+const { up: addRetestExpiryToBinProducts } = require("./migrations/010_add_retest_expiry_to_bin_products");
 
 async function runMigrations() {
   let pool;
@@ -87,6 +88,11 @@ async function runMigrations() {
       "📋 Migration 009: Adding Material support to BinProducts and BinProductLogs...",
     );
     await addMaterialSupportToBinProducts(pool);
+
+    console.log(
+      "📋 Migration 010: Adding RetestDate and ExpiryDate to BinProducts...",
+    );
+    await addRetestExpiryToBinProducts(pool);
 
     console.log("\n✅ All migrations completed successfully!\n");
 

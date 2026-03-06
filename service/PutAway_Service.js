@@ -557,6 +557,24 @@ async function validateBinNumberForPutaway(pool, values) {
       );
     }
 
+    // Validate RetestDate (mandatory)
+    if (!values.RetestDate) {
+      throw new CustomError("RetestDate is required");
+    }
+    const RetestDate = moment(values.RetestDate, "YYYY-MM-DD", true);
+    if (!RetestDate.isValid()) {
+      throw new CustomError(`Invalid RetestDate: ${values.RetestDate}`);
+    }
+
+    // Validate ExpiryDate (mandatory)
+    if (!values.ExpiryDate) {
+      throw new CustomError("ExpiryDate is required");
+    }
+    const ExpiryDate = moment(values.ExpiryDate, "YYYY-MM-DD", true);
+    if (!ExpiryDate.isValid()) {
+      throw new CustomError(`Invalid ExpiryDate: ${values.ExpiryDate}`);
+    }
+
     // Dynamically compare ManufactureDate with today's date in the database
     const dateCheckQuery = `
             DECLARE @Today DATE = CAST(GETDATE() AS DATE);
@@ -678,6 +696,8 @@ async function validateBinNumberForPutaway(pool, values) {
         throw new CustomError(`No bin found for BinNumber: ${bin.BinNumber}`);
       }
       // Validate partial bin consistency
+      const binRetest = binProduct.RetestDate ? moment(binProduct.RetestDate).format("YYYY-MM-DD") : null;
+      const binExpiry = binProduct.ExpiryDate ? moment(binProduct.ExpiryDate).format("YYYY-MM-DD") : null;
       if (
         binProduct.ProductID != ProductID ||
         binProduct.BatchNumber != BatchNumber ||
@@ -685,10 +705,12 @@ async function validateBinNumberForPutaway(pool, values) {
           ManufactureDate.format("YYYY-MM-DD") ||
         binProduct.UOMID != UOMID ||
         binProduct.SLOCID != SLOCID ||
-        binProduct.MRP != MRP
+        binProduct.MRP != MRP ||
+        binRetest != RetestDate.format("YYYY-MM-DD") ||
+        binExpiry != ExpiryDate.format("YYYY-MM-DD")
       ) {
         throw new CustomError(
-          "Bin already contains a different product or different batch number or different manufacture date or different UOM or different SLOCID or different MRP",
+          "Bin already contains a different product or different batch number or different manufacture date or different UOM or different SLOCID or different MRP or different RetestDate or different ExpiryDate",
         );
       }
       if (binProduct.AvailableQuantity < Quantity) {
@@ -735,6 +757,20 @@ async function putProductIntoBinForPutaway(pool, values) {
     const Quantity = Number(values.Quantity) || PurchaseOrderProduct.Pending_Quantity;
     const BatchChangeReason = values.BatchChangeReason || "";
     const ManufactureDate = values.ManufactureDate || moment().format("YYYY-MM-DD");
+    if (!values.RetestDate) {
+      throw new CustomError("RetestDate is required");
+    }
+    const RetestDate = moment(values.RetestDate, "YYYY-MM-DD", true).format("YYYY-MM-DD");
+    if (!moment(values.RetestDate, "YYYY-MM-DD", true).isValid()) {
+      throw new CustomError(`Invalid RetestDate: ${values.RetestDate}`);
+    }
+    if (!values.ExpiryDate) {
+      throw new CustomError("ExpiryDate is required");
+    }
+    const ExpiryDate = moment(values.ExpiryDate, "YYYY-MM-DD", true).format("YYYY-MM-DD");
+    if (!moment(values.ExpiryDate, "YYYY-MM-DD", true).isValid()) {
+      throw new CustomError(`Invalid ExpiryDate: ${values.ExpiryDate}`);
+    }
     const MaxQuantity = 1000;
     const user_id = parseInt(values.user_id) || 1;
 
@@ -766,6 +802,8 @@ async function putProductIntoBinForPutaway(pool, values) {
                 @BinProductsProductID AS ProductID,
                 @BatchNumber AS BatchNumber,
                 @ManufactureDate AS ManufactureDate,
+                @RetestDate AS RetestDate,
+                @ExpiryDate AS ExpiryDate,
                 @UOMID AS UOMID,
                 @SLOCID AS SLOCID,
                 @MRP AS MRP,
@@ -777,17 +815,19 @@ async function putProductIntoBinForPutaway(pool, values) {
                 UPDATE SET
                     FilledQuantity = target.FilledQuantity + source.Quantity,
                     AvailableQuantity = target.AvailableQuantity - source.Quantity,
+                    RetestDate = source.RetestDate,
+                    ExpiryDate = source.ExpiryDate,
                     UpdatedBy = @UpdatedBy,
                     UpdatedDate = GETDATE()
             WHEN NOT MATCHED THEN
                 INSERT (
                     BinID, PalletTypeID, StackID, VendorID, BranchID, WarehouseID,
-                    ProductID, BatchNumber, ManufactureDate, UOMID, SLOCID, MRP,
+                    ProductID, BatchNumber, ManufactureDate, RetestDate, ExpiryDate, UOMID, SLOCID, MRP,
                     MaxQuantity, FilledQuantity, AvailableQuantity, CreatedBy, UpdatedBy, IsActive, CreatedDate
                 )
                 VALUES (
                     source.BinID, source.PalletTypeID, source.StackID, source.VendorID, source.BranchID, source.WarehouseID,
-                    source.ProductID, source.BatchNumber, source.ManufactureDate, source.UOMID, source.SLOCID, source.MRP,
+                    source.ProductID, source.BatchNumber, source.ManufactureDate, source.RetestDate, source.ExpiryDate, source.UOMID, source.SLOCID, source.MRP,
                     source.MaxQuantity, source.Quantity, source.MaxQuantity - source.Quantity, @CreatedBy, @UpdatedBy, 1, GETDATE()
                 )
             OUTPUT INSERTED.BinProductID INTO @OutputTable(BinProductID);
@@ -844,6 +884,8 @@ async function putProductIntoBinForPutaway(pool, values) {
       .input("BatchNumber", sql.VarChar(100), values.BatchNumber || PurchaseOrderProduct.BatchNumber || "BATCH001")
       .input("BatchChangeReason", sql.VarChar(100), BatchChangeReason)
       .input("ManufactureDate", sql.Date, ManufactureDate)
+      .input("RetestDate", sql.Date, RetestDate)
+      .input("ExpiryDate", sql.Date, ExpiryDate)
       .input("UOMID", sql.Int, UOMID)
       .input("SLOCID", sql.Int, SLOCID)
       .input("MRP", sql.Decimal(10, 2), MRP)
