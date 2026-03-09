@@ -943,6 +943,24 @@ async function putMaterialIntoBinForPutaway(pool, values) {
     const user_id = parseInt(values.user_id) || 1;
     const MaxQuantity = 1000;
 
+    if (!values.RetestDate) {
+      throw new CustomError("RetestDate is required");
+    }
+    const RetestDateMoment = moment(values.RetestDate, "YYYY-MM-DD", true);
+    if (!RetestDateMoment.isValid()) {
+      throw new CustomError(`Invalid RetestDate: ${values.RetestDate}`);
+    }
+    const RetestDate = RetestDateMoment.format("YYYY-MM-DD");
+
+    if (!values.ExpiryDate) {
+      throw new CustomError("ExpiryDate is required");
+    }
+    const ExpiryDateMoment = moment(values.ExpiryDate, "YYYY-MM-DD", true);
+    if (!ExpiryDateMoment.isValid()) {
+      throw new CustomError(`Invalid ExpiryDate: ${values.ExpiryDate}`);
+    }
+    const ExpiryDate = ExpiryDateMoment.format("YYYY-MM-DD");
+
     const ensureColumnsQuery = `
       IF COL_LENGTH('PurchaseOrderProducts','ManufactureDate') IS NULL
         ALTER TABLE PurchaseOrderProducts ADD ManufactureDate DATE NULL;
@@ -952,6 +970,10 @@ async function putMaterialIntoBinForPutaway(pool, values) {
         ALTER TABLE PurchaseOrderProducts ADD BatchNumber NVARCHAR(50) NULL;
       IF COL_LENGTH('PurchaseOrderProducts','MRP') IS NULL
         ALTER TABLE PurchaseOrderProducts ADD MRP DECIMAL(18, 2) NULL;
+      IF COL_LENGTH('PurchaseOrderProducts','RetestDate') IS NULL
+        ALTER TABLE PurchaseOrderProducts ADD RetestDate DATE NULL;
+      IF COL_LENGTH('PurchaseOrderProducts','ExpiryDate') IS NULL
+        ALTER TABLE PurchaseOrderProducts ADD ExpiryDate DATE NULL;
     `;
     await pool.request().query(ensureColumnsQuery);
 
@@ -963,6 +985,8 @@ async function putMaterialIntoBinForPutaway(pool, values) {
           BinNumber = @BinNumber,
           BatchNumber = @BatchNumber,
           MRP = @MRP,
+          RetestDate = @RetestDate,
+          ExpiryDate = @ExpiryDate,
           UpdatedBy = @UpdatedBy,
           UpdatedDate = GETDATE()
         WHERE PurchaseOrderProductID = @PurchaseOrderProductID;
@@ -998,6 +1022,8 @@ async function putMaterialIntoBinForPutaway(pool, values) {
 
       .input("Quantity", sql.Decimal(10, 2), Quantity)
       .input("ManufactureDate", sql.Date, ManufactureDate)
+      .input("RetestDate", sql.Date, RetestDate)
+      .input("ExpiryDate", sql.Date, ExpiryDate)
       .input("BinNumber", sql.VarChar(50), BinNumber)
       .input("UpdatedBy", sql.Int, user_id)
       .input("PurchaseOrderProductID", sql.Int, parseInt(values.PurchaseOrderProductID))
@@ -1046,6 +1072,10 @@ async function getAllPutawayOrderAllocatedMaterials(pool, values) {
         ALTER TABLE PurchaseOrderProducts ADD BatchNumber NVARCHAR(50) NULL;
       IF COL_LENGTH('PurchaseOrderProducts','MRP') IS NULL
         ALTER TABLE PurchaseOrderProducts ADD MRP DECIMAL(18, 2) NULL;
+      IF COL_LENGTH('PurchaseOrderProducts','RetestDate') IS NULL
+        ALTER TABLE PurchaseOrderProducts ADD RetestDate DATE NULL;
+      IF COL_LENGTH('PurchaseOrderProducts','ExpiryDate') IS NULL
+        ALTER TABLE PurchaseOrderProducts ADD ExpiryDate DATE NULL;
     `;
     await pool.request().query(ensureColumnsQuery);
     const query = `
@@ -1075,6 +1105,8 @@ async function getAllPutawayOrderAllocatedMaterials(pool, values) {
       POP.BatchNumber AS BatchNumber,
       POP.MRP AS MRP,
       POP.ManufactureDate AS ManufactureDate,
+      POP.RetestDate AS RetestDate,
+      POP.ExpiryDate AS ExpiryDate,
       POP.Received_Quantity,
       POP.Pending_Quantity,
       S.SLOCName,

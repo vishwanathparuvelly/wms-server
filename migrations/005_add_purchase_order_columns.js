@@ -1,24 +1,12 @@
-const config = require("config");
-const sql = require("mssql");
-
 // Migration: Add missing columns to PurchaseOrders table
 // These columns are required by the PO update functionality
+// Uses the pool passed by run-migrations.js (no separate connection).
 
-async function up() {
-  const dbConfig = {
-    user: config.get("database.DB_USER"),
-    password: config.get("database.DB_PASSWORD"),
-    server: config.get("database.DB_SERVER"),
-    database: config.get("database.DB_NAME"),
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-    },
-  };
-
-  let pool;
+async function up(pool) {
+  if (!pool) {
+    throw new Error("Migration 005 requires a pool from run-migrations");
+  }
   try {
-    pool = await sql.connect(dbConfig);
     console.log("Migration 005: Adding missing columns to PurchaseOrders table...");
 
     // Check and add DeliveryAddress column
@@ -133,28 +121,14 @@ async function up() {
   } catch (err) {
     console.error("✗ Migration 005 failed:", err.message);
     throw err;
-  } finally {
-    if (pool) {
-      await pool.close();
-    }
   }
 }
 
-async function down() {
-  const dbConfig = {
-    user: config.get("database.DB_USER"),
-    password: config.get("database.DB_PASSWORD"),
-    server: config.get("database.DB_SERVER"),
-    database: config.get("database.DB_NAME"),
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-    },
-  };
-
-  let pool;
+async function down(pool) {
+  if (!pool) {
+    throw new Error("Migration 005 down() requires a pool");
+  }
   try {
-    pool = await sql.connect(dbConfig);
     console.log("Rolling back migration 005...");
 
     // Drop columns in reverse order
@@ -181,10 +155,6 @@ async function down() {
   } catch (err) {
     console.error("✗ Rollback failed:", err.message);
     throw err;
-  } finally {
-    if (pool) {
-      await pool.close();
-    }
   }
 }
 
