@@ -17,6 +17,7 @@ const { up: addQuarantineToReceiving } = require("./migrations/008_add_quarantin
 const { up: addMaterialSupportToBinProducts } = require("./migrations/009_add_material_support_to_bin_products");
 const { up: addRetestExpiryToBinProducts } = require("./migrations/010_add_retest_expiry_to_bin_products");
 const { up: createPurchaseOrderReturnTables } = require("./migrations/011_create_purchase_order_return_tables");
+const { up: createStagingTables } = require("./migrations/012_create_staging_tables");
 
 function isIpAddress(host) {
   if (!host || typeof host !== "string") return false;
@@ -111,6 +112,11 @@ async function runMigrations() {
       "📋 Migration 011: Creating PurchaseOrderReturns, PurchaseOrderReturnProducts, PurchaseOrderReturnShipments...",
     );
     await createPurchaseOrderReturnTables(pool);
+
+    console.log(
+      "📋 Migration 012: Creating Staging and StagingStatusHistory tables...",
+    );
+    await createStagingTables(pool);
 
     console.log("\n✅ All migrations completed successfully!\n");
 

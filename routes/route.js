@@ -4,6 +4,7 @@ const poController = require("../controller/PO_Controller");
 const soController = require("../controller/SO_Controller");
 const portController = require("../controller/PORT_Controller");
 const sortController = require("../controller/SORT_Controller");
+const stagingController = require("../controller/Staging_Controller");
 const documentController = require("../controller/Document_Controller");
 const { uploadSingle, handleUploadError } = require("../middleware/fileUpload");
 const masterRoutes = require("./master_route"); // <-- Import the new master router
@@ -94,6 +95,25 @@ router
 router
   .route("/purchase_order/deletePurchaseOrderReceiving")
   .post(poController.deletePurchaseOrderReceiving);
+
+router
+  .route("/staging/getAllStagingRecords")
+  .post(stagingController.getAllStagingRecords);
+router
+  .route("/staging/getReceivingsForStaging")
+  .post(stagingController.getReceivingsForStaging);
+router
+  .route("/staging/createStagingRecord")
+  .post(stagingController.createStagingRecord);
+router
+  .route("/staging/updateStagingStatus")
+  .post(stagingController.updateStagingStatus);
+router
+  .route("/staging/getStagingStatusHistory")
+  .post(stagingController.getStagingStatusHistory);
+router
+  .route("/staging/getStagingRecord")
+  .post(stagingController.getStagingRecord);
 
 router
   .route("/putaway/getAllPutawayOrders")
