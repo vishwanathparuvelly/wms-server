@@ -1,24 +1,12 @@
-const config = require("config");
-const sql = require("mssql");
-
 // Migration: Add MaterialID support to PurchaseOrderProducts
 // This enables dual-reference model: Materials (Pharma) OR Products (FMCG/Trading)
+// Uses the pool passed by run-migrations.js (no separate connection).
 
-async function up() {
-  const dbConfig = {
-    user: config.get("database.DB_USER"),
-    password: config.get("database.DB_PASSWORD"),
-    server: config.get("database.DB_SERVER"),
-    database: config.get("database.DB_NAME"),
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-    },
-  };
-
-  let pool;
+async function up(pool) {
+  if (!pool) {
+    throw new Error("Migration 006 requires a pool from run-migrations");
+  }
   try {
-    pool = await sql.connect(dbConfig);
     console.log("Migration 006: Adding Material support to PurchaseOrderProducts table...");
 
     // Step 1: Check and add MaterialID column
@@ -132,28 +120,14 @@ async function up() {
   } catch (err) {
     console.error("✗ Migration 006 failed:", err.message);
     throw err;
-  } finally {
-    if (pool) {
-      await pool.close();
-    }
   }
 }
 
-async function down() {
-  const dbConfig = {
-    user: config.get("database.DB_USER"),
-    password: config.get("database.DB_PASSWORD"),
-    server: config.get("database.DB_SERVER"),
-    database: config.get("database.DB_NAME"),
-    options: {
-      encrypt: true,
-      trustServerCertificate: true,
-    },
-  };
-
-  let pool;
+async function down(pool) {
+  if (!pool) {
+    throw new Error("Migration 006 down() requires a pool");
+  }
   try {
-    pool = await sql.connect(dbConfig);
     console.log("Rolling back migration 006...");
 
     // Drop constraints and column in reverse order
@@ -179,10 +153,6 @@ async function down() {
   } catch (err) {
     console.error("✗ Rollback failed:", err.message);
     throw err;
-  } finally {
-    if (pool) {
-      await pool.close();
-    }
   }
 }
 

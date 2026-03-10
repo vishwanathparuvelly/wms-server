@@ -1638,6 +1638,7 @@ async function getPurchaseOrderReceivingsForPutaway(pool, values) {
             ELSE 'Quarantine Completed'
         END AS QuarantineStatus
         FROM PurchaseOrderReceivings POR 
+        INNER JOIN Staging S ON S.PurchaseOrderReceivingID = POR.PurchaseOrderReceivingID AND S.IsDeleted = 0
         left join Users CU ON POR.CreatedBy = CU.UserID 
         left join Users UU ON POR.UpdatedBy = UU.UserID 
         left join PurchaseOrders PO ON POR.PurchaseOrderID = PO.PurchaseOrderID 
@@ -1649,6 +1650,7 @@ async function getPurchaseOrderReceivingsForPutaway(pool, values) {
         AND POR.IsDeleted = 0
         AND POR.QuarantineEndDate IS NOT NULL
         AND DATEDIFF(DAY, GETDATE(), POR.QuarantineEndDate) = 0
+        AND S.StagingStatus = 'Released'
         ORDER BY POR.QuarantineEndDate ASC, POR.ReceivingDate DESC
         `;
     

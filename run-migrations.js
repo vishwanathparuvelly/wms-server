@@ -16,20 +16,34 @@ const { up: addPurchaseOrderProductsColumns } = require("./migrations/007_add_pu
 const { up: addQuarantineToReceiving } = require("./migrations/008_add_quarantine_to_receiving");
 const { up: addMaterialSupportToBinProducts } = require("./migrations/009_add_material_support_to_bin_products");
 const { up: addRetestExpiryToBinProducts } = require("./migrations/010_add_retest_expiry_to_bin_products");
+const { up: createPurchaseOrderReturnTables } = require("./migrations/011_create_purchase_order_return_tables");
+const { up: createStagingTables } = require("./migrations/012_create_staging_tables");
+
+function isIpAddress(host) {
+  if (!host || typeof host !== "string") return false;
+  const trimmed = host.trim();
+  const ipv4 = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+  const ipv6 = /^\[?([0-9a-fA-F:]+)\]?$/;
+  return ipv4.test(trimmed) || ipv6.test(trimmed);
+}
 
 async function runMigrations() {
   let pool;
   try {
     // Get database config
     const dbConfig = config.get("database");
+    const server = dbConfig.DB_SERVER;
+    const useEncrypt = Boolean(dbConfig.DB_ENCRYPT);
+    // Node TLS does not allow IP as ServerName (SNI). When server is an IP, disable encrypt to avoid TLS handshake.
+    const encrypt = useEncrypt && !isIpAddress(server) ? true : false;
     const connectionConfig = {
       user: dbConfig.DB_USER,
       password: dbConfig.DB_PASSWORD,
-      server: dbConfig.DB_SERVER,
+      server,
       port: dbConfig.DB_PORT ? parseInt(dbConfig.DB_PORT, 10) : undefined,
       database: dbConfig.DB_NAME,
       options: {
-        encrypt: Boolean(dbConfig.DB_ENCRYPT),
+        encrypt,
         trustServerCertificate: Boolean(dbConfig.DB_TRUST_SERVER_CERT),
       },
       pool: {
@@ -93,6 +107,16 @@ async function runMigrations() {
       "📋 Migration 010: Adding RetestDate and ExpiryDate to BinProducts...",
     );
     await addRetestExpiryToBinProducts(pool);
+
+    console.log(
+      "📋 Migration 011: Creating PurchaseOrderReturns, PurchaseOrderReturnProducts, PurchaseOrderReturnShipments...",
+    );
+    await createPurchaseOrderReturnTables(pool);
+
+    console.log(
+      "📋 Migration 012: Creating Staging and StagingStatusHistory tables...",
+    );
+    await createStagingTables(pool);
 
     console.log("\n✅ All migrations completed successfully!\n");
 
