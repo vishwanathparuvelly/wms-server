@@ -158,6 +158,9 @@ router
   .route("/sales_order/getSalesOrderAllProducts")
   .post(soController.getSalesOrderAllProducts);
 router
+  .route("/sales_order/checkMaterialRequirementsForSO")
+  .post(soController.checkMaterialRequirementsForSO);
+router
   .route("/sales_order/updateSalesOrderProduct")
   .post(soController.updateSalesOrderProduct);
 router

@@ -385,8 +385,6 @@ async function addNewProductForSalesOrder(pool, values) {
             "WarehouseID",
             "ProductID",
             "UOMID",
-            "SLOCID",
-            "BatchNumber",
             "Quantity",
             "MRP",
             "Discount"
@@ -422,21 +420,18 @@ async function addNewProductForSalesOrder(pool, values) {
                 throw new CustomError(`Minimum quantity for product ${productData.ProductName} is ${productData.MinQty}, but provided quantity is ${Quantity} and existing quantity is ${currentProductQuantity}, which makes total quantity less than minimum`);
             }
         }
-        await commonService.validateBinProductAvailability(pool, values);
         let user_id = values.user_id;
         let query = `
             MERGE INTO SalesOrderProducts AS target
             USING (SELECT 
                 @SalesOrderID AS SalesOrderID, 
-                @ProductID AS ProductID, 
-                @BatchNumber AS BatchNumber,
+                @ProductID AS ProductID,
                 @Quantity AS Quantity,
                 @MRP AS MRP,
                 @Discount AS Discount
             ) AS source
             ON target.SalesOrderID = source.SalesOrderID
             AND target.ProductID = source.ProductID
-            AND target.BatchNumber = source.BatchNumber
             AND target.IsDeleted = 0
             WHEN MATCHED THEN
                 UPDATE SET 
@@ -444,7 +439,6 @@ async function addNewProductForSalesOrder(pool, values) {
                     BranchID = @BranchID,
                     WarehouseID = @WarehouseID,
                     UOMID = @UOMID,
-                    SLOCID = @SLOCID,
                     Quantity = target.Quantity + source.Quantity,
                     Pending_Quantity = target.Quantity + source.Quantity,
                     Picked_Quantity = 0,
@@ -463,8 +457,6 @@ async function addNewProductForSalesOrder(pool, values) {
                     WarehouseID,
                     ProductID,
                     UOMID,
-                    SLOCID,
-                    BatchNumber,
                     Quantity,
                     Pending_Quantity,
                     Picked_Quantity,
@@ -483,8 +475,6 @@ async function addNewProductForSalesOrder(pool, values) {
                     @WarehouseID,
                     @ProductID,
                     @UOMID,
-                    @SLOCID,
-                    @BatchNumber,
                     @Quantity,
                     @Quantity,
                     0,
@@ -505,8 +495,6 @@ async function addNewProductForSalesOrder(pool, values) {
             .input('WarehouseID', sql.Int, parseInt(values.WarehouseID))
             .input('ProductID', sql.Int, parseInt(values.ProductID))
             .input('UOMID', sql.Int, parseInt(values.UOMID))
-            .input('SLOCID', sql.Int, parseInt(values.SLOCID))
-            .input('BatchNumber', sql.VarChar(100), values.BatchNumber)
             .input('Quantity', sql.Decimal(10, 2), Quantity)
             .input('MRP', sql.Decimal(10, 2), values.MRP)
             .input('Discount', sql.Decimal(10, 2), values.Discount)
@@ -602,7 +590,6 @@ async function getSalesOrderAllProducts(pool, values) {
         U.UOMCode,
         U.UOMName,
         U.UOMDescription,
-        S.SLOCName,
         CU.UserName AS CreatedByUserName,
         UU.UserName AS UpdatedByUserName,
         C.CustomerName,
@@ -619,7 +606,6 @@ async function getSalesOrderAllProducts(pool, values) {
         LEFT JOIN ProductConsumes PC ON PRD.ProductConsumeID = PC.ProductConsumeID
         LEFT JOIN ProductTypes PT ON PRD.ProductTypeID = PT.ProductTypeID
         LEFT JOIN UOMs U ON SOP.UOMID = U.UOMID
-        LEFT JOIN Slocs S ON SOP.SLOCID = S.SLOCID
         LEFT JOIN Customers C ON SOP.CustomerID = C.CustomerID
         LEFT JOIN Branches B ON SOP.BranchID = B.BranchID
         LEFT JOIN Warehouses W ON SOP.WarehouseID = W.WarehouseID
@@ -649,8 +635,6 @@ async function updateSalesOrderProduct(pool, values) {
             "SalesOrderID",
             "ProductID",
             "UOMID",
-            "SLOCID",
-            "BatchNumber",
             "Quantity",
             "MRP",
             "Discount"
@@ -693,7 +677,6 @@ async function updateSalesOrderProduct(pool, values) {
                 throw new CustomError(`Minimum quantity for product ${productData.ProductName} is ${productData.MinQty}, but provided quantity is ${Quantity} and existing quantity is ${currentProductQuantity}, which makes total quantity less than minimum`);
             }
         }
-        await commonService.validateBinProductAvailability(pool, values);
         const Total_Product_MRP = (Quantity * Number(values.MRP)) || 0;
         const Total_Product_Discount = (Quantity * Number(values.Discount)) || 0;
         const Total_Product_Amount = Total_Product_MRP - Total_Product_Discount;
@@ -702,8 +685,6 @@ async function updateSalesOrderProduct(pool, values) {
             SET 
                 ProductID = @ProductID,
                 UOMID = @UOMID,
-                SLOCID = @SLOCID,
-                BatchNumber = @BatchNumber,
                 Quantity = @Quantity,
                 Pending_Quantity = @Quantity,
                 Picked_Quantity = 0,
@@ -720,8 +701,6 @@ async function updateSalesOrderProduct(pool, values) {
             .input('SalesOrderProductID', sql.Int, parseInt(values.SalesOrderProductID))
             .input('ProductID', sql.Int, parseInt(values.ProductID))
             .input('UOMID', sql.Int, parseInt(values.UOMID))
-            .input('SLOCID', sql.Int, parseInt(values.SLOCID))
-            .input('BatchNumber', sql.VarChar(100), values.BatchNumber)
             .input('Quantity', sql.Decimal(10, 2), Quantity)
             .input('MRP', sql.Decimal(10, 2), values.MRP)
             .input('Discount', sql.Decimal(10, 2), values.Discount)
@@ -1763,6 +1742,118 @@ async function updateSalesOrderShipment(pool, values) {
     }
 }
 
+/**
+ * Check Material Requirements for Sales Order
+ * Validates if enough raw materials are available to manufacture all products in the SO
+ * @param {Object} pool - Database connection pool
+ * @param {Object} values - { SalesOrderID, user_id }
+ * @returns {Array} - Material requirements with availability status
+ */
+async function checkMaterialRequirementsForSO(pool, values) {
+    try {
+        const SalesOrderID = values.SalesOrderID;
+        if (!SalesOrderID) {
+            throw new CustomError('SalesOrderID is required');
+        }
+
+        // Get Sales Order details
+        const SalesOrder = await getSalesOrder(pool, SalesOrderID);
+        const WarehouseID = SalesOrder.WarehouseID;
+
+        // Get all products in the Sales Order
+        const SOProducts = await getSalesOrderAllProducts(pool, { SalesOrderID });
+
+        if (!SOProducts || SOProducts.length === 0) {
+            return [];
+        }
+
+        // Query to get material requirements and availability
+        const query = `
+            -- Get material requirements for all products in SO
+            WITH MaterialRequirements AS (
+                SELECT 
+                    M.MaterialID,
+                    M.MaterialCode,
+                    M.MaterialName,
+                    PM.ProductID,
+                    P.ProductCode,
+                    P.ProductName,
+                    SOP.Quantity AS ProductQuantity,
+                    PM.Quantity AS MaterialPerUnit,
+                    (SOP.Quantity * PM.Quantity) AS TotalRequiredQty,
+                    PM.UOMID,
+                    U.UOMName,
+                    U.UOMCode
+                FROM SalesOrderProducts SOP
+                INNER JOIN Products P ON SOP.ProductID = P.ProductID
+                INNER JOIN ProductMaterials PM ON P.ProductID = PM.ProductID AND PM.IsActive = 1 AND PM.IsDeleted = 0
+                INNER JOIN Materials M ON PM.MaterialID = M.MaterialID AND M.IsActive = 1 AND M.IsDeleted = 0
+                LEFT JOIN UOMs U ON PM.UOMID = U.UOMID
+                WHERE SOP.SalesOrderID = @SalesOrderID 
+                AND SOP.IsDeleted = 0
+            ),
+            -- Get available material stock from received purchase orders
+            MaterialStock AS (
+                SELECT 
+                    POP.MaterialID,
+                    SUM(POP.Received_Quantity) AS TotalReceivedQty,
+                    POP.UOMID
+                FROM PurchaseOrderProducts POP
+                WHERE POP.MaterialID IS NOT NULL
+                AND POP.WarehouseID = @WarehouseID
+                AND POP.IsDeleted = 0
+                GROUP BY POP.MaterialID, POP.UOMID
+            )
+            -- Combine requirements with availability
+            SELECT 
+                MR.MaterialID,
+                MR.MaterialCode,
+                MR.MaterialName,
+                MR.ProductCode,
+                MR.ProductName,
+                MR.ProductQuantity,
+                MR.MaterialPerUnit,
+                CAST(ROUND(SUM(MR.TotalRequiredQty), 2) AS DECIMAL(18,2)) AS RequiredQty,
+                CAST(ROUND(ISNULL(MS.TotalReceivedQty, 0), 2) AS DECIMAL(18,2)) AS AvailableQty,
+                CAST(ROUND(ISNULL(MS.TotalReceivedQty, 0) - SUM(MR.TotalRequiredQty), 2) AS DECIMAL(18,2)) AS ShortageQty,
+                MR.UOMName,
+                MR.UOMCode,
+                CASE 
+                    WHEN ISNULL(MS.TotalReceivedQty, 0) >= SUM(MR.TotalRequiredQty) THEN 'Sufficient'
+                    ELSE 'Shortage'
+                END AS Status
+            FROM MaterialRequirements MR
+            LEFT JOIN MaterialStock MS ON MR.MaterialID = MS.MaterialID AND MR.UOMID = MS.UOMID
+            GROUP BY 
+                MR.MaterialID,
+                MR.MaterialCode,
+                MR.MaterialName,
+                MR.ProductCode,
+                MR.ProductName,
+                MR.ProductQuantity,
+                MR.MaterialPerUnit,
+                MR.UOMName,
+                MR.UOMCode,
+                MS.TotalReceivedQty
+            ORDER BY 
+                CASE WHEN ISNULL(MS.TotalReceivedQty, 0) < SUM(MR.TotalRequiredQty) THEN 0 ELSE 1 END,
+                MR.MaterialName;
+        `;
+
+        const request = pool.request()
+            .input('SalesOrderID', sql.Int, parseInt(SalesOrderID))
+            .input('WarehouseID', sql.Int, parseInt(WarehouseID));
+
+        const result = await request.query(query);
+        return result.recordset;
+    } catch (err) {
+        if (err instanceof CustomError) {
+            throw err;
+        }
+        throw new CustomError('Catch Exception in checkMaterialRequirementsForSO: ' + err.message);
+    }
+}
+
 module.exports.getNewSalesOrder = getNewSalesOrder;
 module.exports.getSalesOrder = getSalesOrder;
 module.exports.getAllSalesOrders = getAllSalesOrders;
@@ -1786,3 +1877,4 @@ module.exports.getNewSalesOrderShipment = getNewSalesOrderShipment;
 module.exports.getSalesOrderShipment = getSalesOrderShipment;
 module.exports.getAllSalesOrderShipments = getAllSalesOrderShipments;
 module.exports.updateSalesOrderShipment = updateSalesOrderShipment;
+module.exports.checkMaterialRequirementsForSO = checkMaterialRequirementsForSO;

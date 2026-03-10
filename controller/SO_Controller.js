@@ -255,6 +255,17 @@ async function updateSalesOrderShipment(req, res) {
     }
 }
 
+async function checkMaterialRequirementsForSO(req, res) {
+    const pool = req?.app?.locals?.dbPool;
+    const values = req?.body;
+    try {
+        const result = await soService.checkMaterialRequirementsForSO(pool, values);
+        return res.status(200).json({ data: result });
+    } catch (e) {
+        return res.status(400).json({ error: e.message });
+    }
+}
+
 module.exports.getNewSalesOrder = getNewSalesOrder;
 module.exports.getSalesOrder = getSalesOrder;
 module.exports.getAllSalesOrders = getAllSalesOrders;
@@ -278,3 +289,4 @@ module.exports.getNewSalesOrderShipment = getNewSalesOrderShipment;
 module.exports.getSalesOrderShipment = getSalesOrderShipment;
 module.exports.getAllSalesOrderShipments = getAllSalesOrderShipments;
 module.exports.updateSalesOrderShipment = updateSalesOrderShipment;
+module.exports.checkMaterialRequirementsForSO = checkMaterialRequirementsForSO;
