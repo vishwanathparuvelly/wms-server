@@ -6,6 +6,7 @@ const portController = require("../controller/PORT_Controller");
 const sortController = require("../controller/SORT_Controller");
 const stagingController = require("../controller/Staging_Controller");
 const documentController = require("../controller/Document_Controller");
+const inventoryController = require("../controller/Inventory_Controller");
 const { uploadSingle, handleUploadError } = require("../middleware/fileUpload");
 const masterRoutes = require("./master_route"); // <-- Import the new master router
 const dataHandlerRoutes = require("./dataHandler_Routes");
@@ -370,5 +371,16 @@ router
 router
   .route("/putaway_sort/putProductIntoBinForPutawaySalesOrderReturn")
   .post(sortController.putProductIntoBinForPutawaySalesOrderReturn);
+
+// Inventory Routes
+router
+  .route("/inventory/getMaterialInventory")
+  .post(inventoryController.getMaterialInventory);
+router
+  .route("/inventory/getProductInventory")
+  .post(inventoryController.getProductInventory);
+router
+  .route("/inventory/getStats")
+  .post(inventoryController.getInventoryStats);
 
 module.exports = router;

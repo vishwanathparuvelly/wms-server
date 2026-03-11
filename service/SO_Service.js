@@ -162,6 +162,86 @@ async function getAllSalesOrders(pool, values) {
     }
 }
 
+async function checkInventoryAvailability(pool, SalesOrderID, WarehouseID) {
+    try {
+        // Get all products in the sales order with their required quantities
+        const productsQuery = `
+            SELECT 
+                SOP.SalesOrderProductID,
+                SOP.ProductID,
+                PRD.ProductName,
+                SOP.Quantity AS RequiredQuantity,
+                SOP.UOMID,
+                U.UOMCode,
+                U.UOMName
+            FROM SalesOrderProducts SOP
+            INNER JOIN Products PRD ON SOP.ProductID = PRD.ProductID
+            LEFT JOIN UOMs U ON SOP.UOMID = U.UOMID
+            WHERE SOP.SalesOrderID = @SalesOrderID 
+            AND SOP.IsDeleted = 0
+        `;
+        
+        const productsRequest = pool.request();
+        productsRequest.input('SalesOrderID', sql.Int, SalesOrderID);
+        const productsResult = await productsRequest.query(productsQuery);
+        const products = productsResult.recordset;
+
+        if (!products || products.length === 0) {
+            throw new CustomError('No products found in the sales order');
+        }
+
+        const insufficientProducts = [];
+
+        // Check inventory for each product
+        for (const product of products) {
+            const inventoryQuery = `
+                SELECT 
+                    COALESCE(SUM(BP.FilledQuantity), 0) AS TotalAvailableQuantity
+                FROM BinProducts BP
+                INNER JOIN Bins B ON BP.BinID = B.BinID
+                WHERE BP.ProductID = @ProductID
+                AND B.WarehouseID = @WarehouseID
+                AND BP.IsActive = 1
+                AND B.IsActive = 1
+                AND BP.FilledQuantity > 0
+            `;
+
+            const inventoryRequest = pool.request();
+            inventoryRequest
+                .input('ProductID', sql.Int, product.ProductID)
+                .input('WarehouseID', sql.Int, WarehouseID);
+            
+            const inventoryResult = await inventoryRequest.query(inventoryQuery);
+            const availableQuantity = inventoryResult.recordset[0]?.TotalAvailableQuantity || 0;
+
+            if (availableQuantity < product.RequiredQuantity) {
+                insufficientProducts.push({
+                    ProductID: product.ProductID,
+                    ProductName: product.ProductName,
+                    RequiredQuantity: product.RequiredQuantity,
+                    AvailableQuantity: availableQuantity,
+                    UOMCode: product.UOMCode
+                });
+            }
+        }
+
+        if (insufficientProducts.length > 0) {
+            let errorMessage = 'Insufficient inventory available for the following products:\n';
+            insufficientProducts.forEach((product, index) => {
+                errorMessage += `${index + 1}. ${product.ProductName} - Required: ${product.RequiredQuantity} ${product.UOMCode}, Available: ${product.AvailableQuantity} ${product.UOMCode}\n`;
+            });
+            throw new CustomError(errorMessage.trim());
+        }
+
+        return true;
+    } catch (err) {
+        if (err instanceof CustomError) {
+            throw err;
+        }
+        throw new CustomError('Catch Exception in checkInventoryAvailability: ' + err.message);
+    }
+}
+
 async function updateSalesOrder(pool, values) {
     try {
         let items = [
@@ -189,16 +269,17 @@ async function updateSalesOrder(pool, values) {
             }
             if (key == "DeliveryDate") {
                 let date = moment(values[key], 'YYYY-MM-DD', true);
-                let today = moment();
+                // let today = moment();
                 if (!date.isValid()) {
                     throw new CustomError(`Invalid DeliveryDate: ${values[key]}`);
                 }
-                if (date.isBefore(today)) {
-                    throw new CustomError(`DeliveryDate cannot be in the past: ${values[key]}`);
-                }
-                if (date.isAfter(today.add(30, 'days'))) {
-                    throw new CustomError(`DeliveryDate cannot be more than 30 days in the future: ${values[key]}`);
-                }
+                // Temporarily disabled date range validation
+                // if (date.isBefore(today)) {
+                //     throw new CustomError(`DeliveryDate cannot be in the past: ${values[key]}`);
+                // }
+                // if (date.isAfter(today.add(30, 'days'))) {
+                //     throw new CustomError(`DeliveryDate cannot be more than 30 days in the future: ${values[key]}`);
+                // }
             }
             if (key == 'SalesOrderStatus') {
                 if (values[key] != 'Draft' && values[key] != 'Open' && values[key] != 'Cancelled') {
@@ -209,6 +290,13 @@ async function updateSalesOrder(pool, values) {
         if (SalesOrder.SalesOrderStatus == 'Completed' || SalesOrder.SalesOrderStatus == 'Cancelled') {
             throw new CustomError(`Cannot update Sales Order with status: ${SalesOrder.SalesOrderStatus}`);
         }
+
+        // Check inventory availability when changing status to "Open"
+        // Commented out as per requirement - skip inventory validation
+        // if (SalesOrder.SalesOrderStatus === 'Draft' && values.SalesOrderStatus === 'Open') {
+        //     await checkInventoryAvailability(pool, values.SalesOrderID, values.WarehouseID);
+        // }
+
         let user_id = values.user_id;
         let query = `
         UPDATE SalesOrders
